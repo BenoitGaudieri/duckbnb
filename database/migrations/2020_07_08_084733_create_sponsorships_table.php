@@ -15,7 +15,9 @@ class CreateSponsorshipsTable extends Migration
     {
         Schema::create('sponsorships', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->decimal("price", 4, 2);
+            $table->tinyInteger("duration")->unsigned();
+            // $table->timestamps();
         });
     }
 
