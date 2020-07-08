@@ -23,7 +23,7 @@ class CreateApartmentsTable extends Migration
             $table->tinyInteger("bathroom_qty")->unsigned();
             $table->tinyInteger("bed_qty")->unsigned();
             $table->smallInteger("sqr_meters")->unsigned();
-            $table->boolean("is_visible")->unsigned();
+            $table->boolean("is_visible")->default(0);
             $table->string("img_url");
             $table->decimal("lat", 10, 8);
             $table->decimal("lng", 11, 8);

@@ -18,7 +18,7 @@ class CreateMessagesTable extends Migration
             $table->foreignId("apartment_id")->constrained();
             $table->text("body");
             $table->string("mail_from");
-            $table->boolean("is_read");
+            $table->boolean("is_read")->default(0);
             $table->timestamps();
         });
     }

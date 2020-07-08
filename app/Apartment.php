@@ -6,7 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Apartment extends Model
 {
-    //
+    protected $fillable = [
+        'user_id',
+        'title',
+        'description',
+        'price',
+        'room_qty',
+        'bathroom_qty',
+        'bed_qty',
+        'sqr_meters',
+        'img_url',
+        'lat',
+        'lng',
+    ];
 
     public function user()
     {
