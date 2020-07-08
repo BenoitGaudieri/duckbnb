@@ -9,4 +9,12 @@ class Service extends Model
     protected $fillable = [];
 
     public $timestamps = false;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function apartments()
+    {
+        return $this->belongsToMany('App\Apartment');
+    }
 }

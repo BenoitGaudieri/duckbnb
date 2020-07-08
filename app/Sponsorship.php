@@ -7,4 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Sponsorship extends Model
 {
     //
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function apartments()
+    {
+        return $this->belongsToMany('App\Apartment');
+    }
 }
