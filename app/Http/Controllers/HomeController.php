@@ -1,28 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Apartment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    public function index() {
+        $apts = Apartment::orderBy('views', 'desc')->limit(6)->get();
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
+        return view('guests.index', compact('apts'));
     }
 }
