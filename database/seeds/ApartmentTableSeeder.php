@@ -30,7 +30,7 @@ class ApartmentTableSeeder extends Seeder
             $newApt->sqr_meters = $faker->randomNumber(3);
             $newApt->lat = $faker->latitude(-90, 90);
             $newApt->lng = $faker->longitude();
-            $newApt->img_url = "https://www.funcage.com/?";
+            $newApt->img_url = "https://picsum.photos/200/300";
             $newApt->views = 0;
             $newApt->is_visible = 1;
 
