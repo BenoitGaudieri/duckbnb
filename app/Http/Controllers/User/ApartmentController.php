@@ -4,6 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Apartment;
+use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -15,6 +19,12 @@ class ApartmentController extends Controller
     public function index()
     {
         //
+
+        $apartments = Apartment::where("user_id", Auth::id())->orderBy("created_at", "desc")->get();
+        // $apartments = Apartment::all();
+
+
+        return view('users.index', compact("apartments"));
     }
 
     /**
@@ -24,6 +34,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
+        return view("users.create");
         //
     }
 
@@ -35,7 +46,25 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: DA MODIFICARE
+        $request->validate($this->validationRules());
+        $data = $request->all();
+        $data["user_id"] = Auth::id();
+
+        if (!empty($data["img_url"])) {
+            $data["img_url"] = Storage::disk("public")->put("images", $data["img_url"]);
+        }
+
+        $newApartment = new Apartment();
+        $newApartment->fill($data);
+        // TODO: EMAIL
+        $saved = $newApartment->save();
+
+        if ($saved) {
+            // EMAIL LOGIC
+
+            return redirect()->route("users.show", $newApartment->id);
+        }
     }
 
     /**
@@ -44,9 +73,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return view("users.show", compact("apartment"));
     }
 
     /**
@@ -55,9 +84,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        //
+        return view("users.edit", compact("apartment"));
     }
 
     /**
@@ -67,9 +96,29 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
-        //
+        $request->validate($this->validationRules());
+
+        $data = $request->all();
+
+        // IMG UPDATE
+        if (!empty($data["img_url"])) {
+
+            // delete previous img:
+            if (!empty($apartment->img_url)) {
+                Storage::disk("public")->delete($apartment->img_url);
+            }
+
+            // set new img:
+            $data["img_url"] = Storage::disk("public")->put("images", $data["img_url"]);
+        }
+
+        $updated = $apartment->update($data);
+
+        if ($updated) {
+            return redirect()->route("users.show", $apartment->id);
+        }
     }
 
     /**
@@ -78,8 +127,32 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        if (empty($apartment)) {
+            abort("404");
+        }
+
+        $title = $apartment->title;
+
+        $deleted = $apartment->delete();
+
+        if ($deleted) {
+            // remove img
+            if (!empty($apartment->img_url)) {
+                Storage::disk("public")->delete($apartment->img_url);
+            }
+
+            return redirect()->route("users.index")->with("$apartment-deleted", $title);
+        }
+    }
+
+    private function validationRules()
+    {
+        return [
+            "title" => "required",
+            "body" => "required",
+            "img_url" => "image"
+        ];
     }
 }

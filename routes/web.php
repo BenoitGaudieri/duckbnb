@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 // Guest
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
+// TODO: TESTARE LA SHOW
 Route::get('apartment/{id}', 'ApartmentController@show')->name('show');
 
 Auth::routes();
@@ -25,7 +26,7 @@ Route::prefix('user')
     ->name('user.')
     ->namespace('User')
     ->middleware('auth')
-    ->group(function() {
-        Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    ->group(function () {
+        // Route::get('/dashboard', 'HomeController@index')->name('dashboard');
         Route::resource('apartments', 'ApartmentController');
     });

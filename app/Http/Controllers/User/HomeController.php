@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\User;
 
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Apartment;
 
 class HomeController extends Controller
 {
-      /**
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('users.index');
+        $apartments = Apartment::where("user_id", Auth::id())->orderBy("created_at", "desc")->get();
+        // $apartments = Apartment::all();
+
+
+        return view('users.index', compact("apartments"));
     }
 }

@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('content')
+    
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -68,7 +73,7 @@
         @if (Route::has('login'))
             <div class="top-right links">
                 @auth
-                    <a href="{{ route('user.dashboard') }}">{{ Auth::user()->email }}</a>
+                    <a href="{{ route('user.apartments.index') }}">{{ Auth::user()->email }}</a>
                 @else
                     <a href="{{ route('login') }}">Login</a>
 
@@ -90,3 +95,4 @@
     </div>
 </body>
             
+@endsection

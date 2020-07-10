@@ -1,4 +1,8 @@
-<h2>{{ Auth::user()->email }}</h2>
+{{-- PAGINA VISUALIZZATA DOPO LOGIN --}}
+
+@extends('layouts.app')
+{{-- HEADER --}}
+{{-- <h2>{{ Auth::user()->email }}</h2>
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">
@@ -13,5 +17,19 @@
             @endauth
         </div>
     @endif
-</div>
+</div> --}}
+{{-- FINE HEADER --}}
+
+
+@section('content')
 <h1>Home/User</h1>
+
+<h2>I tuoi appartamenti!</h2>
+<ul>
+    @foreach ($apartments as $apt)
+        <li>{{ $apt->id }}</li>
+    @endforeach
+</ul>
+
+    
+@endsection
