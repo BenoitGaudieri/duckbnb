@@ -60,8 +60,9 @@
 
         <div class="form-group">
             <label for="sqr_meters">N° di m<sup>2</sup> :</label>
-            <input class="form-control" type="number" min="1" max="10000" name="
-            sqr_meters" id="sqr_meters" value="{{ old("sqr_meters", $apartment->sqr_meters) }}" placeholder="Inserisci il n° di metri quadri">
+            <input class="form-control" type="number" min="1" max="10000" 
+            name="sqr_meters" id="sqr_meters" value="{{ old("sqr_meters", $apartment->sqr_meters) }}" 
+            placeholder="Inserisci il n° di metri quadri">
         </div>
 
 
@@ -72,8 +73,6 @@
                 <option value="0">Not Active</option>
             </select>
         </div>
-
-        <h3>input algolia mappa</h3>
 
         @foreach ($services as $service)
             <div class="form-check form-check-inline">
@@ -86,8 +85,12 @@
             </div>
         @endforeach
 
-        <input type="hidden" name="lat" value="41.902782"> {{-- ROMA LAT --}}
-        <input type="hidden" name="lng" value="12.496365"> {{-- ROMA LONGIT --}}
+        <div class="form-group">
+            <input type="search" id="address-input" placeholder="Where are we going?" />
+        </div>
+
+        <input type="hidden" id="lat" name="lat" value="{{ old("lat", $apartment->lat) }}">
+        <input type="hidden" id="lng" name="lng" value="{{ old("lng", $apartment->lng) }}"> 
 
         <input class="btn btn-primary" type="submit" value="Save">
 
