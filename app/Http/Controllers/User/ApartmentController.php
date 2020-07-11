@@ -154,15 +154,15 @@ class ApartmentController extends Controller
     private function validationRules()
     {
         return [
-            "title" => "required|max:150",
+            "title" => "regex:[A-z0-9À-ž\s]|required|max:150",
             "description" => "required|max:1500",
-            "img_url" => "required|image",
-            "price" => "required",
-            "room_qty" => "required",
-            "bathroom_qty" => "required",
-            "bed_qty" => "required",
-            "sqr_meters" => "required",
-            "is_visible" => "required",
+            "img_url" => "sometimes|required|image",
+            "price" => "required|numeric|max:9999.99",
+            "room_qty" => "required|integer|max:255",
+            "bathroom_qty" => "required|integer|max:255",
+            "bed_qty" => "required|integer|max:255",
+            "sqr_meters" => "required|integer|max:65535",
+            "is_visible" => "required|boolean",
             //******************************** INSERIRE MAPPA ALGOLIA POSIZIONE APPARTAMENTO */
         ];
     }

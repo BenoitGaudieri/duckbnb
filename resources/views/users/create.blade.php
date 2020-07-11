@@ -57,16 +57,20 @@
         <div class="form-group">
             <label for="sqr_meters">N° di m<sup>2</sup> :</label>
             <input class="form-control" type="number" min="1" max="10000" name="
-            sqr_meters" id="sqr_meters" value="{{ old("sqr_meters") }}" placeholder="Inserisci il n° di metri quadri">
+            sqr_meters" id="sqr_meters" value="{{ old("sqr_meters") }}" placeholder="Inserisci il n° di m&sup2;">
         </div>
 
-        <label for="activeStatus">Active Status</label>
-        <select id="activeStatus" name="activeStatus">
-            <option value="true" selected>Active</option>
-            <option value="false">Not Active</option>
-        </select>
-
-        <h1>+input algolia mappa</h1>
+        <div class="form-group">
+            <label for="activeStatus">Active Status</label>
+            <select id="activeStatus" name="activeStatus">
+                <option value="true" selected>Active</option>
+                <option value="false">Not Active</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <h1>+input algolia mappa</h1>
+        </div>
 
         @foreach ($services as $service)
             <div class="form-check form-check-inline">
@@ -74,13 +78,12 @@
                 <label class="form-check-label" for="service-{{ $loop->iteration }}">{{ $service->name }}</label>
             </div>
         @endforeach
+
         <input type="hidden" name="lat" value="41.902782"> {{-- ROMA LAT --}}
         <input type="hidden" name="lng" value="12.496365"> {{-- ROMA LONGIT --}}
-        <input type="hidden" name="views" value="0">
+        
         <input class="btn btn-primary" type="submit" value="Create new post">
-
     </form>
-
 </div>
 
 
