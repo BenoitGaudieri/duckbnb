@@ -70,12 +70,12 @@
 
         @foreach ($services as $service)
             <div class="form-check form-check-inline">
-                <input name="service[]" type="checkbox" class="form-check-input" id="service-{{ $loop->iteration }}" value="{{ $service->id}}">
+                <input name="services[]" type="checkbox" class="form-check-input" id="service-{{ $loop->iteration }}" value="{{ $service->id}}">
                 <label class="form-check-label" for="service-{{ $loop->iteration }}">{{ $service->name }}</label>
             </div>
         @endforeach
-        <input type="hidden" name="lat" value="36.076637">
-        <input type="hidden" name="lng" value="-95.903633">
+        <input type="hidden" name="lat" value="41.902782"> {{-- ROMA LAT --}}
+        <input type="hidden" name="lng" value="12.496365"> {{-- ROMA LONGIT --}}
         <input type="hidden" name="views" value="0">
         <input class="btn btn-primary" type="submit" value="Create new post">
 
