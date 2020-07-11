@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Apartment;
 use App\User;
+use App\Service;
 use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
@@ -34,8 +35,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view("users.create");
-        //
+        $services = Service::all();
+        return view("users.create", compact("services"));
     }
 
     /**
@@ -47,7 +48,9 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         // TODO: DA MODIFICARE
-        $request->validate($this->validationRules());
+        $request->validate([
+            'services.*' => 'exists:services,id'
+        ]);
         $data = $request->all();
         $data["user_id"] = Auth::id();
 
@@ -59,11 +62,13 @@ class ApartmentController extends Controller
         $newApartment->fill($data);
         // TODO: EMAIL
         $saved = $newApartment->save();
-
         if ($saved) {
+            if(!empty($data['services'])){
+                $newApartment->services()->attach($data['services']);
+            }
             // EMAIL LOGIC
 
-            return redirect()->route("users.show", $newApartment->id);
+            return redirect()->route("user.apartments.show", $newApartment->id);
         }
     }
 
@@ -151,8 +156,15 @@ class ApartmentController extends Controller
     {
         return [
             "title" => "required",
-            "body" => "required",
-            "img_url" => "image"
+            "description" => "required",
+            "img_url" => "image",
+            "price" => "required",
+            "room_qty" => "required",
+            "bathroom_qty" => "required",
+            "bed_qty" => "required",
+            "sqr_meters" => "required",
+            "is_visible" => "required",
+            //******************************** INSERIRE MAPPA ALGOLIA POSIZIONE APPARTAMENTO */
         ];
     }
 }
