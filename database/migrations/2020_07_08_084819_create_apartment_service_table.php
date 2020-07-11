@@ -14,9 +14,8 @@ class CreateApartmentServiceTable extends Migration
     public function up()
     {
         Schema::create('apartment_service', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger("apartment_id");
-            $table->unsignedBigInteger("service_id");
+            $table->foreignId("apartment_id");
+            $table->foreignId("service_id");
 
             $table->foreign("apartment_id")
                 ->references("id")

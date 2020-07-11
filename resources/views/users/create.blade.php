@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- @dd($services) --}}
 <div class="container">
     <h1 class="mb-4">Crea un nuovo appartamento</h1>
 
@@ -14,7 +15,7 @@
         </div>
     @endif
 
-    {{-- <form action="{{ route("user.apartments.store") }}" method="POST" enctype="multipart/form-data"> --}}
+    <form action="{{ route("user.apartments.store") }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method("POST")
 
@@ -34,8 +35,8 @@
         </div>
 
         <div class="form-group">
-            <label for="path_img">Apartment image :</label>
-            <input class="form-control" type="file" name="path_img" id="path_img" accept="image/*">
+            <label for="img_url">Apartment image :</label>
+            <input class="form-control" type="file" name="img_url" id="img_url" accept="image/*">
         </div>
 
         <div class="form-group">
@@ -67,7 +68,15 @@
 
         <h1>+input algolia mappa</h1>
 
-
+        @foreach ($services as $service)
+            <div class="form-check form-check-inline">
+                <input name="service[]" type="checkbox" class="form-check-input" id="service-{{ $loop->iteration }}" value="{{ $service->id}}">
+                <label class="form-check-label" for="service-{{ $loop->iteration }}">{{ $service->name }}</label>
+            </div>
+        @endforeach
+        <input type="hidden" name="lat" value="36.076637">
+        <input type="hidden" name="lng" value="-95.903633">
+        <input type="hidden" name="views" value="0">
         <input class="btn btn-primary" type="submit" value="Create new post">
 
     </form>
