@@ -35,7 +35,6 @@ class ApartmentController extends Controller
     public function create()
     {
         return view("users.create");
-        //
     }
 
     /**
@@ -151,8 +150,15 @@ class ApartmentController extends Controller
     {
         return [
             "title" => "required",
-            "body" => "required",
-            "img_url" => "image"
+            "description" => "required",
+            "img_url" => "image",
+            "price" => "required",
+            "room_qty" => "required",
+            "bathroom_qty" => "required",
+            "bed_qty" => "required",
+            "sqr_meters" => "required",
+            "is_visible" => "required",
+            //******************************** INSERIRE MAPPA ALGOLIA POSIZIONE APPARTAMENTO */
         ];
     }
 }
