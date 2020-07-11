@@ -48,9 +48,8 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         // TODO: DA MODIFICARE
-        $request->validate([
-            'services.*' => 'exists:services,id'
-        ]);
+        $request->validate($this->validationRules());
+
         $data = $request->all();
         $data["user_id"] = Auth::id();
 
@@ -155,9 +154,9 @@ class ApartmentController extends Controller
     private function validationRules()
     {
         return [
-            "title" => "required",
-            "description" => "required",
-            "img_url" => "image",
+            "title" => "required|max:150",
+            "description" => "required|max:1500",
+            "img_url" => "required|image",
             "price" => "required",
             "room_qty" => "required",
             "bathroom_qty" => "required",

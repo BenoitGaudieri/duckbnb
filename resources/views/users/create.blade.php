@@ -21,12 +21,12 @@
 
         <div class="form-group">
             <label for="title">Titolo :</label>
-            <input class="form-control" type="text" name="title" id="title" value="{{ old("title") }}" placeholder="Inserisci un titolo">
+            <input class="form-control" type="text" name="title" id="title" value="{{ old("title") }}" placeholder="Inserisci un titolo" required maxlength="150" pattern="[A-z0-9À-ž\s]+">
         </div>
 
         <div class="form-group">
             <label for="description">Descrizione :</label>
-            <textarea class="form-control" name="description" id="description" placeholder="Inserisci una descrizione">{{ old("body") }}</textarea>
+            <textarea class="form-control" name="description" id="description" placeholder="Inserisci una descrizione" required maxlength="1500">{{ old("body") }}</textarea>
         </div>
 
         <div class="form-group">
