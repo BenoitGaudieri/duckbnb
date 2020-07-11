@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label for="description">Descrizione :</label>
-            <textarea class="form-control" name="description" id="description" placeholder="Inserisci una descrizione" required maxlength="1500">{{ old("body") }}</textarea>
+            <textarea class="form-control" name="description" id="description" placeholder="Inserisci una descrizione" required maxlength="1500">{{ old("description") }}</textarea>
         </div>
 
         <div class="form-group">
@@ -60,13 +60,16 @@
             sqr_meters" id="sqr_meters" value="{{ old("sqr_meters") }}" placeholder="Inserisci il n° di metri quadri">
         </div>
 
-        <label for="activeStatus">Active Status</label>
-        <select id="activeStatus" name="activeStatus">
-            <option value="true" selected>Active</option>
-            <option value="false">Not Active</option>
-        </select>
 
-        <h1>+input algolia mappa</h1>
+        <div class="form-group">
+            <label for="activeStatus">Active Status</label>
+            <select id="activeStatus" name="is_visible">
+                <option value="1" selected>Active</option>
+                <option value="0">Not Active</option>
+            </select>
+        </div>
+
+        <h3>input algolia mappa</h3>
 
         @foreach ($services as $service)
             <div class="form-check form-check-inline">
@@ -74,9 +77,10 @@
                 <label class="form-check-label" for="service-{{ $loop->iteration }}">{{ $service->name }}</label>
             </div>
         @endforeach
+
         <input type="hidden" name="lat" value="41.902782"> {{-- ROMA LAT --}}
         <input type="hidden" name="lng" value="12.496365"> {{-- ROMA LONGIT --}}
-        <input type="hidden" name="views" value="0">
+
         <input class="btn btn-primary" type="submit" value="Create new post">
 
     </form>
