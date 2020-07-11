@@ -62,7 +62,7 @@ class ApartmentController extends Controller
         // TODO: EMAIL
         $saved = $newApartment->save();
         if ($saved) {
-            if(!empty($data['services'])){
+            if (!empty($data['services'])) {
                 $newApartment->services()->attach($data['services']);
             }
             // EMAIL LOGIC
@@ -102,7 +102,7 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        $request->validate($this->validationRules());
+        $request->validate($this->validationRules(true));
 
         $data = $request->all();
 
@@ -159,19 +159,35 @@ class ApartmentController extends Controller
         }
     }
 
-    private function validationRules()
+    private function validationRules($type = false)
     {
+        if ($type) {
+            return [
+                "title" => "required|max:150",
+                "description" => "required|max:1500",
+                "img_url" => "sometimes|required|image",
+                "price" => "required|numeric|max:9999.99",
+                "room_qty" => "required|integer|max:255",
+                "bathroom_qty" => "required|integer|max:255",
+                "bed_qty" => "required|integer|max:255",
+                "sqr_meters" => "required|integer|max:65535",
+                "is_visible" => "required|boolean",
+                "lat" => "between:-90,90|required",
+                "lng" => "between:-180,180|required"
+            ];
+        }
         return [
-            "title" => "regex:[A-z0-9À-ž\s]|required|max:150",
+            "title" => "required|max:150",
             "description" => "required|max:1500",
-            "img_url" => "sometimes|required|image",
+            "img_url" => "required|image",
             "price" => "required|numeric|max:9999.99",
             "room_qty" => "required|integer|max:255",
             "bathroom_qty" => "required|integer|max:255",
             "bed_qty" => "required|integer|max:255",
             "sqr_meters" => "required|integer|max:65535",
             "is_visible" => "required|boolean",
-            //******************************** INSERIRE MAPPA ALGOLIA POSIZIONE APPARTAMENTO */
+            "lat" => "between:-90,90|required",
+            "lng" => "between:-180,180|required"
         ];
     }
 }

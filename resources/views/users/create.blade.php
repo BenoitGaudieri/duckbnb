@@ -56,20 +56,22 @@
 
         <div class="form-group">
             <label for="sqr_meters">N° di m<sup>2</sup> :</label>
-            <input class="form-control" type="number" min="1" max="10000" name="
-            sqr_meters" id="sqr_meters" value="{{ old("sqr_meters") }}" placeholder="Inserisci il n° di m&sup2;">
+            <input class="form-control" type="number" min="1" max="10000" 
+            name="sqr_meters" id="sqr_meters" value="{{ old("sqr_meters") }}" placeholder="Inserisci il n° di m&sup2;">
         </div>
 
         <div class="form-group">
             <label for="activeStatus">Active Status</label>
-            <select id="activeStatus" name="activeStatus">
-                <option value="true" selected>Active</option>
-                <option value="false">Not Active</option>
+            <select id="activeStatus" name="is_visible">
+                <option value="1" selected>Active</option>
+                <option value="0">Not Active</option>
             </select>
         </div>
         
         <div class="form-group">
             <h1>+input algolia mappa</h1>
+            <input type="search" id="address-input" placeholder="Where are we going?" />
+            <span id="coords"></span>
         </div>
 
         @foreach ($services as $service)
@@ -79,8 +81,8 @@
             </div>
         @endforeach
 
-        <input type="hidden" name="lat" value="41.902782"> {{-- ROMA LAT --}}
-        <input type="hidden" name="lng" value="12.496365"> {{-- ROMA LONGIT --}}
+        <input type="hidden" id="lat" name="lat" value="{{ old("lat") }}">
+        <input type="hidden" id="lng" name="lng" value="{{ old("lng") }}"> 
         
         <input class="btn btn-primary" type="submit" value="Create new post">
     </form>

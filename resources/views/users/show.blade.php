@@ -18,6 +18,12 @@
         {{ $apartment->views }}
     </div>
     <div class="row">
+        {{ $apartment->lat }}
+    </div>
+    <div class="row">
+        {{ $apartment->lng }}
+    </div>
+    <div class="row">
         <h3>Services</h3>
         @forelse($apartment->services as $service)
             <span class="badge badge-pill badge-primary">
