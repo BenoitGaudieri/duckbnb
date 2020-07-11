@@ -14,15 +14,19 @@ class CreateApartmentServiceTable extends Migration
     public function up()
     {
         Schema::create('apartment_service', function (Blueprint $table) {
+            $table->id();
             $table->foreignId("apartment_id");
             $table->foreignId("service_id");
 
             $table->foreign("apartment_id")
                 ->references("id")
-                ->on("apartments");
+                ->on("apartments")
+                ->onDelete('cascade');
             $table->foreign("service_id")
                 ->references("id")
-                ->on("services");
+                ->on("services")
+                ->onDelete('cascade');
+                
         });
     }
 
