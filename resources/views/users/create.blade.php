@@ -24,12 +24,12 @@
         </div>
 
         <div class="form-group">
-            <label for="body">Descrizione :</label>
-            <textarea class="form-control" name="body" id="body" placeholder="Inserisci una descrizione">{{ old("body") }}</textarea>
+            <label for="description">Descrizione :</label>
+            <textarea class="form-control" name="description" id="description" placeholder="Inserisci una descrizione">{{ old("body") }}</textarea>
         </div>
 
         <div class="form-group">
-            <label for="title">Prezzo :</label>
+            <label for="price">Prezzo :</label>
             <input class="form-control" type="number" min="1" max="10000" name="price" id="price" value="{{ old("price") }}" placeholder="€">
         </div>
 
@@ -49,17 +49,18 @@
         </div>
 
         <div class="form-group">
-            <label for="bed_qty">N° di stanze :</label>
-            <input class="form-control" type="number" min="1" max="10000" name="bathroom_qty" id="bed_qty" value="{{ old("bathroom_qty") }}" placeholder="Inserisci il n° di stanze">
+            <label for="bed_qty">N° di letti :</label>
+            <input class="form-control" type="number" min="1" max="10000" name="bed_qty" id="bed_qty" value="{{ old("bed_qty") }}" placeholder="Inserisci il n° di letti">
         </div>
 
         <div class="form-group">
             <label for="sqr_meters">N° di m<sup>2</sup> :</label>
-            <input class="form-control" type="number" min="1" max="10000" name="bathroom_qty" id="bed_qty" value="{{ old("bathroom_qty") }}" placeholder="Inserisci il n° di metri quadri">
+            <input class="form-control" type="number" min="1" max="10000" name="
+            sqr_meters" id="sqr_meters" value="{{ old("sqr_meters") }}" placeholder="Inserisci il n° di metri quadri">
         </div>
 
         <label for="activeStatus">Active Status</label>
-        <select class="ml-1" id="activeStatus" name="activeStatus">
+        <select id="activeStatus" name="activeStatus">
             <option value="true" selected>Active</option>
             <option value="false">Not Active</option>
         </select>
