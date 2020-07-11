@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Apartment;
-use App\User;
 use App\Service;
 use Illuminate\Support\Facades\Storage;
 
@@ -52,6 +51,7 @@ class ApartmentController extends Controller
 
         $data = $request->all();
         $data["user_id"] = Auth::id();
+        $data['views'] = 0;
 
         if (!empty($data["img_url"])) {
             $data["img_url"] = Storage::disk("public")->put("images", $data["img_url"]);
@@ -66,7 +66,6 @@ class ApartmentController extends Controller
                 $newApartment->services()->attach($data['services']);
             }
             // EMAIL LOGIC
-
             return redirect()->route("user.apartments.show", $newApartment->id);
         }
     }
@@ -90,7 +89,8 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view("users.edit", compact("apartment"));
+        $services = Service::all();
+        return view("users.edit", compact("apartment", 'services'));
     }
 
     /**
@@ -116,12 +116,20 @@ class ApartmentController extends Controller
 
             // set new img:
             $data["img_url"] = Storage::disk("public")->put("images", $data["img_url"]);
+        } else {
+            $data["img_url"] = $apartment->img_url;
         }
 
         $updated = $apartment->update($data);
 
         if ($updated) {
-            return redirect()->route("users.show", $apartment->id);
+            if (!empty($data['services'])) {
+                $apartment->services()->sync($data['services']);
+            } else {
+                $apartment->services()->detach();
+            }
+
+            return redirect()->route("user.apartments.show", $apartment->id);
         }
     }
 
@@ -137,8 +145,8 @@ class ApartmentController extends Controller
             abort("404");
         }
 
-        $title = $apartment->title;
-
+        $apartmentId = $apartment->id;
+        $apartment->services()->detach();
         $deleted = $apartment->delete();
 
         if ($deleted) {
@@ -147,7 +155,7 @@ class ApartmentController extends Controller
                 Storage::disk("public")->delete($apartment->img_url);
             }
 
-            return redirect()->route("users.index")->with("$apartment-deleted", $title);
+            return redirect()->route("user.apartments.index")->with("apartment_deleted", $apartmentId);
         }
     }
 

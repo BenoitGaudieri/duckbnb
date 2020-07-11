@@ -18,7 +18,8 @@ class Apartment extends Model
         'img_url',
         'lat',
         'lng',
-        'views'
+        'views',
+        'is_visible'
     ];
 
     public function user()

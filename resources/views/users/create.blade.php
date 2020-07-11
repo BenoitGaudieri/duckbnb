@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label for="description">Descrizione :</label>
-            <textarea class="form-control" name="description" id="description" placeholder="Inserisci una descrizione" required maxlength="1500">{{ old("body") }}</textarea>
+            <textarea class="form-control" name="description" id="description" placeholder="Inserisci una descrizione" required maxlength="1500">{{ old("description") }}</textarea>
         </div>
 
         <div class="form-group">
