@@ -48,13 +48,22 @@ function updateDiv(response) {
     // The first hit is the most accurate
     var suggestion = hits[0];
     var addressDiv = document.querySelector("#address");
+    var address = "";
 
     // Check the response for italian names
     if (suggestion.locale_names.it && suggestion.country.it) {
-        addressDiv.innerHTML = `${suggestion.locale_names.it}, ${suggestion.country.it}`;
+        address = `${suggestion.locale_names.it}, ${suggestion.country.it}`;
     } else if (suggestion.locale_names.default && suggestion.country.default) {
-        addressDiv.innerHTML = `${suggestion.locale_names.default}, ${suggestion.country.default}`;
+        address = `${suggestion.locale_names.default[0]}, ${suggestion.country.default}`;
     } else {
-        addressDiv.innerHTML = "Impossibile localizzarti";
+        address = "Impossibile localizzarti";
     }
+    addressDiv.innerHTML = address;
+
+    L.marker([latFlt, lngFlt])
+        .addTo(mymap)
+        .bindPopup(address)
+        .openPopup();
+
+    console.log(suggestion);
 }

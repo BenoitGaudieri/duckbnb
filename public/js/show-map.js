@@ -47770,15 +47770,20 @@ function updateDiv(response) {
   var hits = response.hits; // The first hit is the most accurate
 
   var suggestion = hits[0];
-  var addressDiv = document.querySelector("#address"); // Check the response for italian names
+  var addressDiv = document.querySelector("#address");
+  var address = ""; // Check the response for italian names
 
   if (suggestion.locale_names.it && suggestion.country.it) {
-    addressDiv.innerHTML = "".concat(suggestion.locale_names.it, ", ").concat(suggestion.country.it);
+    address = "".concat(suggestion.locale_names.it, ", ").concat(suggestion.country.it);
   } else if (suggestion.locale_names["default"] && suggestion.country["default"]) {
-    addressDiv.innerHTML = "".concat(suggestion.locale_names["default"], ", ").concat(suggestion.country["default"]);
+    address = "".concat(suggestion.locale_names["default"][0], ", ").concat(suggestion.country["default"]);
   } else {
-    addressDiv.innerHTML = "Impossibile localizzarti";
+    address = "Impossibile localizzarti";
   }
+
+  addressDiv.innerHTML = address;
+  L.marker([latFlt, lngFlt]).addTo(mymap).bindPopup(address).openPopup();
+  console.log(suggestion);
 }
 
 /***/ }),
