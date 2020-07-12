@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -47680,42 +47680,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window.Vue = require('vue');
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-// const app = new Vue({
-//     el: '#app',
-// });
-
-/***/ }),
-
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -47762,27 +47726,60 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/***/ "./resources/js/show-map.js":
+/*!**********************************!*\
+  !*** ./resources/js/show-map.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\P\airbnb\duckbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\P\airbnb\duckbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    isNull = _require.isNull;
 
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+var startLat = document.querySelector("#lat").innerHTML;
+var startLng = document.querySelector("#lng").innerHTML;
+var mapDiv = document.querySelector("#mapid");
+var mymap = L.map(mapDiv, {
+  // Map control deactivated in show
+  dragging: false,
+  zoomControl: false,
+  scrollWheelZoom: false
+}).setView([startLat, startLng], 13);
+L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  maxZoom: 18,
+  id: "mapbox/streets-v11",
+  tileSize: 512,
+  zoomOffset: -1,
+  accessToken: "pk.eyJ1IjoiY2FudHVnYSIsImEiOiJja2NkbjZsazQwMDV4MnFtb2R2NTVwYWJlIn0._T3wB3T1ZY2bB6LEQdb1uQ"
+}).addTo(mymap);
+/**
+ * Reverse geoloc
+ */
+
+var places = algoliasearch.initPlaces("plH9W3AD2IH9", "3cad2b19f8a21e59f2cafcb26bfb0181");
+var latFlt = parseFloat(startLat);
+var lngFlt = parseFloat(startLng);
+places.reverse({
+  aroundLatLng: latFlt + "," + lngFlt
+}).then(updateDiv);
+
+function updateDiv(response) {
+  var hits = response.hits; // The first hit is the most accurate
+
+  var suggestion = hits[0];
+  var addressDiv = document.querySelector("#address"); // Check the response for italian names
+
+  if (suggestion.locale_names.it && suggestion.country.it) {
+    addressDiv.innerHTML = "".concat(suggestion.locale_names.it, ", ").concat(suggestion.country.it);
+  } else if (suggestion.locale_names["default"] && suggestion.country["default"]) {
+    addressDiv.innerHTML = "".concat(suggestion.locale_names["default"], ", ").concat(suggestion.country["default"]);
+  } else {
+    addressDiv.innerHTML = "Impossibile localizzarti";
+  }
+}
 
 /***/ }),
 
@@ -47794,6 +47791,18 @@ module.exports = __webpack_require__(/*! D:\P\airbnb\duckbnb\resources\sass\app.
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+
+/***/ 2:
+/*!****************************************!*\
+  !*** multi ./resources/js/show-map.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! D:\P\airbnb\duckbnb\resources\js\show-map.js */"./resources/js/show-map.js");
+
 
 /***/ })
 
