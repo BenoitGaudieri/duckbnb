@@ -81,17 +81,11 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         //salvare in db
-        if (Auth::id() <> $apartment['user_id']) {
-            $aptViews = $apartment['views'] + 1;
-            $apartment['views'] = $aptViews;
+        if(Auth::id() <> $apartment['user_id']) {
+            $apartment['views'] += 1;
             $saved = $apartment->save();
-
-            if ($saved) {
-                return view("users.show", compact("apartment"));
-            }
-        } else {
-            return view("users.show", compact("apartment"));
         }
+        return view("guests.show", compact("apartment"));
     }
 
     /**
@@ -115,7 +109,7 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        $request->validate($this->validationRules(true));
+        $request->validate($this->validationRules("sometimes|"));
 
         $data = $request->all();
 
@@ -172,27 +166,15 @@ class ApartmentController extends Controller
         }
     }
 
-    private function validationRules($type = false)
+    private function validationRules($type = "")
     {
-        if ($type) {
-            return [
-                "title" => "required|max:150",
-                "description" => "required|max:1500",
-                "img_url" => "sometimes|required|image",
-                "price" => "required|numeric|max:9999.99",
-                "room_qty" => "required|integer|max:255",
-                "bathroom_qty" => "required|integer|max:255",
-                "bed_qty" => "required|integer|max:255",
-                "sqr_meters" => "required|integer|max:65535",
-                "is_visible" => "required|boolean",
-                "lat" => "between:-90,90|required",
-                "lng" => "between:-180,180|required"
-            ];
-        }
+
+        $imgRule = $type . "required|image";
+
         return [
             "title" => "required|max:150",
             "description" => "required|max:1500",
-            "img_url" => "required|image",
+            "img_url" => $imgRule,
             "price" => "required|numeric|max:9999.99",
             "room_qty" => "required|integer|max:255",
             "bathroom_qty" => "required|integer|max:255",
