@@ -5,11 +5,11 @@
     <button><a href="{{ route('search') }}">SEARCH</a></button>
     
     <div>
-        <ol>
+        <ul>
         @foreach($apts as $apt)
-            <li>{{ $apt->id }}<br>{{ $apt->views }}</li>
+            <li>ID: {{ $apt->id }}<br>Views:{{ $apt->views }}</li>
         @endforeach
-        </ol>
+        </ul>
     </div>
             
 @endsection
