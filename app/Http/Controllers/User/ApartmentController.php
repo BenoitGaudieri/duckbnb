@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Apartment;
 use App\Service;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\NewApartment;
+use App\Mail\DeleteApartment;
+use App\Mail\EditApartment;
+use Illuminate\Support\Facades\Mail;
 
 class ApartmentController extends Controller
 {
@@ -65,7 +69,7 @@ class ApartmentController extends Controller
             if (!empty($data['services'])) {
                 $newApartment->services()->attach($data['services']);
             }
-            // EMAIL LOGIC
+            Mail::to(Auth::user()->email)->send(new NewApartment($newApartment));
             return redirect()->route("user.apartments.show", $newApartment->id);
         }
     }
@@ -121,14 +125,14 @@ class ApartmentController extends Controller
         }
 
         $updated = $apartment->update($data);
-
+        
         if ($updated) {
             if (!empty($data['services'])) {
                 $apartment->services()->sync($data['services']);
             } else {
                 $apartment->services()->detach();
             }
-
+            Mail::to(Auth::user()->email)->send(new EditApartment($apartment));
             return redirect()->route("user.apartments.show", $apartment->id);
         }
     }
@@ -154,7 +158,7 @@ class ApartmentController extends Controller
             if (!empty($apartment->img_url)) {
                 Storage::disk("public")->delete($apartment->img_url);
             }
-
+            Mail::to(Auth::user()->email)->send(new DeleteApartment($apartment));
             return redirect()->route("user.apartments.index")->with("apartment_deleted", $apartmentId);
         }
     }
@@ -172,7 +176,7 @@ class ApartmentController extends Controller
                 "bed_qty" => "required|integer|max:255",
                 "sqr_meters" => "required|integer|max:65535",
                 "is_visible" => "required|boolean",
-                "lat" => "between:-90,90|required",
+                "lat" => "between:-90,90|required", 
                 "lng" => "between:-180,180|required"
             ];
         }
@@ -186,7 +190,7 @@ class ApartmentController extends Controller
             "bed_qty" => "required|integer|max:255",
             "sqr_meters" => "required|integer|max:65535",
             "is_visible" => "required|boolean",
-            "lat" => "between:-90,90|required",
+            "lat" => "between:-90,90|required", 
             "lng" => "between:-180,180|required"
         ];
     }
