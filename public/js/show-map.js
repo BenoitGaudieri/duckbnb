@@ -47738,6 +47738,30 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var LeafIcon = L.Icon.extend({
+  options: {
+    iconSize: [48, 41],
+    iconAnchor: [30, 50],
+    popupAnchor: [-3, -50],
+    shadowUrl: "/img/map-icons/duck-shadow.png",
+    shadowSize: [66, 41],
+    shadowAnchor: [30, 50]
+  }
+});
+var orangeIcon = new LeafIcon({
+  iconUrl: "/img/map-icons/duck-orange.png"
+}),
+    redIcon = new LeafIcon({
+  iconUrl: "/img/map-icons/duck-red.png"
+}),
+    yellowIcon = new LeafIcon({
+  iconUrl: "/img/map-icons/duck-yellow.png"
+});
+
+L.icon = function (options) {
+  return new L.Icon(options);
+};
+
 var startLat = document.querySelector("#lat").innerHTML;
 var startLng = document.querySelector("#lng").innerHTML;
 var mapDiv = document.querySelector("#mapid");
@@ -47781,8 +47805,11 @@ function updateDiv(response) {
     address = "Impossibile localizzarti";
   }
 
-  addressDiv.innerHTML = address;
-  L.marker([latFlt, lngFlt]).addTo(mymap).bindPopup(address).openPopup();
+  addressDiv.innerHTML = address; // Map icon
+
+  L.marker([latFlt, lngFlt], {
+    icon: yellowIcon
+  }).addTo(mymap).bindPopup(address).openPopup();
   console.log(suggestion);
 }
 

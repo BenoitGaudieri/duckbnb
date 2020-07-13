@@ -2,6 +2,24 @@ const { isNull } = require("lodash");
 
 require("./bootstrap");
 
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize: [48, 41],
+        iconAnchor: [30, 50],
+        popupAnchor: [-3, -50],
+        shadowUrl: "/img/map-icons/duck-shadow.png",
+        shadowSize: [66, 41],
+        shadowAnchor: [30, 50]
+    }
+});
+
+var orangeIcon = new LeafIcon({ iconUrl: "/img/map-icons/duck-orange.png" }),
+    redIcon = new LeafIcon({ iconUrl: "/img/map-icons/duck-red.png" }),
+    yellowIcon = new LeafIcon({ iconUrl: "/img/map-icons/duck-yellow.png" });
+L.icon = function(options) {
+    return new L.Icon(options);
+};
+
 let startLat = document.querySelector("#lat").innerHTML;
 let startLng = document.querySelector("#lng").innerHTML;
 
@@ -60,7 +78,8 @@ function updateDiv(response) {
     }
     addressDiv.innerHTML = address;
 
-    L.marker([latFlt, lngFlt])
+    // Map icon
+    L.marker([latFlt, lngFlt], { icon: yellowIcon })
         .addTo(mymap)
         .bindPopup(address)
         .openPopup();
