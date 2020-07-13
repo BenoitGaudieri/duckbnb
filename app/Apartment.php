@@ -7,7 +7,7 @@ use Laravel\Scout\Searchable;
 
 class Apartment extends Model
 {
-   /*  use Searchable; */
+    use Searchable;
 
     protected $fillable = [
         'user_id',
