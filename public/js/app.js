@@ -47717,8 +47717,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window
 
 
 var placesAutocomplete = places({
-  appId: "plH9W3AD2IH9",
-  apiKey: "3cad2b19f8a21e59f2cafcb26bfb0181",
+  appId: "",
+  apiKey: "",
   container: document.querySelector("#address-input")
 });
 placesAutocomplete.on("change", changeHandle);
@@ -47796,8 +47796,8 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\P\airbnb\duckbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\P\airbnb\duckbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/mac/Desktop/duckbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/mac/Desktop/duckbnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
