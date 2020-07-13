@@ -1,0 +1,42 @@
+.navbar {
+    width: 100%;
+    background: $light;
+
+    .logo-container {
+        min-width: 120px;
+        max-width: 160px;
+
+    }
+
+    .hamburger-menu {
+        color: $dark;
+        font-size: 2em;
+    }
+
+    .nav-item--user {
+        color: $main-color;
+    }
+
+    .dropdown-menu {
+
+        background-color: transparent;
+        border:none;
+
+
+        @include responsive($tablet) {
+            background-color: #F7F6F6;
+            filter: drop-shadow(0px 1px 2px #ccc);
+        }
+
+        .dropdown-item {
+
+            &.active,
+            &:active,
+            &:hover,
+            &:focus {
+                color: $main-color;
+                background-color: transparent;
+            }
+        }
+    }
+}

@@ -9,7 +9,7 @@
 
 </style>
 
-<div class="ais-InstantSearch container">
+<div class="ais-InstantSearch container search">
     <h1>Search</h1>
 
     <div class="left-panel">
