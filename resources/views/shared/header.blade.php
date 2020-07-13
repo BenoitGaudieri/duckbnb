@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {{-- Favicon --}}
+    <link rel="icon" href="{{ asset('img/favicon.png')}}" sizes="48x48" />
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -15,38 +18,31 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }} users Panel
-            </a>
+            <div class="logo-container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img class="img-fluid" src="{{ asset('img/logo-header.png')}}" alt="Duckbnb">
+                </a>
+            </div>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
+                <span><ion-icon class="hamburger-menu" name="menu-outline"></ion-icon></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        {{-- <a href="{{ route("users.index") }}" class="nav-link">Post Database</a> --}}
-                    </li>
-                    <li class="nav-item">
-                        {{-- <a href="{{ route("home") }}" class="nav-link">Home</a> --}}
-                    </li>
-                    <li class="nav-item">
-                        {{-- <a href="{{ route("users.create") }}" class="nav-link">New Post</a> --}}
-                    </li>
-
-                </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="{{ route("search") }}" class="nav-link">Search</a>
+                    </li>
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
@@ -59,7 +55,7 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-item--user nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 @if(!empty(Auth::user()->first_name))
                                 {{  Auth::user()->first_name }}
                                 @else

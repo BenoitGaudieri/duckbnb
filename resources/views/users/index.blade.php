@@ -3,25 +3,35 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Home/User</h1>
+
 @if (session('apartment_deleted'))
     <div class="alert alert-success">
-        Post <strong>{{ session('apartment_deleted') }}</strong> successfully deleted!
+        Appartamento <strong>{{ session('apartment_deleted') }}</strong> cancellato!
     </div>
 @endif
-<h2>I tuoi appartamenti!</h2>
-<ul>
-    @foreach ($apartments as $apartment)
-        <li>{{ $apartment->id }}</li>
-        <button>
+
+<div class="container">
+
+    <div class="row">
+        <p>Ciao {{!empty(Auth::user()->first_name) ? Auth::user()->first_name : Auth::user()->email}}, benvenuto nella tua dashboard.</p>
+    </div>
+    <div class="row">
+        <h2>I tuoi appartamenti!</h2>
+    </div>
+    <div class="row">
+        @foreach ($apartments as $apartment)
+            <p>{{ $apartment->id }}</p>
+            
             <form action="{{ route('user.apartments.destroy', $apartment->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <input class="btn btn-danger" type="submit" value="Delete">
+                <a href="#" class="btn-show"> ora vediamo </a>
             </form>
-        </button>
-    @endforeach
-</ul>
+                
+        @endforeach
+    </div>
+</div>
 
     
 @endsection

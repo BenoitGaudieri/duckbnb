@@ -1,0 +1,26 @@
+// Commons
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: $dark;
+
+    @include flex(column, flex-start, center);
+}
+
+#app {
+    width: 100%;
+}
+
+a {
+    color: inherit;
+    &:hover {
+        color: $main-color;
+        text-decoration: none;
+    }
+}
+
+button:focus {
+    outline: none;
+}

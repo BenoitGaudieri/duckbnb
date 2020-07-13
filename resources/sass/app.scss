@@ -1,8 +1,13 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
+// // Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Commons
+@import 'partials/variables';
+@import 'partials/mixins';
+@import 'partials/common';
+
+// Components
+@import 'partials/components/header';
