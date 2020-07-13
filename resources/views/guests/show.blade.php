@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <style>
     /* The map needs dimensions to be displayed */
     #mapid {
@@ -20,6 +19,10 @@
     }
 </style>
 <div class="container">
+
+    @if(Auth::id() == $apartment['user_id'])
+        È IL TUO
+    @endif
 
     <div class="map-wrapper">
         <div class="mapid" id="mapid"></div>
