@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Apartment extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         'user_id',
         'title',
@@ -57,5 +60,17 @@ class Apartment extends Model
     public function sponsorships()
     {
         return $this->belongsToMany('App\Sponsorship')->withTimestamps();
+    }
+
+    public function toSearchableArray()
+    {
+        $apts = $this->toArray();
+
+        $apts['_geoloc'] = [
+            'lat' => $apts['lat'],
+            'lng' => $apts['lng'],
+        ];
+
+        return $apts;
     }
 }
