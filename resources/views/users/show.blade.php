@@ -41,7 +41,7 @@
         <img src="{{ asset('storage/'. $apartment->img_url) }}" alt="{{ $apartment->title }}">
     </div>
     <div class="row">
-        {{ $apartment->views }}
+        Views: {{ $apartment->views }}
     </div>
     <div class="row" id="lat">
         {{ $apartment->lat }}
