@@ -50,7 +50,6 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: DA MODIFICARE
         $request->validate($this->validationRules());
 
         $data = $request->all();
@@ -63,7 +62,6 @@ class ApartmentController extends Controller
 
         $newApartment = new Apartment();
         $newApartment->fill($data);
-        // TODO: EMAIL
         $saved = $newApartment->save();
         if ($saved) {
             if (!empty($data['services'])) {
@@ -83,19 +81,17 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         //salvare in db
-        if(Auth::id() <> $apartment['user_id']) {
+        if (Auth::id() <> $apartment['user_id']) {
             $aptViews = $apartment['views'] + 1;
             $apartment['views'] = $aptViews;
             $saved = $apartment->save();
-            
-            if($saved) {
+
+            if ($saved) {
                 return view("users.show", compact("apartment"));
             }
         } else {
             return view("users.show", compact("apartment"));
         }
-
-
     }
 
     /**
@@ -138,7 +134,7 @@ class ApartmentController extends Controller
         }
 
         $updated = $apartment->update($data);
-        
+
         if ($updated) {
             if (!empty($data['services'])) {
                 $apartment->services()->sync($data['services']);
@@ -189,7 +185,7 @@ class ApartmentController extends Controller
                 "bed_qty" => "required|integer|max:255",
                 "sqr_meters" => "required|integer|max:65535",
                 "is_visible" => "required|boolean",
-                "lat" => "between:-90,90|required", 
+                "lat" => "between:-90,90|required",
                 "lng" => "between:-180,180|required"
             ];
         }
@@ -203,7 +199,7 @@ class ApartmentController extends Controller
             "bed_qty" => "required|integer|max:255",
             "sqr_meters" => "required|integer|max:65535",
             "is_visible" => "required|boolean",
-            "lat" => "between:-90,90|required", 
+            "lat" => "between:-90,90|required",
             "lng" => "between:-180,180|required"
         ];
     }
