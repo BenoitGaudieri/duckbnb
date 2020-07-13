@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/place-create.js": "/js/place-create.js",
+    "/js/search.js": "/js/search.js",
     "/js/show-map.js": "/js/show-map.js"
 }
