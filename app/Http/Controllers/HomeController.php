@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index() {
-        $apts = Apartment::orderBy('views', 'desc')->limit(6)->get();
+        $apartments = Apartment::orderBy('views', 'desc')->limit(6)->get();
 
-        return view('guests.index', compact('apts'));
+        return view('guests.index', compact('apartments'));
     }
 }
