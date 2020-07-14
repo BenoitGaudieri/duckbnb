@@ -1,5 +1,3 @@
-{{-- PAGINA VISUALIZZATA DOPO LOGIN --}}
-
 @extends('layouts.app')
 
 @section('content')
