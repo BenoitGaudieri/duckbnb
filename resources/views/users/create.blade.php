@@ -69,8 +69,8 @@
         </div>
         
         <div class="form-group">
-            <h1>+input algolia mappa</h1>
-            <input type="search" id="address-input" placeholder="Where are we going?" />
+            <label for="address-input">Indirizzo</label>
+            <input id="address-input" placeholder="Where are we going?" />
             <span id="coords"></span>
         </div>
 

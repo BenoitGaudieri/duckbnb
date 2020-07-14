@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- @dd($services) --}}
+
 <div class="container">
-    <h1 class="mb-4">Crea un nuovo appartamento</h1>
+<h1 class="mb-4">Modifica <span class="text-main">{{ $apartment->title }}</span></h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -86,7 +86,7 @@
         @endforeach
 
         <div class="form-group">
-            <input type="search" id="address-input" placeholder="Where are we going?" />
+            <input id="address-input" placeholder="Where are we going?" />
         </div>
 
         <input type="hidden" id="lat" name="lat" value="{{ old("lat", $apartment->lat) }}">
