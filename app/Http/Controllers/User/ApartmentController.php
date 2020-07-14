@@ -166,6 +166,11 @@ class ApartmentController extends Controller
         }
     }
 
+    public function statistics(Apartment $apartment)
+    {
+        return view('users.statistics', compact('apartment'));
+    }
+
     private function validationRules($type = "")
     {
 

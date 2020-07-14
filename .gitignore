@@ -11,3 +11,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /vscode
+public/js/show-map.js
+public/js/search.js
+public/js/place-create.js
+public/js/app.js
+public/mix-manifest.json

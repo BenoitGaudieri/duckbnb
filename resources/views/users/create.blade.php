@@ -70,7 +70,7 @@
         
         <div class="form-group">
             <label for="address-input">Indirizzo</label>
-            <input id="address-input" placeholder="Where are we going?" />
+            <input id="address-input" placeholder="La tua prossima meta?"/>
             <span id="coords"></span>
         </div>
 

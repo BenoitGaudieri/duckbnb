@@ -86,7 +86,7 @@
         @endforeach
 
         <div class="form-group">
-            <input id="address-input" placeholder="Where are we going?" />
+            <input id="address-input" placeholder="La tua prossima meta?"/>
         </div>
 
         <input type="hidden" id="lat" name="lat" value="{{ old("lat", $apartment->lat) }}">
@@ -95,8 +95,10 @@
         <input class="btn btn-primary" type="submit" value="Save">
 
     </form>
-
 </div>
-
-
 @endsection
+
+@push('scripts')
+<script src="{{ asset("js/place-create.js") }}" defer></script>    
+    
+@endpush
