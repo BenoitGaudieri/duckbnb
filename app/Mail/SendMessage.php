@@ -6,25 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Apartment;
 
-class DeleteApartment extends Mailable
+class SendMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     *  Apartment instance
-    */
-    private $apartment;
+    public $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Apartment $apartment)
+    public function __construct($data)
     {
-        $this->apartment = $apartment;
+        $this->data = $data;
     }
 
     /**
@@ -35,9 +31,9 @@ class DeleteApartment extends Mailable
     public function build()
     {
         return $this->from('index@duckbnb.com')
-                    ->markdown('mail.delete-apartment')
+                    ->markdown('mail.send-message')
                     ->with([
-                        'title' => $this->apartment->title
+                        'data' , $this->data
                     ]);
     }
 }

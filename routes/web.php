@@ -19,6 +19,9 @@ Route::get('/search', 'SearchController@index')->name('search');
 // TODO: TESTARE LA SHOW
 Route::get('apartments/{apartment}', 'ApartmentController@show')->name('show');
 
+Route::get('/sendmessage', 'SendMessageController@index');
+Route::post('/sendmessage/send', 'SendMessageController@send');
+
 Auth::routes();
 
 // User
