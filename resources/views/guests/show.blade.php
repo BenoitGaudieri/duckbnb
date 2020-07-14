@@ -55,28 +55,46 @@
     </div>    
     @if(Auth::id() == $apartment['user_id'])
         <div class="dashboard">
-            <h4 class="weight-light">Dashboard Proprietario</h4>
+            <h4 class="section-title weight-light">Dashboard Proprietario</h4>
             <div class="dashboard-ctas">
                 <a class="dashboard-ctas--btn button-main" href="#">Sponsorizza</a>
                 <a class="dashboard-ctas--btn button-light" href="{{ route('user.apartments.edit', $apartment->id) }}">Modifica</a>
-             <a class=" dashboard-ctas--btn button-dark" href="{{--{{ route('user.stats') }}--}}">Statistiche</a> 
+             <a class=" dashboard-ctas--btn button-dark" href="{{ route('user.stats', $apartment->id) }}">Statistiche</a> 
             <a class="dashboard-ctas--btn button-shadow" href="#">Nascondi</a>
             </div>
         </div>
     @else
         <div class="message">
-            <h4 class="weight-light">Contatta il proprietario</h4>
-            <p>form</p>
+            <h4 class="section-title weight-light">Contatta il proprietario</h4>
+            @if($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            <form method="POST" action="{{ url('sendmessage/send') }}">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <input type="text" name="email" class="form-control" placeholder="La tua email">
+                </div>
+                <div class="form-group">
+                    <textarea name="message" id="message" class="form-control" placeholder="Inserisci il tuo messaggio"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="send" value="Send" class="btn btn-info">
+                </div>
+            </form>
+            
         </div>
 
         <div class="review">
-            <h4 class="weight-light">Scrivi una recensione</h4>
+            <h4 class="section-title weight-light">Scrivi una recensione</h4>
             <p>form</p>
         </div>
     @endif
 
     <div class="reviews">
-        <h4 class="weight-light">Recensioni</h4>
+        <h4 class="section-title weight-light">Recensioni</h4>
 
         <div class="row reviews-single">
             <div class="reviews-single--avatar">
@@ -101,29 +119,7 @@
             </ul>
         </div>
     @endif
-    
-    @if($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong>{{ $message }}</strong>
-        </div>
-    @endif
 
-    <h3>Contattami</h3>
-    <form method="POST" action="{{ url('sendmessage/send') }}">
-        {{ csrf_field() }}
-        <div class="form-group">
-            <label>Inserisci la tua email</label>
-            <input type="text" name="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>Inserisci il tuo messaggio</label>
-            <textarea name="message" id="message" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <input type="submit" name="send" value="Send" class="btn btn-info">
-        </div>
-    </form>
 </div>
 
 @endsection
