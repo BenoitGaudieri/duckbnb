@@ -5,25 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use App\Apartment;
 use App\Mail\SendMessage;
 
 class SendMessageController extends Controller
 {
-    function index()
+    function send(Request $request, Apartment $apartment)
     {
-        return view("guests.show");
-    }
-    function send(Request $request)
-    {
+        $address = $apartment->user->email;
+        
         $this->validate($request, [
             'email' => 'required|email',
             'message' => 'required'
         ]);
+
         $data = array(
             'email' => $request->email,
             'message' => $request->message,
         );
-        Mail::to(Auth::user()->email)->send(new SendMessage($data));
+
+        Mail::to($address)->send(new SendMessage($data));
         return back()->with('success', 'Grazie per averci contattato');
     }
 }
