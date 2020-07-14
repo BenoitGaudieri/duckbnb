@@ -86,7 +86,7 @@
         @endforeach
 
         <div class="form-group">
-            <input type="search" id="address-input" placeholder="Where are we going?" />
+            <input id="address-input" placeholder="Dove vorresti alloggiare?" />
         </div>
 
         <input type="hidden" id="lat" name="lat" value="{{ old("lat", $apartment->lat) }}">
@@ -95,8 +95,5 @@
         <input class="btn btn-primary" type="submit" value="Save">
 
     </form>
-
 </div>
-
-
 @endsection
