@@ -64,13 +64,20 @@ class Apartment extends Model
 
     public function toSearchableArray()
     {
-        $apts = $this->toArray();
+        $array = $this->toArray();
 
-        $apts['_geoloc'] = [
-            'lat' => $apts['lat'],
-            'lng' => $apts['lng'],
+        $array = $this->transform($array);
+
+        // Magia
+        $array["services"] = $this->services->map(function ($data) {
+            return $data['name'];
+        })->toArray();
+
+        $array['_geoloc'] = [
+            'lat' => (float) $array['lat'],
+            'lng' => (float) $array['lng'],
         ];
 
-        return $apts;
+        return $array;
     }
 }

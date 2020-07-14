@@ -14,8 +14,8 @@ search.addWidgets([
         container: "#clear-refinements"
     }),
     instantsearch.widgets.refinementList({
-        container: "#apartment-service",
-        attribute: "brand"
+        container: "#services",
+        attribute: "services"
     }),
     instantsearch.widgets.hits({
         container: "#hits",
@@ -33,6 +33,7 @@ search.addWidgets([
             <div class="hit-price">\${{price}}</div>
             <div class="item-lat">{{lat}}</div>
             <div class="item-lng">{{lng}}</div>
+            <div class="servizi">{{services}}</div>
           </div>
         `
         }

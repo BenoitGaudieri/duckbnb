@@ -102,12 +102,12 @@ search.addWidgets([instantsearch.widgets.searchBox({
 }), instantsearch.widgets.clearRefinements({
   container: "#clear-refinements"
 }), instantsearch.widgets.refinementList({
-  container: "#apartment-service",
-  attribute: "brand"
+  container: "#services",
+  attribute: "services"
 }), instantsearch.widgets.hits({
   container: "#hits",
   templates: {
-    item: "\n          <div class=\"container\">\n            <img src=\"/storage/{{ img_url }}\" align=\"left\" alt=\"{{title}}\" />\n            <div class=\"hit-name\">\n              {{#helpers.highlight}}{ \"attribute\": \"title\" }{{/helpers.highlight}}\n            </div>\n            <div class=\"hit-description\">\n              {{#helpers.highlight}}{ \"attribute\": \"description\" }{{/helpers.highlight}}\n            </div>\n            <div class=\"item-lng\">{{id}}</div>\n            <div class=\"hit-price\">${{price}}</div>\n            <div class=\"item-lat\">{{lat}}</div>\n            <div class=\"item-lng\">{{lng}}</div>\n          </div>\n        "
+    item: "\n          <div class=\"container\">\n            <img src=\"/storage/{{ img_url }}\" align=\"left\" alt=\"{{title}}\" />\n            <div class=\"hit-name\">\n              {{#helpers.highlight}}{ \"attribute\": \"title\" }{{/helpers.highlight}}\n            </div>\n            <div class=\"hit-description\">\n              {{#helpers.highlight}}{ \"attribute\": \"description\" }{{/helpers.highlight}}\n            </div>\n            <div class=\"item-lng\">{{id}}</div>\n            <div class=\"hit-price\">${{price}}</div>\n            <div class=\"item-lat\">{{lat}}</div>\n            <div class=\"item-lng\">{{lng}}</div>\n            <div class=\"servizi\">{{services}}</div>\n          </div>\n        "
   }
 }), instantsearch.widgets.pagination({
   container: "#pagination"

@@ -15,8 +15,8 @@
     <div class="left-panel">
       <div id="clear-refinements"></div>
 
-      <h2>Tags</h2>
-      <div id="apartment-service"></div>
+      <h2>Servizi</h2>
+      <div id="services"></div>
     </div>
 
     <div class="right-panel">
