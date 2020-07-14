@@ -28,6 +28,9 @@
     }
 }
 
-@mixin button($text-color, $border-color) {
-    
+@mixin button($color) {
+    color: $color;
+    border: 1px solid $color;
+    padding: 7px 20px;
+    border-radius: 4px;
 }

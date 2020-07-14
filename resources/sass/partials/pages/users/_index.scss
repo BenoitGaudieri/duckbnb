@@ -1,0 +1,72 @@
+.dashboard {
+
+    &-welcome {
+
+        &--username {
+            color: $main-color;
+        }
+    }
+
+    &-nav {
+        list-style: none;
+        margin-bottom: 30px;
+
+        ul {
+            padding: 0;
+        }
+
+        &--link {
+            display: inline;
+            
+            
+            &:first-child {
+                margin-right: 10px;
+            }
+
+        }
+        
+    }
+
+    &-apts {
+        @include flex(column);
+        padding: 0;
+
+        &--title {
+            @include flex(row, flex-start, center);
+            margin-bottom: 20px;
+
+            h2 {
+                font-size: 1.1rem;
+                
+                margin-right: 10px;
+
+                @include responsive($tablet) {
+                    font-size: 2rem;
+                }
+            }
+        }
+        
+        &--apt {
+            @include flex($align: center);
+            padding: 10px 0;
+            border-bottom: 1px solid $dark;
+
+            &:last-child {
+                border: 0;
+            }
+
+            &-title {
+                width: 180px;
+                margin-right: 10px;
+
+                @include responsive($tablet) {
+                    width: 400px;
+                }
+            }
+
+            input[type="submit" i] {
+               background-color: transparent;
+            }
+        }
+    }
+}

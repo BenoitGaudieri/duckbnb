@@ -10,26 +10,47 @@
     </div>
 @endif
 
-<div class="container">
+<div class="container dashboard">
 
-    <div class="row">
-        <p>Ciao {{!empty(Auth::user()->first_name) ? Auth::user()->first_name : Auth::user()->email}}, benvenuto nella tua dashboard.</p>
+    <div class="row dashbord-welcome">
+        <p>Ciao <span class="dashboard-welcome--username">{{!empty(Auth::user()->first_name) ? Auth::user()->first_name : Auth::user()->email}}</span>, benvenuto nella tua dashboard.</p>
     </div>
-    <div class="row">
-        <h2>I tuoi appartamenti!</h2>
-    </div>
-    <div class="row">
-        @foreach ($apartments as $apartment)
-            <p>{{ $apartment->id }}</p>
-            
-            <form action="{{ route('user.apartments.destroy', $apartment->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <input class="btn btn-danger" type="submit" value="Delete">
-                <a href="#" class="btn-show"> ora vediamo </a>
-            </form>
-                
-        @endforeach
+    {{-- Secondary Nav --}}
+    <nav class="row dashboard-nav">
+       <ul>
+            <li class="dashboard-nav--link">
+                <a href="">I tuoi appartamenti</a>
+            </li>
+            <li class="dashboard-nav--link">
+                <a href="">Messaggi</a>
+            </li>
+       </ul>
+    </nav>
+    <div class="row dashboard-apts">
+        <div class="dashboard-apts--title">
+            <h2>I tuoi appartamenti</h2>
+            <a href="{{ route('user.apartments.create') }}" class="button-main">Aggiungi</a>
+        </div>
+        @if(count($apartments) > 0)
+            @foreach ($apartments as $apartment)
+                <div class="dashboard-apts--apt">
+                    <div class="dashboard-apts--apt-title">
+                        <a href="{{route('user.apartments.show', $apartment->id)}}">
+                            {{ $apartment->title }}
+                        </a>
+                    </div>
+                    <div class="dashboard-apts--apt-delete">
+                        <form action="{{ route('user.apartments.destroy', $apartment->id) }}" method="POST">
+                    </div>
+                        @csrf
+                        @method('DELETE')
+                        <input class="button-dark" type="submit" value="Elimina">
+                    </form>
+                </div>       
+            @endforeach
+        @else 
+            <p>Non hai nessun appartamento, aggiungine uno!</p>
+        @endif
     </div>
 </div>
 

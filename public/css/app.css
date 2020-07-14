@@ -10923,6 +10923,10 @@ a.text-dark:focus {
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   width: 100%;
   min-height: 100vh;
@@ -10938,6 +10942,16 @@ body {
   width: 100%;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 a {
   color: inherit;
 }
@@ -10949,6 +10963,39 @@ a:hover {
 
 button:focus {
   outline: none;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.button-main {
+  color: #F4AF32;
+  border: 1px solid #F4AF32;
+  padding: 7px 20px;
+  border-radius: 4px;
+}
+
+.button-light {
+  color: #87ACBC;
+  border: 1px solid #87ACBC;
+  padding: 7px 20px;
+  border-radius: 4px;
+}
+
+.button-dark {
+  color: #A67A5D;
+  border: 1px solid #A67A5D;
+  padding: 7px 20px;
+  border-radius: 4px;
+}
+
+.button-shadow {
+  color: rgba(62, 68, 82, 0.62);
+  border: 1px solid rgba(62, 68, 82, 0.62);
+  padding: 7px 20px;
+  border-radius: 4px;
 }
 
 .navbar {
@@ -10988,6 +11035,82 @@ button:focus {
 .navbar .dropdown-menu .dropdown-item:hover,
 .navbar .dropdown-menu .dropdown-item:focus {
   color: #F4AF32;
+  background-color: transparent;
+}
+
+.dashboard-welcome--username {
+  color: #F4AF32;
+}
+
+.dashboard-nav {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.dashboard-nav ul {
+  padding: 0;
+}
+
+.dashboard-nav--link {
+  display: inline;
+}
+
+.dashboard-nav--link:first-child {
+  margin-right: 10px;
+}
+
+.dashboard-apts {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.dashboard-apts--title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-apts--title h2 {
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-apts--title h2 {
+    font-size: 2rem;
+  }
+}
+
+.dashboard-apts--apt {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #3E4452;
+}
+
+.dashboard-apts--apt:last-child {
+  border: 0;
+}
+
+.dashboard-apts--apt-title {
+  width: 180px;
+  margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-apts--apt-title {
+    width: 400px;
+  }
+}
+
+.dashboard-apts--apt input[type=submit i] {
   background-color: transparent;
 }
 
