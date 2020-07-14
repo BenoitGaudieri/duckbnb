@@ -97,3 +97,8 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script src="{{ asset("js/place-create.js") }}" defer></script>    
+    
+@endpush

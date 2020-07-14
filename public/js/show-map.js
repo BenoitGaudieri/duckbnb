@@ -47777,13 +47777,13 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   id: "mapbox/streets-v11",
   tileSize: 512,
   zoomOffset: -1,
-  accessToken: "pk.eyJ1IjoiY2FudHVnYSIsImEiOiJja2NkbjZsazQwMDV4MnFtb2R2NTVwYWJlIn0._T3wB3T1ZY2bB6LEQdb1uQ"
+  accessToken: "pk.yJ1Ijoibmljb2xvcml6emkiLCJhIjoiY2tjazlycjN1MWxrdDMxbHBrbzl3MTJnYiJ9.ixoVNnRiG0UPNZ9dKCUTiw"
 }).addTo(mymap);
 /**
  * Reverse geoloc
  */
 
-var places = algoliasearch.initPlaces("plH9W3AD2IH9", "3cad2b19f8a21e59f2cafcb26bfb0181");
+var places = algoliasearch.initPlaces("pl9UU6OYE3WK", "37d301cd4aac7a421b9138b33579f801");
 var latFlt = parseFloat(startLat);
 var lngFlt = parseFloat(startLng);
 places.reverse({
@@ -47833,7 +47833,7 @@ function updateDiv(response) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\P\airbnb\duckbnb\resources\js\show-map.js */"./resources/js/show-map.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\show-map.js */"./resources/js/show-map.js");
 
 
 /***/ })
