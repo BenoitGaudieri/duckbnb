@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container d-flex justify-content-end mb-5">
-        <div class="row">
-            <button>
-                <a class="mb-5 align-self-end" href="{{ route('search') }}">SEARCH</a>
-            </button>
-        </div>
+
+    <div class="jumbotron position-relative">
+        <div class="search position-absolute"></div>
     </div>
+
+    <div class="divider"></div>
+
 
     <div class="container d-flex flex-wrap justify-content-center">
         @foreach($apartments as $apt)
@@ -32,3 +32,12 @@
         @endforeach
     </div>
 @endsection
+
+@push('scripts')
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+  <script src="{{ asset("js/search.js") }}" defer></script>    
+@endpush

@@ -10940,6 +10940,7 @@ body {
 
 #app {
   width: 100%;
+  padding: 60px 0;
 }
 
 h1,
@@ -10959,6 +10960,10 @@ a {
 a:hover {
   color: #F4AF32;
   text-decoration: none;
+}
+
+input[type=submit i] {
+  background-color: transparent;
 }
 
 button:focus {
@@ -11078,8 +11083,15 @@ button:focus {
   font-weight: 500;
 }
 
+.divider {
+  height: 25px;
+  background: linear-gradient(150deg, #ffdd00 0%, #fbb034 80%);
+}
+
 .navbar {
   width: 100%;
+  position: fixed;
+  z-index: 1;
   background: #F7F6F6;
 }
 
@@ -11116,6 +11128,25 @@ button:focus {
 .navbar .dropdown-menu .dropdown-item:focus {
   color: #F4AF32;
   background-color: transparent;
+}
+
+.jumbotron {
+  height: calc(100vh - 60px);
+  width: 100%;
+  margin: 0;
+  background-image: url(/images/jumbo-img.jpg?4fd43bb42c0c7ebdb428046c669dca08);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.jumbotron .search {
+  width: 400px;
+  height: 50px;
+  background-color: rgba(62, 68, 82, 0.62);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .dashboard-nav {
@@ -11186,10 +11217,6 @@ button:focus {
   }
 }
 
-.dashboard-apts--apt input[type=submit i] {
-  background-color: transparent;
-}
-
 .map-show {
   margin: 30px 0;
 }
@@ -11254,6 +11281,11 @@ button:focus {
   flex-wrap: wrap;
 }
 
+.info-detail--data--details,
+.info-detail--data--services {
+  padding: 10px 0;
+}
+
 .info-detail--data--details {
   margin-right: 20px;
 }
@@ -11271,7 +11303,7 @@ button:focus {
 }
 
 .message {
-  margin-top: 20px;
+  margin: 50px 0;
 }
 
 .section-title {

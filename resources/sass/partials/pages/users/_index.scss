@@ -1,9 +1,5 @@
 .dashboard {
 
-    &-welcome {
-        
-    }
-
     &-nav {
         list-style: none;
         margin-bottom: 30px;
@@ -59,10 +55,6 @@
                 @include responsive($tablet) {
                     width: 400px;
                 }
-            }
-
-            input[type="submit" i] {
-               background-color: transparent;
             }
         }
     }

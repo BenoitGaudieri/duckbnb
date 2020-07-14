@@ -81,15 +81,25 @@
                     <textarea name="message" id="message" class="form-control" placeholder="Inserisci il tuo messaggio"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="send" value="Send" class="btn btn-info">
+                    <input type="submit" name="send" value="Send" class="button-main">
                 </div>
             </form>
-            
         </div>
 
         <div class="review">
             <h4 class="section-title weight-light">Scrivi una recensione</h4>
-            <p>form</p>
+            <form method="POST" action="{{ url('sendmessage/send') }}">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <input type="text" name="email" class="form-control" placeholder="La tua email">
+                </div>
+                <div class="form-group">
+                    <textarea name="message" id="message" class="form-control" placeholder="Inserisci il tuo messaggio"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="send" value="Send" class="button-main">
+                </div>
+            </form>
         </div>
     @endif
 
