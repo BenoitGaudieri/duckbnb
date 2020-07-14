@@ -72,8 +72,8 @@
                 <strong>{{ $message }}</strong>
             </div>
             @endif
-            <form method="POST" action="{{ url('sendmessage/send') }}">
-                {{ csrf_field() }}
+            <form method="POST" action="{{ route('send', $apartment->id) }}">
+                @csrf
                 <div class="form-group">
                     <input type="text" name="email" class="form-control" placeholder="La tua email">
                 </div>
