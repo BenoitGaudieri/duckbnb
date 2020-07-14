@@ -9,6 +9,9 @@ class Apartment extends Model
 {
     use Searchable;
 
+    // Built-in feature of laravel to let a model know that a model a linked model has changed
+    protected $touches = ["services"];
+
     protected $fillable = [
         'user_id',
         'title',
@@ -62,13 +65,16 @@ class Apartment extends Model
         return $this->belongsToMany('App\Sponsorship')->withTimestamps();
     }
 
+    /**
+     * Scout Extended transforms the model into Algolia records with this toSearchableArray method.
+     * Returning the services and the lat/lng in the _geoloc object used by Algolia. 
+     */
     public function toSearchableArray()
     {
         $array = $this->toArray();
 
         $array = $this->transform($array);
 
-        // Magia
         $array["services"] = $this->services->map(function ($data) {
             return $data['name'];
         })->toArray();
