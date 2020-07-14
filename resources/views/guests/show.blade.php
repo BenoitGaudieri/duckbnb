@@ -60,7 +60,13 @@
                 <a class="dashboard-ctas--btn button-main" href="#">Sponsorizza</a>
                 <a class="dashboard-ctas--btn button-light" href="{{ route('user.apartments.edit', $apartment->id) }}">Modifica</a>
              <a class=" dashboard-ctas--btn button-dark" href="{{ route('user.stats', $apartment->id) }}">Statistiche</a> 
-            <a class="dashboard-ctas--btn button-shadow" href="#">Nascondi</a>
+            
+            @if($apartment->is_visible == 0)
+                <a class="dashboard-ctas--btn button-shadow" href="#">Pubblica</a>
+            @else
+                <a class="dashboard-ctas--btn button-shadow" href="#">Nascondi</a>
+            @endif
+            
             </div>
         </div>
     @else
