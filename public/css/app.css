@@ -11270,6 +11270,14 @@ button:focus {
   line-height: 3;
 }
 
+.message {
+  margin-top: 20px;
+}
+
+.section-title {
+  margin-bottom: 15px;
+}
+
 .latlng {
   display: none;
 }
