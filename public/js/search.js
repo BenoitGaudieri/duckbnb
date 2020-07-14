@@ -95,7 +95,7 @@
 
 var search = instantsearch({
   indexName: "apartments",
-  searchClient: algoliasearch("NWETNAHZK6", "fca9bb4e7ca1b31995450978f9862d0f")
+  searchClient: algoliasearch("YW4SUZV7KO", "7dd6fae3ecf69532abcb8d0928988477")
 });
 search.addWidgets([instantsearch.widgets.searchBox({
   container: "#searchbox"
@@ -123,7 +123,7 @@ search.start();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\P\airbnb\duckbnb\resources\js\search.js */"./resources/js/search.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\search.js */"./resources/js/search.js");
 
 
 /***/ })

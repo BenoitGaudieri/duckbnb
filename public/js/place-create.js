@@ -47737,8 +47737,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Algoli
 
 
 var placesAutocomplete = places({
-  appId: "plH9W3AD2IH9",
-  apiKey: "3cad2b19f8a21e59f2cafcb26bfb0181",
+  appId: "pl9UU6OYE3WK",
+  apiKey: "37d301cd4aac7a421b9138b33579f801",
   container: document.querySelector("#address-input")
 });
 placesAutocomplete.on("change", changeHandle);
@@ -47770,7 +47770,7 @@ function changeHandle(e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\P\airbnb\duckbnb\resources\js\place-create.js */"./resources/js/place-create.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\place-create.js */"./resources/js/place-create.js");
 
 
 /***/ })
