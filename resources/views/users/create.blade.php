@@ -69,7 +69,8 @@
         </div>
         
         <div class="form-group">
-            <input id="address-input" placeholder="Dove vorresti alloggiare?"/>
+            <label for="address-input">Indirizzo</label>
+            <input id="address-input" placeholder="La tua prossima meta?"/>
             <span id="coords"></span>
         </div>
 

@@ -8,9 +8,11 @@
 @import 'partials/variables';
 @import 'partials/mixins';
 @import 'partials/common';
+@import 'partials/utilities';
 
 // Components
 @import 'partials/components/header';
 
 // Pages
-@import 'partials/pages/users/index'
+@import 'partials/pages/users/index';
+@import 'partials/pages/show';

@@ -13,7 +13,7 @@
 <div class="container dashboard">
 
     <div class="row dashbord-welcome">
-        <p>Ciao <span class="dashboard-welcome--username">{{!empty(Auth::user()->first_name) ? Auth::user()->first_name : Auth::user()->email}}</span>, benvenuto nella tua dashboard.</p>
+        <p>Ciao <span class="text-main dashboard-welcome--username">{{!empty(Auth::user()->first_name) ? Auth::user()->first_name : Auth::user()->email}}</span>, benvenuto nella tua dashboard.</p>
     </div>
     {{-- Secondary Nav --}}
     <nav class="row dashboard-nav">
