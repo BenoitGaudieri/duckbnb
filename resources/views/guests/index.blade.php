@@ -4,12 +4,12 @@
 
     <div class="jumbotron position-relative">
         <div class="search position-absolute">
-            <div class="search-group">
-                <input id="address-input" placeholder="Cerca per meta"/>
-            </div>
             <form action="{{ route('search.submit') }}" method="POST">
                 @csrf
                 @method('POST')
+                <div class="search-group">
+                    <input id="address-input" placeholder="Cerca per meta"/>
+                </div>
                 <input type="hidden" id="apartmentId" name="id[]" value="">
                 <input type="submit" value="Cerca">
             </form>

@@ -20,15 +20,6 @@ class SearchController extends Controller
         $apartments = Apartment::all()->whereIn("id", $array);
 
 
-        // for ($i = 0; $i < count($array); $i++) {
-        //     $selectedApts = $apartments->with(["id" => $array[$i]])->get();
-        // }
-
-        // foreach ($array as $item => $key) {
-        //     $apartments[] = Apartment::where('id', $key)->get();
-        // }
-
-
         return view('guests.search', compact('apartments'));
     }
 }
