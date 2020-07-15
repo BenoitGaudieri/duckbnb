@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 // Guest
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
+Route::post('/search', 'SearchController@search')->name('search.submit');
 Route::get('apartments/{apartment}', 'ApartmentController@show')->name('show');
 
 Route::post('sendmessage/send/{apartment}', 'SendMessageController@send')->name('send');

@@ -3,7 +3,17 @@
 @section('content')
 
     <div class="jumbotron position-relative">
-        <div class="search position-absolute"></div>
+        <div class="search position-absolute">
+            <div class="search-group">
+                <input id="address-input" placeholder="Cerca per meta"/>
+            </div>
+            <form action="{{ route('search.submit') }}" method="POST">
+                @csrf
+                @method('POST')
+                <input type="hidden" id="apartmentId" name="id[]" value="">
+                <input type="submit" value="Cerca">
+            </form>
+        </div>
     </div>
 
     <div class="divider"></div>
@@ -39,3 +49,12 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+<script src="{{ asset("js/search.js") }}" defer></script>    
+@endpush
