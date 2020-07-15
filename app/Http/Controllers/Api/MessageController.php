@@ -16,16 +16,12 @@ class MessageController extends Controller
             'error' => '',
             'response' => []
         ];
-
-        if(!empty($apartments)) {
-            foreach ($apartments as $apartment) {
-                foreach ($apartment->messages as $message) {
-                    $message['apt_title'] = $apartment->title;
-                    $res['response'][] = $message;
-                }
+        
+        foreach ($apartments as $apartment) {
+            foreach ($apartment->messages as $message) {
+                $message['apt_title'] = $apartment->title;
+                $res['response'][] = $message;
             }
-        } else {
-            $res['error'] = 'Non hai messaggi';
         }
 
         return response()->json($res);
