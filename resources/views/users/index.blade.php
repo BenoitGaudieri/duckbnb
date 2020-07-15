@@ -24,6 +24,18 @@
             </li>
        </ul>
     </nav>
+
+    <h4>Prova stampa dei messaggi:</h4>
+    @foreach($apartments as $apartment)
+        <div class="row">
+            @foreach($apartment->messages as $message)
+                <p><strong>Inviato da:</strong>{{ $message->mail_from }}</p>
+                <p><strong>Testo messaggio: </strong>{{ $message->body }}</p>
+                <hr>
+            @endforeach
+        </div>
+    @endforeach
+
     <div class="row dashboard-apts">
         <div class="dashboard-apts--title">
             <h2>I tuoi appartamenti</h2>

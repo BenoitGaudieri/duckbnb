@@ -16,9 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::where("user_id", Auth::id())->orderBy("created_at", "desc")->get();
-        // $apartments = Apartment::all();
-
+        $apartments = Apartment::where("user_id", Auth::id())->orderBy("views", "desc")->get();
 
         return view('users.index', compact("apartments"));
     }

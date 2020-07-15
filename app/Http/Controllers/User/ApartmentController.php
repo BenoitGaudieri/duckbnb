@@ -140,6 +140,22 @@ class ApartmentController extends Controller
         }
     }
 
+    public function updateVisibility(Request $request, Apartment $apartment)
+    {
+        $data = $request->all();
+        $updated = $apartment->update($data);
+
+        if($request->input('is_visible') == 0) {
+            $visibility = 'hidden';
+        } else {
+            $visibility = 'published';
+        }
+
+        if($updated) {
+            return back()->with('visibility', $visibility);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 // Guest
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
-// TODO: TESTARE LA SHOW
 Route::get('apartments/{apartment}', 'ApartmentController@show')->name('show');
 
 Route::post('sendmessage/send/{apartment}', 'SendMessageController@send')->name('send');
@@ -31,4 +30,5 @@ Route::prefix('user')
     ->group(function () {
         Route::resource('apartments', 'ApartmentController');
         Route::get('apartments/{apartment}/stats', 'ApartmentController@statistics')->name('stats');
+        Route::post('apartments/{apartment}/visibility', 'ApartmentController@updateVisibility')->name('apartment.visibility');
     });
