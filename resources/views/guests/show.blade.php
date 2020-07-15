@@ -54,6 +54,13 @@
         </div>
     </div>    
     @if(Auth::id() == $apartment['user_id'])
+        @if(Session::has('visibility'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                {{ Session::get('visibility') == 'hidden' ? 'Appartamento nascosto' : 'Appartamento pubblicato' }}
+            </div>
+        @endif
+            
         <div class="dashboard">
             <h4 class="section-title weight-light">Dashboard Proprietario</h4>
             <div class="dashboard-ctas">
@@ -62,9 +69,19 @@
              <a class=" dashboard-ctas--btn button-dark" href="{{ route('user.stats', $apartment->id) }}">Statistiche</a> 
             
             @if($apartment->is_visible == 0)
-                <a class="dashboard-ctas--btn button-shadow" href="#">Pubblica</a>
+                <form action="{{ route('user.apartment.visibility', $apartment->id) }}" class="form" method="POST">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="is_visible" value="1">
+                    <input class="dashboard-ctas--btn button-shadow" type="submit" value="Pubblica">
+                </form>
             @else
-                <a class="dashboard-ctas--btn button-shadow" href="#">Nascondi</a>
+                <form action="{{ route('user.apartment.visibility', $apartment->id) }}" class="form" method="POST">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="is_visible" value="0">
+                    <input class="dashboard-ctas--btn button-shadow" type="submit" value="Nascondi">
+                </form>
             @endif
             
             </div>

@@ -30,5 +30,5 @@ Route::prefix('user')
     ->group(function () {
         Route::resource('apartments', 'ApartmentController');
         Route::get('apartments/{apartment}/stats', 'ApartmentController@statistics')->name('stats');
-        Route::get('apartments/{apartment}/visibility', 'ApartmentController@toggleVisibility')->name('apartment.visibility');
+        Route::post('apartments/{apartment}/visibility', 'ApartmentController@updateVisibility')->name('apartment.visibility');
     });
