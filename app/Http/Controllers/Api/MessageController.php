@@ -20,7 +20,7 @@ class MessageController extends Controller
         if(!empty($apartments)) {
             foreach ($apartments as $apartment) {
                 foreach ($apartment->messages as $message) {
-                    $message['title'] = $apartment->title;
+                    $message['apt_title'] = $apartment->title;
                     $res['response'][] = $message;
                 }
             }
