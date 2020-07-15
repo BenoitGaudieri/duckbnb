@@ -54,37 +54,38 @@
         </div>
     </div>    
     @if(Auth::id() == $apartment['user_id'])
-        @if(Session::has('visibility'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert">x</button>
-                {{ Session::get('visibility') == 'hidden' ? 'Appartamento nascosto' : 'Appartamento pubblicato' }}
-            </div>
-        @endif
-            
         <div class="dashboard">
             <h4 class="section-title weight-light">Dashboard Proprietario</h4>
             <div class="dashboard-ctas">
                 <a class="dashboard-ctas--btn button-main" href="#">Sponsorizza</a>
                 <a class="dashboard-ctas--btn button-light" href="{{ route('user.apartments.edit', $apartment->id) }}">Modifica</a>
-             <a class=" dashboard-ctas--btn button-dark" href="{{ route('user.stats', $apartment->id) }}">Statistiche</a> 
+                <a class=" dashboard-ctas--btn button-dark" href="{{ route('user.stats', $apartment->id) }}">Statistiche</a> 
             
-            @if($apartment->is_visible == 0)
-                <form action="{{ route('user.apartment.visibility', $apartment->id) }}" class="form" method="POST">
-                    @csrf
-                    @method('POST')
-                    <input type="hidden" name="is_visible" value="1">
-                    <input class="dashboard-ctas--btn button-shadow" type="submit" value="Pubblica">
-                </form>
-            @else
-                <form action="{{ route('user.apartment.visibility', $apartment->id) }}" class="form" method="POST">
-                    @csrf
-                    @method('POST')
-                    <input type="hidden" name="is_visible" value="0">
-                    <input class="dashboard-ctas--btn button-shadow" type="submit" value="Nascondi">
-                </form>
-            @endif
+                @if($apartment->is_visible == 0)
+                    <form action="{{ route('user.apartment.visibility', $apartment->id) }}" class="form" method="POST">
+                        @csrf
+                        @method('POST')
+                        <input type="hidden" name="is_visible" value="1">
+                        <input class="dashboard-ctas--btn button-shadow" type="submit" value="Pubblica">
+                    </form>
+                @else
+                    <form action="{{ route('user.apartment.visibility', $apartment->id) }}" class="form" method="POST">
+                        @csrf
+                        @method('POST')
+                        <input type="hidden" name="is_visible" value="0">
+                        <input class="dashboard-ctas--btn button-shadow" type="submit" value="Nascondi">
+                    </form>
+                @endif
             
             </div>
+
+            {{-- Message operation hide/show done --}}
+            @if(Session::has('visibility'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                {{ Session::get('visibility') == 'hidden' ? 'Appartamento nascosto' : 'Appartamento pubblicato' }}
+            </div>
+        @endif
         </div>
     @else
         <div class="message">
@@ -98,60 +99,70 @@
             <form method="POST" action="{{ route('send', $apartment->id) }}">
                 @csrf
                 <div class="form-group">
-                    <input type="text" name="email" class="form-control" placeholder="La tua email">
+                    <input type="text" name="email" class="form-control" placeholder="La tua email"
+                    @auth
+                        value="{{ old('email', Auth::user()->email) }}"
+                    @endauth
+                    >
                 </div>
                 <div class="form-group">
                     <textarea name="message" id="message" class="form-control" placeholder="Inserisci il tuo messaggio"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="send" value="Send" class="button-main">
+                    <input type="submit" name="send" value="Invia" class="button-main">
                 </div>
             </form>
         </div>
 
         <div class="review">
             <h4 class="section-title weight-light">Scrivi una recensione</h4>
-            <form method="POST" action="{{ url('sendmessage/send') }}">
+            @if($message = Session::get('success-review'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            <form method="POST" action="{{ route('sendReview', $apartment->id, Auth::user()) }}">
+                @if(count($errors) > 0 )
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <ul>
+                            @foreach($errors ->all() as $error)
+                                <li> {{ $error }}</li>  
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <input type="text" name="email" class="form-control" placeholder="La tua email">
+                    <textarea name="body" id="body" class="form-control" placeholder="La tua recensione"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea name="message" id="message" class="form-control" placeholder="Inserisci il tuo messaggio"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="send" value="Send" class="button-main">
+                    <input type="hidden" name="from_id" value="{{ Auth::user()}}">
+                    <input type="submit" name="send" value="Invia" class="button-main">
                 </div>
             </form>
         </div>
     @endif
-
-    <div class="reviews">
-        <h4 class="section-title weight-light">Recensioni</h4>
-
-        <div class="row reviews-single">
-            <div class="reviews-single--avatar">
-                img
-            </div>
-            <div class="reviews-single--data">
-                <p>data</p>
-            </div>
-        </div>
-    </div>
 </div>
-
-<div class="container mt-4">
-
-    @if(count($errors) > 0 )
-        <div class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            <ul>
-                @foreach($errors ->all() as $error)
-                    <li> {{ $error }}</li>  
-                @endforeach
-            </ul>
-        </div>
-    @endif
+<div class="container-fluid reviews-wrapper">
+    <div class="container reviews">
+        <h4 class="section-title weight-light">Recensioni</h4>
+        @if ( !$apartment->reviews->isEmpty()  ) 
+            @foreach ($apartment->reviews as $review)
+                <div class="row reviews-single">
+                    <div class="reviews-single--avatar">
+                      
+                    </div>
+                    <div class="reviews-single--data">
+                        <p>{{$review->body}}</p>
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <p>Non ci sono recensioni per questo appartamento.</p>
+        @endif
+    </div>
 
 </div>
 
