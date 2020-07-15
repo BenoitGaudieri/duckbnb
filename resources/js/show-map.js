@@ -44,45 +44,43 @@ L.tileLayer(
     }
 ).addTo(mymap);
 
-/**
- * Reverse geoloc
- */
-let places = algoliasearch.initPlaces(
-    process.env.MIX_PLACES_APPID,
-    process.env.MIX_PLACES_APIKEY
-);
-
 let latFlt = parseFloat(startLat);
 let lngFlt = parseFloat(startLng);
 
-places
-    .reverse({
-        aroundLatLng: latFlt + "," + lngFlt
-    })
-    .then(updateDiv);
+// Map icon
+L.marker([latFlt, lngFlt], { icon: yellowIcon })
+    .addTo(mymap)
+    .bindPopup(address)
+    .openPopup();
+/**
+ * Reverse geoloc
+ */
 
-function updateDiv(response) {
-    var hits = response.hits;
-    // The first hit is the most accurate
-    var suggestion = hits[0];
-    var addressDiv = document.querySelector("#address");
-    var address = "";
+// let places = algoliasearch.initPlaces(
+//     process.env.MIX_PLACES_APPID,
+//     process.env.MIX_PLACES_APIKEY
+// );
 
-    // Check the response for italian names
-    if (suggestion.locale_names.it && suggestion.country.it) {
-        address = `${suggestion.locale_names.it}, ${suggestion.country.it}`;
-    } else if (suggestion.locale_names.default && suggestion.country.default) {
-        address = `${suggestion.locale_names.default[0]}, ${suggestion.country.default}`;
-    } else {
-        address = "Impossibile localizzarti";
-    }
-    addressDiv.innerHTML = address;
+// places
+//     .reverse({
+//         aroundLatLng: latFlt + "," + lngFlt
+//     })
+//     .then(updateDiv);
 
-    // Map icon
-    L.marker([latFlt, lngFlt], { icon: yellowIcon })
-        .addTo(mymap)
-        .bindPopup(address)
-        .openPopup();
+// function updateDiv(response) {
+//     var hits = response.hits;
+//     // The first hit is the most accurate
+//     var suggestion = hits[0];
+//     var addressDiv = document.querySelector("#address");
+//     var address = "";
 
-    console.log(suggestion);
-}
+//     // Check the response for italian names
+//     if (suggestion.locale_names.it && suggestion.country.it) {
+//         address = `${suggestion.locale_names.it}, ${suggestion.country.it}`;
+//     } else if (suggestion.locale_names.default && suggestion.country.default) {
+//         address = `${suggestion.locale_names.default[0]}, ${suggestion.country.default}`;
+//     } else {
+//         address = "Impossibile localizzarti";
+//     }
+//     addressDiv.innerHTML = address;
+// }

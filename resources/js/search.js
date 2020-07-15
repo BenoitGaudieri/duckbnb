@@ -9,6 +9,10 @@ const search = instantsearch({
 });
 
 search.addWidgets([
+    instantsearch.widgets.configure({
+        hitsPerPage: 8
+        // enablePersonalization: true
+    }),
     instantsearch.widgets.searchBox({
         container: "#searchbox"
     }),
@@ -18,10 +22,6 @@ search.addWidgets([
     instantsearch.widgets.menu({
         container: "#services",
         attribute: "services"
-    }),
-    instantsearch.widgets.menuSelect({
-        container: "#bathrooms_qty",
-        attribute: "bathroom_qty"
     }),
     instantsearch.widgets.menuSelect({
         container: "#beds_qty",
@@ -40,20 +40,19 @@ search.addWidgets([
         container: "#hits",
         templates: {
             item: `
-          <div class="container">
-            <img src="/storage/{{ img_url }}" align="left" alt="{{title}}" />
-            <div class="hit-name">
-              {{#helpers.highlight}}{ "attribute": "title" }{{/helpers.highlight}}
-            </div>
-            <div class="hit-description">
-              {{#helpers.highlight}}{ "attribute": "description" }{{/helpers.highlight}}
-            </div>
-            <div class="item-lng">Appartamento N°: {{id}}</div>
-            <div class="hit-price">Prezzo: \${{price}}</div>
-            <div class="bagni">Bagni: {{bathroom_qty}}</div>
-            <div class="letti">Letti: {{bed_qty}}</div>
-            <div class="stanze">Stanze: {{room_qty}}</div>
-          </div>
+                <div class="container">
+                    <img src="/storage/{{ img_url }}" align="left" alt="{{title}}" />
+                    <div class="hit-name">
+                    {{#helpers.highlight}}{ "attribute": "title" }{{/helpers.highlight}}
+                    </div>
+                    <div class="hit-description">
+                    {{#helpers.highlight}}{ "attribute": "description" }{{/helpers.highlight}}
+                    </div>
+                    <div class="hit-price">Prezzo: \${{price}}</div>
+                    <div class="bagni">Bagni: {{bathroom_qty}}</div>
+                    <div class="letti">Letti: {{bed_qty}}</div>
+                    <div class="stanze">Stanze: {{room_qty}}</div>
+                </div>
         `
         }
     }),
@@ -95,4 +94,10 @@ function changeHandle(e) {
                 console.log(item);
             });
         });
+}
+
+{
+    /* <a href="apartments/{{ id }}" class="card mb-4">
+Vai all'appartamento
+</a> */
 }

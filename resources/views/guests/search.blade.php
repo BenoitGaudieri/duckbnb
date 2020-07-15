@@ -26,11 +26,10 @@
             <div id="services"></div>
             
         </div>
-    <div class="search-group">
+    {{-- <div class="search-group">
         <h4>Bagni:</h4>
         <div id="bathrooms_qty"></div>
-
-    </div>
+    </div> --}}
         <div class="search-group">
             <h4>Letti:</h4>
             <div id="beds_qty"></div>
@@ -54,15 +53,15 @@
     <div class="right-panel">
         <div id="searchbox" class="ais-SearchBox"></div>
         <div id="hits"></div>
+        <div class="search-group">
+            <h2>Cerca per meta</h2>
+            <input id="address-input" placeholder="Cerca per meta"/>
+            <span id="results"></span>
+        </div>
         <div id="pagination"></div>
     </div>
 </div>
 
-<div class="search-group">
-    <label for="address-input">Indirizzo</label>
-    <input id="address-input" placeholder="Cerca per meta"/>
-    <span id="results"></span>
-</div>
 
 @endsection
 
