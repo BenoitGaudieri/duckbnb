@@ -25,7 +25,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-md shadow-sm">
+    <nav class="navbar navbar-expand-md shadow-sm fixed-top">
         <div class="container">
             <div class="logo-container">
                 <a class="navbar-brand" href="{{ url('/') }}">

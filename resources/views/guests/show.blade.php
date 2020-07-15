@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container show-page">
     
     <h2 class="weight-light">{{ $apartment->title }}</h2>
     <h4 id="address" class="text-main weight-regular"></h4>
