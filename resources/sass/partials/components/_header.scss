@@ -40,3 +40,45 @@
         }
     }
 }
+
+
+// Avatar visibility
+.navbar-nav {
+
+    @include responsive($tablet) {
+        @include flex(row, center, center);      
+    }
+
+    .nav-item.dropdown {
+        
+        .nav-item--user {
+            
+            @include responsive($tablet) {
+                @include flex(row, center, center);
+                
+            }
+            
+            &--avatar {
+                display: none;
+
+                @include responsive($tablet) {
+                    display: block;
+                    margin-right: 10px;
+                }
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    border: 2px solid $main-color;   
+                }
+            }
+        }
+    }
+}
+
+// Login Icon
+.login-icon {
+    font-size: 1.1rem;
+}

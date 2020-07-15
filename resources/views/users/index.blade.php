@@ -25,7 +25,6 @@
        </ul>
     </nav>
 
-    <h4>Prova stampa dei messaggi:</h4>
     @foreach($apartments as $apartment)
         <div class="row">
             @foreach($apartment->messages as $message)
