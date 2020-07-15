@@ -41,22 +41,29 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="{{ route("search") }}" class="nav-link">Search</a>
+                        <a href="{{ route("search") }}" class="nav-link">Cerca</a>
                     </li>
                     <!-- Authentication Links -->
                     @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">Registrati</a>
                             </li>
                         @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}"><ion-icon class="login-icon" name="lock-open"></ion-icon></a>
+                        </li>
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-item--user nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 @if(!empty(Auth::user()->first_name))
+                                <div class="nav-item--user--avatar">
+                                    @if(Auth::user()->path_img == 'img/avatar-default.png')
+                                        <img class="img-fluid" src="{{ asset(Auth::user()->path_img) }}" alt="">
+                                    @else
+                                        <img class="img-fluid" src="{{ asset('storage/' . Auth::user()->path_img) }}" alt="">
+                                    @endif
+                                </div>
                                 {{  Auth::user()->first_name }}
                                 @else
                                 {{Auth::user()->email}}
