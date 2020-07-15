@@ -20,6 +20,6 @@ class SearchController extends Controller
         $apartments = Apartment::all()->whereIn("id", $array);
 
 
-        return view('guests.search', compact('apartments'));
+        return view('guests.search')->with($apartments);
     }
 }

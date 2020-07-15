@@ -21,8 +21,8 @@
         <option value="3">3</option>
         <option value="4+">4+</option>
     </select>
-    <div class="row">
 
+    <div class="row">
         @foreach ($apartments as $apartment)
         <div class="card">
         <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
@@ -63,11 +63,6 @@
     }
 
 </style>
-
-<script>
-    var apartments = {{ count($apartments)}}
-
-</script>
 
 @push('scripts')
 <link

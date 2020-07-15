@@ -17,19 +17,5 @@ selectRooms.change(function() {
                     .hide();
             }
         }
-        // if (
-        //     item
-        //         .next()
-        //         .$(".rooms")
-        //         .text() == selectRooms.val()
-        // ) {
-        //     console.log("yay");
-        // }
     }
-
-    console.log(selectRooms.val());
 });
-
-console.log(apartments);
-
-console.log(results);
