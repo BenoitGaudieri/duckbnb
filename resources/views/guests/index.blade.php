@@ -9,35 +9,33 @@
     <div class="divider"></div>
 
 
-    <div class="container d-flex flex-wrap justify-content-center">
-        @foreach($apartments as $apt)
-            @if ($apt->is_visible==1)
-                <div class="row col-4">
-                    <a href="{{ route('show', $apt->id) }}" class="card mb-4">
-                        <div class="card-body">
-                            <img class="mb-2" width="200" height="200" src="{{ $apt->img_url }}">
-                            <div class="card-title">
-                                <h4>{{ $apt->title }}</h4>
-                            </div>
-                            <div class="card-text mb-2">
-                                {{ $apt->description }}
-                            </div>
-                            <div class="card-text">
-                                <strong>Views: {{ $apt->views }}</strong>
-                            </div>
+    <div class="container sponsor-section">
+        <div class="row sponsor-section--title">
+            <h2 class="weight-light">Le migliori mete</h2>
+        </div>
+        <div class="row sponsor-section--apts">
+            @foreach($apartments as $apt)
+                @if ($apt->is_visible==1)
+                    <div class="card-apt">
+                        <a href="{{ route('show', $apt->id) }}" class="card-apt--img">
+                            <img src="{{ $apt->img_url }}" alt="{{ $apt->title }}" class="img-fluid">
+                        </a>
+                        <div class="card-apt--location">
+                            <h5 class="weight-regular">
+                                Recensioni 
+                                (<span class="text-main">{{ count($apt->reviews)}}</span>)
+                            </h5>
+                            <h5 class="weight-regular text-main"> Città </h5>
                         </div>
-                    </a>
-                </div>
-            @endif
-        @endforeach
+                        <div class="card-apt--title">
+                            <h4 class="weight-regular"> {{ $apt->title }} </h4>
+                        </div>
+                        <div class="card-apt--price">
+                            <h4 class="weight-regular"> <span class="text-main weight-bold">{{ $apt->price }}€</span> a notte</h4>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
     </div>
 @endsection
-
-@push('scripts')
-  <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
-  <script src="{{ asset("js/search.js") }}" defer></script>    
-@endpush
