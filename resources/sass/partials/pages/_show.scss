@@ -72,13 +72,28 @@
     margin-top: 30px;
 
     &-ctas {
-
+        @include flex();
+        flex-wrap: wrap;
         padding: 15px 0;
-
+        
+        form {
+            display: inline-block;
+        }
+        
         &--btn {
-            line-height: 3;
+            margin: 5px 5px 5px 0;
         }
     } 
+}
+
+
+.message,
+.review {
+    max-width: 500px;
+
+    textarea {
+        height: 100px;
+    }
 }
 
 .message {
@@ -89,8 +104,18 @@
     margin-bottom: 15px;
 }
 
+
+.reviews-wrapper {
+    background: $light;
+}
+
+.reviews {
+    padding: 50px 0;
+}
+
 // Need Element for maps
 .latlng {
     display: none;
 }
+
 

@@ -19,6 +19,8 @@ Route::get('/search', 'SearchController@index')->name('search');
 Route::get('apartments/{apartment}', 'ApartmentController@show')->name('show');
 
 Route::post('sendmessage/send/{apartment}', 'SendMessageController@send')->name('send');
+Route::post('sendreview/sendrew/{apartment}', 'SendReviewController@sendReview')->name('sendReview');
+
 
 Auth::routes();
 
