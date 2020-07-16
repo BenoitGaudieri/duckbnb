@@ -24,7 +24,7 @@
             </li>
        </ul>
     </nav> --}}
-
+{{-- 
     @foreach($apartments as $apartment)
         <div class="row">
             @foreach($apartment->messages as $message)
@@ -33,7 +33,7 @@
                 <hr>
             @endforeach
         </div>
-    @endforeach
+    @endforeach --}}
 
     <div class="row dashboard-apts">
         <div class="dashboard-apts--title">
@@ -60,6 +60,28 @@
         @else 
             <p>Non hai nessun appartamento, aggiungine uno!</p>
         @endif
+    </div>
+    <div class="row dashboard-apts">
+        <div class="dashboard-apts--title">
+            <h2>I tuoi Messaggi</h2>
+        </div>
+
+        @foreach($apartments as $apartment)
+            <div class="mb-3">
+                <strong>Appartamento: </strong>{{ $apartment->title }}
+                @foreach($apartment->messages as $message)
+                    <div class="message-line">
+                        <div class="mb-3">
+                            <strong>Inviato da: </strong>{{ $message->mail_from }}
+                        </div>
+                        <div class="">
+                            {{ $message->body }}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
+        
     </div>
 </div>
 

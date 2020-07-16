@@ -28,7 +28,11 @@
                 @if ($apt->is_visible==1)
                     <div class="card-apt">
                         <a href="{{ route('show', $apt->id) }}" class="card-apt--img">
-                            <img src="{{ $apt->img_url }}" alt="{{ $apt->title }}" class="img-fluid">
+                        @if($apt->img_url == 'https://picsum.photos/200/300')
+                            <img class="img-fluid" src="{{ $apt->img_url }}" alt="">
+                        @else
+                            <img class="img-fluid" src="{{ asset('storage/' . $apt->img_url) }}" alt="">
+                        @endif
                         </a>
                         <div class="card-apt--location">
                             <h5 class="weight-regular">
