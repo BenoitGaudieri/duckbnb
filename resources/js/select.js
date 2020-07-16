@@ -1,3 +1,5 @@
+require("./bootstrap");
+
 let selectRooms = $("#select-rooms");
 let results = $(".card");
 
@@ -91,11 +93,11 @@ $(document).ready(function() {
     filter.on("click", function(e) {
         e.preventDefault();
 
-        console.log("From Blade:", idArr.join());
+        console.log("From Blade:", idArr.join(", "));
 
-        var arrInString = idArr.join();
+        var arrInString = idArr.join(", ");
         console.log("Array in stringa: ", arrInString);
-        var urlCombo = `${apiUrl}?filter=/${arrInString}`;
+        var urlCombo = `${apiUrl}?filter=${arrInString}`;
         console.log(urlCombo);
 
         fetch(urlCombo)

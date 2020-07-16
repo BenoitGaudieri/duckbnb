@@ -40,7 +40,7 @@ var idArr = []
         <label for="colazione">Prima Colazione</label> <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione">
     </div>
 
-    {{-- <button id="test">Test ajax</button> --}}
+    <button id="test">Test ajax</button>
 
     <div class="row">
         @foreach ($apartments as $apartment)
