@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="divider"></div>
+    <div class="divider-gradient"></div>
 
 
     <div class="container sponsor-section">

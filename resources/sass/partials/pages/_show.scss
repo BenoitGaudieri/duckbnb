@@ -106,11 +106,65 @@
 
 
 .reviews-wrapper {
-    background: $light;
+    background: $main-gradient;
+    margin-top: 100px;
 }
 
 .reviews {
     padding: 50px 0;
+
+    &-single {
+        max-width: 500px;
+        padding: 10px 20px;
+        border-radius: 13px;
+        margin-bottom: 10px;
+        background: $transparent;
+
+        &--imgName {
+            @include flex($align: center);
+
+            &--avatar {
+                width: 50px;
+                height: 50px;
+                margin-right: 10px;
+
+                img {
+                    border-radius: 50%;
+                    border: 2px solid $dark;
+                }
+            } 
+            
+            &--name {
+                
+                h4 {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+
+        &--body {
+            margin-top: 15px;
+
+            &--review {
+
+                p {
+                    font-size: 0.8rem;
+                }
+            }
+
+            &--date {
+                text-align: right;
+                
+                h6 {
+                    font-size: 0.8rem;
+                }
+
+                .date-format {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
 }
 
 // Need Element for maps

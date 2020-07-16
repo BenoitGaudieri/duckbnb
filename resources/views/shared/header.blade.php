@@ -47,7 +47,7 @@
                     @guest
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Registrati</a>
+                                <a class="nav-link" href="{{ route('register') }}">Iscriviti</a>
                             </li>
                         @endif
                         <li class="nav-item">
@@ -67,18 +67,20 @@
                         </form>
                         <li class="nav-item dropdown">
                             <span id="navbarDropdown" class="nav-item--user nav-link" href="#" role="" data-toggle="" aria-haspopup="true" aria-expanded="false" v-pre>
-                                @if(!empty(Auth::user()->first_name))
                                 <div class="nav-item--user--avatar">
                                     @if(Auth::user()->path_img == 'img/avatar-default.png')
-                                        <img class="img-fluid" src="{{ asset(Auth::user()->path_img) }}" alt="">
+                                    <img class="img-fluid" src="{{ asset(Auth::user()->path_img) }}" alt="">
                                     @else
-                                        <img class="img-fluid" src="{{ asset('storage/' . Auth::user()->path_img) }}" alt="">
+                                    <img class="img-fluid" src="{{ asset('storage/' . Auth::user()->path_img) }}" alt="">
                                     @endif
                                 </div>
-                                {{  Auth::user()->first_name }}
-                                @else
-                                {{Auth::user()->email}}
-                                @endif
+                                <div class="nav-item--user--name">
+                                    @if(!empty(Auth::user()->first_name))
+                                    {{  Auth::user()->first_name }}
+                                    @else
+                                    {{Auth::user()->email}}
+                                    @endif
+                                </div>
                                 {{-- <span class="caret"></span> --}}
                             </span>
 
