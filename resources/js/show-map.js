@@ -28,7 +28,8 @@ let mymap = L.map(mapDiv, {
     // Map control deactivated in show
     dragging: false,
     zoomControl: false,
-    scrollWheelZoom: false
+    scrollWheelZoom: false,
+    doubleClickZoom: false
 }).setView([startLat, startLng], 13);
 
 L.tileLayer(
