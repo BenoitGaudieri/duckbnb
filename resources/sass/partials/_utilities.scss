@@ -65,6 +65,14 @@
 }
 
 .divider {
-    height: 25px;
-    background: $main-gradient;
+
+    &-gradient {
+        height: 25px;
+        background: $main-gradient;
+    }
+
+    &-dark {
+        height: 25px;
+        background: $dark;
+    }
 }
