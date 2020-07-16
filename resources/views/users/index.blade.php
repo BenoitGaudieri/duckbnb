@@ -72,7 +72,7 @@
                 @foreach($apartment->messages as $message)
                     <div class="message-line">
                         <div class="mb-3">
-                            <strong>Inviato da: </strong>{{ $message->mail_from }}
+                            <strong>Inviato da: </strong><a href="mailto:{{ $message->mail_from }}">{{ $message->mail_from }}</a> - <em>{{ $message->created_at->format('d/m/Y') }}</em>
                         </div>
                         <div class="">
                             {{ $message->body }}
