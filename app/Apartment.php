@@ -61,6 +61,11 @@ class Apartment extends Model
     {
         return $this->belongsToMany('App\Sponsorship')->withTimestamps();
     }
+    
+    public function views()
+    {
+        return $this->hasMany('App\View');
+    }
 
     public function toSearchableArray()
     {
