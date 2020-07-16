@@ -11,7 +11,9 @@ var placesAutocomplete = places({
     appId: process.env.MIX_PLACES_APPID,
     apiKey: process.env.MIX_PLACES_APIKEY,
     container: document.querySelector("#address-input"),
-    language: "it"
+    language: "it",
+    aroundLatLngViaIP: true,
+    useDeviceLocation: true
 });
 
 placesAutocomplete.on("change", changeHandle);
