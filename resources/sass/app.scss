@@ -15,8 +15,11 @@
 @import 'partials/components/card-apt';
 @import 'partials/components/review-apt';
 
-// Pages
+// Pages Guest
 @import 'partials/pages/home';
-@import 'partials/pages/users/index';
 @import 'partials/pages/show';
+
+// Pages User
+@import 'partials/pages/users/index';
 @import 'partials/pages/users/messages';
+@import 'partials/pages/users/create';

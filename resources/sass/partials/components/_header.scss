@@ -49,12 +49,22 @@
         @include flex(row, center, center);      
     }
 
+    .nav-auth-link {
+        background: $main-color;
+        padding: 10px;
+        border-radius: 9px;
+
+        a:hover {
+            color: $light;
+        }
+    }
+
     .nav-item.dropdown {
         
         .nav-item--user {
             
             @include responsive($tablet) {
-                @include flex(row, center, center);
+                @include flex(row-reverse, center, center);
                 
             }
             
@@ -63,7 +73,6 @@
 
                 @include responsive($tablet) {
                     display: block;
-                    margin-right: 10px;
                 }
 
                 img {
@@ -73,6 +82,10 @@
                     border-radius: 50%;
                     border: 2px solid $main-color;   
                 }
+            }
+
+            &--name {
+                margin-right: 10px;
             }
         }
     }

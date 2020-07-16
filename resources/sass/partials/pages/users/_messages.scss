@@ -1,3 +1,66 @@
+.dashboard-messages {
+    @include flex(column);
+    padding: 0;
+    margin-top: 50px;
+
+    &--title {
+        @include flex(row, flex-start, center);
+        margin-bottom: 20px;
+
+        h2 {
+            font-size: 1.1rem;
+            
+            margin-right: 10px;
+
+            @include responsive($tablet) {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    &--singleCtn {
+        padding: 10px 0;
+        border-bottom: 1px solid $dark;
+        
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        &--apt {
+
+            &-nameApt {
+
+                
+            }
+
+            &-messages {
+                padding: 10px 30px;
+                max-width: 347px;
+                border-radius: 13px;
+                background: $transparent;
+                margin: 20px 0;
+                
+                &--from {
+
+                }
+
+                &--body {
+                    padding: 15px 0px;
+                    font-size: 0.9rem;
+                }
+
+                &--date {
+
+                    h5 {
+                        text-align: right;
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+
+        }
+    }
+}
 .message-line {
     padding: 10px 0;
     border-bottom: 1px solid $dark;
