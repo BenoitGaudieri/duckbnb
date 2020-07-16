@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item mr-2">
                         <a href="{{ route("search") }}" class="nav-link">Cerca</a>
                     </li>
                     <!-- Authentication Links -->
@@ -54,8 +54,19 @@
                             <a class="nav-link" href="{{ route('login') }}"><ion-icon class="login-icon" name="lock-open"></ion-icon></a>
                         </li>
                     @else
+                        <a class="nav-item mr-2" href="{{ route('user.apartments.index') }}">
+                            Dashboard
+                        </a>
+                        <a class="nav-item mr-2" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-item--user nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <span id="navbarDropdown" class="nav-item--user nav-link" href="#" role="" data-toggle="" aria-haspopup="true" aria-expanded="false" v-pre>
                                 @if(!empty(Auth::user()->first_name))
                                 <div class="nav-item--user--avatar">
                                     @if(Auth::user()->path_img == 'img/avatar-default.png')
@@ -68,22 +79,11 @@
                                 @else
                                 {{Auth::user()->email}}
                                 @endif
-                                <span class="caret"></span>
-                            </a>
+                                {{-- <span class="caret"></span> --}}
+                            </span>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('user.apartments.index') }}">
-                                    Dashboard
-                                </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
                             </div>
                         </li>
                     @endguest

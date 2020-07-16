@@ -10,11 +10,11 @@
 
 <div class="container dashboard">
 
-    <div class="row dashbord-welcome">
+    <div class="row dashbord-welcome mb-5">
         <p>Ciao <span class="text-main dashboard-welcome--username">{{!empty(Auth::user()->first_name) ? Auth::user()->first_name : Auth::user()->email}}</span>, benvenuto nella tua dashboard.</p>
     </div>
     {{-- Secondary Nav --}}
-    <nav class="row dashboard-nav">
+    {{-- <nav class="row dashboard-nav">
        <ul>
             <li class="dashboard-nav--link">
                 <a href="">I tuoi appartamenti</a>
@@ -23,7 +23,7 @@
                 <a href="">Messaggi</a>
             </li>
        </ul>
-    </nav>
+    </nav> --}}
 
     @foreach($apartments as $apartment)
         <div class="row">
