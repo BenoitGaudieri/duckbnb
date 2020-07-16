@@ -18,7 +18,6 @@ class ApartmentController extends Controller
         $filter = $request->input("filter");
         $array = explode(',', $filter);
 
-
         $apartments = Apartment::all()->whereIn("id", $array);
 
         return response()->json($apartments);

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace("Api")->group(function () {
-    Route::post("apartments/api", "ApartmentController@search");
+    Route::get("apartments/api", "ApartmentController@search");
 });
 
 Route::namespace('Api')->group(function () {

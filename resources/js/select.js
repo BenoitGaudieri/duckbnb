@@ -93,45 +93,52 @@ $(document).ready(function() {
 
         console.log("From Blade:", idArr.join());
 
-        $.ajax({
-            url: apiUrl,
-            method: "POST",
-            data: {
-                filter: 2
-            }
-        })
-            .done(function(res) {
-                if (res.length > 0) {
-                    console.log(res);
+        var arrInString = idArr.join();
+        console.log("Array in stringa: ", arrInString);
+        var urlCombo = `${apiUrl}?filter=/${arrInString}`;
+        console.log(urlCombo);
 
-                    // clean
-                    // container.html("");
-
-                    // for (let i = 0; i < res.response.length; i++) {
-                    //     const item = res.response[i];
-
-                    //     let context = {
-                    //         slug: item.slug,
-                    //         img: item.img,
-                    //         nome: item.nome,
-                    //         eta: item.eta,
-                    //         assunzione:
-                    //             item.genere == "m" ? "assunto" : "assunta",
-                    //         azienda: item.azienda,
-                    //         ruolo: item.ruolo,
-                    //         descrizione: item.descrizione
-                    //     };
-
-                    //     let output = template(context);
-                    //     container.append(output);
-                    // }
-                } else {
-                    console.log(res.error);
-                }
-            })
-            .fail(function(err) {
-                console.log("Error:", err);
+        fetch(urlCombo)
+            .then(response => response.json())
+            .then(function(data) {
+                console.log(data);
             });
+
+        // $.ajax({
+        //     url: apiUrl,
+        //     method: "POST",
+        //     data: {
+        //         filter: 2
+        //     }
+        // })
+        //     .done(function(res) {
+        //         if (res.length > 0) {
+        //             console.log(res);
+        //             // clean
+        //             // container.html("");
+        //             // for (let i = 0; i < res.response.length; i++) {
+        //             //     const item = res.response[i];
+        //             //     let context = {
+        //             //         slug: item.slug,
+        //             //         img: item.img,
+        //             //         nome: item.nome,
+        //             //         eta: item.eta,
+        //             //         assunzione:
+        //             //             item.genere == "m" ? "assunto" : "assunta",
+        //             //         azienda: item.azienda,
+        //             //         ruolo: item.ruolo,
+        //             //         descrizione: item.descrizione
+        //             //     };
+        //             //     let output = template(context);
+        //             //     container.append(output);
+        //             // }
+        //         } else {
+        //             console.log(res.error);
+        //         }
+        //     })
+        //     .fail(function(err) {
+        //         console.log("Error:", err);
+        //     });
     });
 
     //

@@ -1,6 +1,8 @@
 window._ = require("lodash");
 window.places = require("places.js");
 
+window.Handlebars = require("handlebars");
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -8,7 +10,7 @@ window.places = require("places.js");
  */
 
 try {
-    window.Popper = require("popper.js").default;
+    // window.Popper = require("popper.js").default;
     window.$ = window.jQuery = require("jquery");
 
     require("bootstrap");
@@ -20,9 +22,9 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require("axios");
+// window.axios = require("axios");
 
-window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+// window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
