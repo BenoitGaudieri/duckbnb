@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::namespace('Api')->group(function() {
+
+Route::namespace("Api")->group(function () {
+    Route::post("apartments/api", "ApartmentController@search");
+});
+
+Route::namespace('Api')->group(function () {
     Route::get('messages/{user}', 'MessageController@inbox');
 });
 

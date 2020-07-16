@@ -14,12 +14,14 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        $ids = $request->id[0];
-        $array = explode(',', $ids);
+        if ($request) {
+            $ids = $request->id[0];
+            $array = explode(',', $ids);
 
-        $apartments = Apartment::all()->whereIn("id", $array);
-
-
-        return view('guests.search', compact("apartments"));
+            $apartments = Apartment::all()->whereIn("id", $array);
+            return view('guests.search', compact("apartments"));
+        } else {
+            return view("guest.search");
+        }
     }
 }
