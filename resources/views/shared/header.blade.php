@@ -54,17 +54,19 @@
                             <a class="nav-link" href="{{ route('login') }}"><ion-icon class="login-icon" name="lock-open"></ion-icon></a>
                         </li>
                     @else
-                        <a class="nav-item mr-2" href="{{ route('user.apartments.index') }}">
-                            Dashboard
-                        </a>
-                        <a class="nav-item mr-2" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                        <div class="nav-auth-link">
+                            <a class="nav-item mr-2" href="{{ route('user.apartments.index') }}">
+                                Dashboard
+                            </a>
+                            <a class="nav-item mr-2" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
                         <li class="nav-item dropdown">
                             <span id="navbarDropdown" class="nav-item--user nav-link" href="#" role="" data-toggle="" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <div class="nav-item--user--avatar">

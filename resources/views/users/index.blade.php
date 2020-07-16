@@ -61,25 +61,36 @@
             <p>Non hai nessun appartamento, aggiungine uno!</p>
         @endif
     </div>
-    <div class="row dashboard-apts">
-        <div class="dashboard-apts--title">
-            <h2>I tuoi Messaggi</h2>
+
+    <div class="row dashboard-messages">
+        <div class="dashboard-messages--title">
+            <h2>Messaggi</h2>
         </div>
 
         @foreach($apartments as $apartment)
-            <div class="mb-3">
-                <strong>Appartamento: </strong>{{ $apartment->title }}
+        <div class="dashboard-messages--singleCtn">
+
+            <div class="dashboard-messages--singleCtn--apt">
+                <div class="dashboard-messages--singleCtn--apt-nameApt">
+                        <h5 class="weight-light text-main">{{ $apartment->title }}</h5>
+                </div>
                 @foreach($apartment->messages as $message)
-                    <div class="message-line">
-                        <div class="mb-3">
-                            <strong>Inviato da: </strong><a href="mailto:{{ $message->mail_from }}">{{ $message->mail_from }}</a> - <em>{{ $message->created_at->format('d/m/Y') }}</em>
-                        </div>
-                        <div class="">
-                            {{ $message->body }}
-                        </div>
+                <div class="dashboard-messages--singleCtn--apt-messages">
+                    <div class="dashboard-messages--singleCtn--apt-messages--from">
+                        <span class="text-main">Mittente: </span><a href="mailto:{{ $message->mail_from }}">{{ $message->mail_from }}</a>
                     </div>
+                    <div class="dashboard-messages--singleCtn--apt-messages--body">
+                        <p>
+                            {{ $message->body }}
+                        </p>
+                    </div>
+                    <div class="dashboard-messages--singleCtn--apt-messages--date">
+                        <h5 class="weight-light">{{ $message->created_at->format('d/m/Y - ' . 'H:i') }}</h5>       
+                    </div>
+                </div>
                 @endforeach
-            </div>
+            </div> 
+        </div>
         @endforeach
         
     </div>
