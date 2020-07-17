@@ -13,12 +13,18 @@ class ApartmentController extends Controller
         $apartments = Apartment::all();
 
         // $data = $request->all();
-        // $filter = $data["filter"];
-        // $filter = $request->filter;
         $filter = $request->input("filter");
-        $array = explode(', ', $filter);
+        $idArr = explode(', ', $filter);
 
-        $apartments = Apartment::all()->whereIn("id", $array);
+        // $apartments = Apartment::all()->whereIn("id", $idArr);
+        $apartments = $apartments->whereIn("id", $idArr);
+
+        if ($request->input("rooms")) {
+            $rooms = $request->input("rooms");
+            $roomsArr = explode(', ', $rooms);
+            $apartments = $apartments->whereIn("room_qty", $roomsArr);
+        }
+
 
         return response()->json($apartments);
     }

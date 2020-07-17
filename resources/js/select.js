@@ -97,13 +97,14 @@ $(document).ready(function() {
 
         var arrInString = idArr.join(", ");
         console.log("Array in stringa: ", arrInString);
+        // var urlCombo = `${apiUrl}?filter=${arrInString}`;
         var urlCombo = `${apiUrl}?filter=${arrInString}`;
         console.log(urlCombo);
 
         fetch(urlCombo)
             .then(response => response.json())
             .then(function(data) {
-                console.log(typeof data);
+                console.log(data);
                 for (var res in data) {
                     console.log(data[res]);
                     // object with the apartment
@@ -111,6 +112,8 @@ $(document).ready(function() {
                     console.log(apt.id);
                 }
             });
+
+        // Riutilizzare il jquery che onclick sul checkbox aggiunge il value all'url della search
 
         // $.ajax({
         //     url: apiUrl,
