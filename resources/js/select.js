@@ -103,7 +103,13 @@ $(document).ready(function() {
         fetch(urlCombo)
             .then(response => response.json())
             .then(function(data) {
-                console.log(data);
+                console.log(typeof data);
+                for (var res in data) {
+                    console.log(data[res]);
+                    // object with the apartment
+                    let apt = data[res];
+                    console.log(apt.id);
+                }
             });
 
         // $.ajax({
