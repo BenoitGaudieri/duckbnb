@@ -4,5 +4,6 @@
     "/js/place-create.js": "/js/place-create.js",
     "/js/search.js": "/js/search.js",
     "/js/select.js": "/js/select.js",
-    "/js/show-map.js": "/js/show-map.js"
+    "/js/show-map.js": "/js/show-map.js",
+    "/js/views-chart.js": "/js/views-chart.js"
 }
