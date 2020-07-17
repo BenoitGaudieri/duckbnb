@@ -1,0 +1,19 @@
+.payment {
+    width: 40%;
+}
+
+.pack {
+    padding: 60px 0;
+
+    &-title {
+        padding: 20px 0;
+    }
+    
+    &-packages {
+        @include flex($just: space-between);
+        
+        h3 {
+            margin: 10px 0;
+        }
+    }
+}

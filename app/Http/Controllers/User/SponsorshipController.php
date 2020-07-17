@@ -4,43 +4,51 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Apartment;
+use App\Sponsorship;
 use Braintree;
 class SponsorshipController extends Controller
 {
-    public function index(Apartment $apartment) {
-
+    public function index(Apartment $apartment, Sponsorship $sponsorship) {
         $gateway = new Braintree\Gateway([
         'environment' => config('services.braintree.environment'),
         'merchantId' => config('services.braintree.merchantId'),
         'publicKey' => config('services.braintree.publicKey'),
         'privateKey' => config('services.braintree.privateKey')
     ]);
+
+    $sponsorship = Sponsorship::all();
 
     $token = $gateway->ClientToken()->generate();
     return view('users.sponsorships', [
         'token' => $token,
         'apartment' => $apartment,
+        'sponsorship' => $sponsorship
     ]);
     }
 
-    public function checkout (Request $request) {
+    public function checkout (Request $request, Apartment $apartment) {
         $gateway = new Braintree\Gateway([
         'environment' => config('services.braintree.environment'),
         'merchantId' => config('services.braintree.merchantId'),
         'publicKey' => config('services.braintree.publicKey'),
         'privateKey' => config('services.braintree.privateKey')
     ]);
+
     $amount = $request["amount"];
     $nonce = $request["payment_method_nonce"];
+
+    // Pack id passato con input
+    $idPack = $request["pack"];
 
     $result = $gateway->transaction()->sale([
         'amount' => $amount,
         'paymentMethodNonce' => $nonce,
         'customer' => [
-            'firstName' => 'Johnny',
-            'lastName' => 'Stecchino',
-            'email' => 'johnny@stecchino.it',
+            'firstName' => Auth::user()->first_name,
+            'lastName' => Auth::user()->last_name,
+            'email' => Auth::user()->email,
         ],
         'options' => [
             'submitForSettlement' => true
@@ -48,8 +56,11 @@ class SponsorshipController extends Controller
 ]); 
 
 if ($result->success) {
+
+    $apartment->sponsorships()->attach($idPack);
+
     $transaction = $result->transaction;
-    return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+    return back()->with('success_message', 'Transazione eseguita, ID:'. $transaction->id);
 } else {
     $errorString = "";
 
