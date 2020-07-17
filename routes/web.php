@@ -34,4 +34,7 @@ Route::prefix('user')
         Route::resource('apartments', 'ApartmentController');
         Route::get('apartments/{apartment}/stats', 'ApartmentController@statistics')->name('stats');
         Route::post('apartments/{apartment}/visibility', 'ApartmentController@updateVisibility')->name('apartment.visibility');
+        Route::get('apartments/{apartment}/sponsorships','SponsorshipController@index')->name('sponsorships');
+        Route::post('apartments/{apartment}/sponsorships/checkout','SponsorshipController@checkout')->name('sponsorships.checkout');
+
     });
