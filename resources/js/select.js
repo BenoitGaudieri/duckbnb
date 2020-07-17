@@ -90,6 +90,13 @@ $(document).ready(function() {
      * Handle the selector view with handlebars
      * using the array returned with the logic of the Api/StudentController
      */
+
+    /**
+     * FETCH TO SET BEDS AND ROOMS,
+     * JQUERY TO SET THE SERVICES
+     * but it won't work because on the refresh it goes fuck all
+     * unless I recheck?
+     */
     filter.on("click", function(e) {
         e.preventDefault();
 
@@ -98,7 +105,7 @@ $(document).ready(function() {
         var arrInString = idArr.join(", ");
         console.log("Array in stringa: ", arrInString);
         // var urlCombo = `${apiUrl}?filter=${arrInString}`;
-        var urlCombo = `${apiUrl}?filter=${arrInString}`;
+        var urlCombo = `${apiUrl}?filter=${arrInString}&rooms=2`;
         console.log(urlCombo);
 
         fetch(urlCombo)
