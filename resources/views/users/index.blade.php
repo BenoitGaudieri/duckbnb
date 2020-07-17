@@ -67,14 +67,16 @@
             <h2>Messaggi</h2>
         </div>
 
-        @foreach($apartments as $apartment)
+        @forelse($apartments as $apartment)
+        @if(!$apartment->messages->isEmpty())
         <div class="dashboard-messages--singleCtn">
 
             <div class="dashboard-messages--singleCtn--apt">
                 <div class="dashboard-messages--singleCtn--apt-nameApt">
                         <h5 class="weight-light text-main">{{ $apartment->title }}</h5>
                 </div>
-                @foreach($apartment->messages as $message)
+        @endif
+                @forelse($apartment->messages as $message)
                 <div class="dashboard-messages--singleCtn--apt-messages">
                     <div class="dashboard-messages--singleCtn--apt-messages--from">
                         <span class="text-main">Mittente: </span><a href="mailto:{{ $message->mail_from }}">{{ $message->mail_from }}</a>
@@ -88,10 +90,15 @@
                         <h5 class="weight-light">{{ $message->created_at->format('d/m/Y - ' . 'H:i') }}</h5>       
                     </div>
                 </div>
-                @endforeach
+                @empty
+                    <p>Non ci sono messaggi. GESTIRE QUESTA COSA</p>
+                @endforelse
             </div> 
         </div>
-        @endforeach
+        @empty
+            <p>Non ci sono messaggi.</p>
+        @endforelse
+   
         
     </div>
 </div>
