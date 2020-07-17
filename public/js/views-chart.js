@@ -48377,7 +48377,8 @@ __webpack_require__.r(__webpack_exports__);
 
 jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ready(function () {
   // Dynamic endpoint
-  var url = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/' + 'api' + window.location.pathname; // 
+  var url = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/' + 'api' + window.location.pathname;
+  console.log(moment__WEBPACK_IMPORTED_MODULE_2___default()()); // 
 
   getViews(url); // Setup chart.js
 
@@ -48407,7 +48408,8 @@ function getViews(url) {
     var viewsArray = data.response.views;
     var timeStamps = [];
     viewsArray.forEach(function (e) {
-      timeStamps.push(e.created_at);
+      var m = moment__WEBPACK_IMPORTED_MODULE_2___default()(e.created_at).format('YYYY MM DD');
+      timeStamps.push(m);
     });
     console.log(timeStamps);
   });

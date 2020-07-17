@@ -1,12 +1,12 @@
 // Imports
 import Chart from 'chart.js';
 import $ from 'jquery';
-import Moment from 'moment';
+import moment from 'moment';
 
 $(document).ready(function() {
     // Dynamic endpoint
     var url = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/' + 'api' + window.location.pathname;
-
+    console.log(moment());
     // 
     getViews(url);
 
@@ -43,7 +43,9 @@ function getViews(url) {
                var timeStamps = [];
 
                viewsArray.forEach( e => {
-                   timeStamps.push(e.created_at);
+                    var m = moment(e.created_at).format('YYYY MM DD');
+
+                   timeStamps.push(m);
                });
 
                console.log(timeStamps);
