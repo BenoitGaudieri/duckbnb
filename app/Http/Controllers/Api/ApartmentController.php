@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
-    public function index()
-    {
-        $apartments = Apartment::with('views')->get();
+    public function index(Request $request)
+    {   
+        $ids = explode(',', $request->id);
+
+        $apartments = Apartment::with('services')->whereIn('id', $ids)->get();
 
         $res = [
             'error' => '',
@@ -26,15 +28,16 @@ class ApartmentController extends Controller
 
     public function search(Request $request)
     {
-        $apartments = Apartment::all();
-
+        $id = $request->id;
+        
+        $apartments = Apartment::with('services')->whereIn('id', $id)->get();
         // $data = $request->all();
         // $filter = $data["filter"];
         // $filter = $request->filter;
-        $filter = $request->input("filter");
-        $array = explode(',', $filter);
+        // $filter = $request->input("filter");
+        // $array = explode(',', $filter);
 
-        $apartments = Apartment::all()->whereIn("id", $array);
+        // $apartments = Apartment::all()->whereIn("id", $array);
 
         return response()->json($apartments);
     }
