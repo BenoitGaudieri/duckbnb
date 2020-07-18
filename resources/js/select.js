@@ -20,13 +20,7 @@ $(document).ready(function() {
 
     // Selects listeners
     selectRooms.change(roomHandle);
-    selectRooms.change(bedHandle);
-
-    $("#reset").on("click", function(e) {
-        e.preventDefault();
-        $(".card").show();
-        $("input[type=checkbox]").prop("checked", false);
-    });
+    selectBeds.change(bedHandle);
 
     /**
      * Update values
@@ -49,6 +43,10 @@ $(document).ready(function() {
         }
     }
 
+    /**
+     * API call
+     */
+    //  Original apiUrl
     const apiUrl =
         window.location.protocol +
         "//" +
@@ -56,25 +54,27 @@ $(document).ready(function() {
         "/api/apartments/api";
     // "http://127.0.0.1:8000/api/apartments/api";
 
-    /**
-     * API call
-     */
     filter.on("click", function(e) {
         e.preventDefault();
 
-        // creates a string from an array
+        // Creates a string from an array
         var arrInString = idArr.join(", ");
 
+        // manually building the api url because fetch body refuses to work
         var urlCombo = `${apiUrl}?filter=${arrInString}&rooms=${roomsInput}&beds=${bedsInput}`;
-        console.log(urlCombo);
+        // console.log(urlCombo);
 
+        // API call
         fetch(urlCombo)
             .then(response => response.json())
             .then(function(data) {
+                // resets the container for Handlebar
                 container.html("");
                 for (var res in data) {
                     let apt = data[res];
+                    // console.log(apt);
 
+                    // Handlebar dance
                     let context = {
                         id: apt.id,
                         title: apt.title,
@@ -93,6 +93,15 @@ $(document).ready(function() {
 
     //
 }); //end ready
+
+// TODO: complete reset button and service query
+
+// Reset button
+// $("#reset").on("click", function(e) {
+//     e.preventDefault();
+//     $(".card").show();
+//     $("input[type=checkbox]").prop("checked", false);
+// });
 
 /**
  * Input logic

@@ -19,7 +19,7 @@ var idArr = []
     </form>
 
     @if (!empty($apartments) && count($apartments) > 0)
-    <button id="reset">Resetta filtri</button>
+    {{-- <button id="reset">Resetta filtri</button> --}}
     <select name="Rooms" id="select-rooms">
         <option value="">Numero di stanze</option>
         <option value="1">1</option>
@@ -36,7 +36,7 @@ var idArr = []
         <option value="4+">4+</option>
     </select>
     
-    <div id="check-servizi">
+    {{-- <div id="check-servizi">
         <label for="wifi">WiFi</label> <input type="checkbox" name="wifi" id="wifi" value="WiFi">
         <label for="car">Posto Macchina</label> <input type="checkbox" name="car" id="car" value="Posto Macchina">
         <label for="pool">Piscina</label> <input type="checkbox" name="pool" id="pool" value="Piscina">
@@ -46,7 +46,7 @@ var idArr = []
         <label for="ac">Aria Condizionata</label> <input type="checkbox" name="ac" id="ac" value="Aria Condizionata">
         <label for="fuma">Fumatori</label> <input type="checkbox" name="fuma" id="fuma" value="Fumatori">
         <label for="colazione">Prima Colazione</label> <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione">
-    </div>
+    </div> --}}
 
     <button id="test">Raffina la ricerca</button>
 

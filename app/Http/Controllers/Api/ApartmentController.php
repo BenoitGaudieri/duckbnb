@@ -33,13 +33,15 @@ class ApartmentController extends Controller
 
         if ($request->input("rooms")) {
             $rooms = $request->input("rooms");
-            $roomsArr = explode(', ', $rooms);
-            $apartments = $apartments->whereIn("room_qty", $roomsArr);
+            $apartments = $apartments->whereIn("room_qty", $rooms);
         }
         if ($request->input("beds")) {
             $beds = $request->input("beds");
-            $bedsArr = explode(', ', $beds);
-            $apartments = $apartments->whereIn("bathroom_qty", $bedsArr);
+            if ($beds == "4+" || $beds > 4) {
+                $apartments = $apartments->with("bathroom_qty", ">=", 4);
+            } else {
+                $apartments = $apartments->whereIn("bathroom_qty", $beds);
+            }
         }
 
 
