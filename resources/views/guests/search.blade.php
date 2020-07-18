@@ -20,22 +20,25 @@ var idArr = []
 
     @if (!empty($apartments) && count($apartments) > 0)
     {{-- <button id="reset">Resetta filtri</button> --}}
-    <select name="Rooms" id="select-rooms">
-        <option value="">Numero di stanze</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4+">4+</option>
-    </select>
-
-    <select name="Beds" id="select-beds">
-        <option value="">Numero di letti</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4+">4+</option>
-    </select>
+    <div class="selects">
+        <select name="Rooms" id="select-rooms">
+            <option value="">Numero di stanze</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4+">4+</option>
+        </select>
     
+        <select name="Beds" id="select-beds">
+            <option value="">Numero di letti</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4+">4+</option>
+        </select>
+    </div>
+    
+    {{-- Checkbox con i servizi --}}
     {{-- <div id="check-servizi">
         <label for="wifi">WiFi</label> <input type="checkbox" name="wifi" id="wifi" value="WiFi">
         <label for="car">Posto Macchina</label> <input type="checkbox" name="car" id="car" value="Posto Macchina">
@@ -48,6 +51,7 @@ var idArr = []
         <label for="colazione">Prima Colazione</label> <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione">
     </div> --}}
 
+    {{-- Avvia la chiamata alle API --}}
     <button id="test">Raffina la ricerca</button>
 
     <div class="row" id="apts">
@@ -63,9 +67,9 @@ var idArr = []
         <h6><span class="weight-light">Bagni:</span> {{$apartment->bathroom_qty}}</h6>
         <h6><span class="weight-light">m&sup2;:</span> {{$apartment->sqr_meters}}</h6>
 
+        {{-- I need this to refine the search --}}
         <script>
             idArr.push({{ $apartment->id }})
-
         </script>
 
         <h5>Servizi</h5>

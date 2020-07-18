@@ -19,7 +19,7 @@ class ApartmentController extends Controller
 
         $apartments = $apartments->whereIn("id", $idArr);
 
-        //
+        // TODO: services to fix.
         if ($request->input("services")) {
             $services = $request->input("services");
             // $servicesArr = explode(', ', $services);
@@ -37,14 +37,13 @@ class ApartmentController extends Controller
         }
         if ($request->input("beds")) {
             $beds = $request->input("beds");
+            // TODO: 4+ to fix. I hate queries.
             if ($beds == "4+" || $beds > 4) {
                 $apartments = $apartments->with("bathroom_qty", ">=", 4);
             } else {
                 $apartments = $apartments->whereIn("bathroom_qty", $beds);
             }
         }
-
-
 
         return response()->json($apartments);
     }
