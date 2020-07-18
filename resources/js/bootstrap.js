@@ -2,6 +2,7 @@ window._ = require("lodash");
 window.places = require("places.js");
 
 window.Handlebars = require("handlebars");
+require('./search-filtering');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

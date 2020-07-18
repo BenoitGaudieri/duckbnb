@@ -29,38 +29,38 @@ var idArr = []
     </select>
     
     <div id="check-servizi">
-        <label for="wifi">WiFi</label> <input type="checkbox" name="wifi" id="wifi" value="WiFi">
-        <label for="car">Posto Macchina</label> <input type="checkbox" name="car" id="car" value="Posto Macchina">
-        <label for="pool">Piscina</label> <input type="checkbox" name="pool" id="pool" value="Piscina">
-        <label for="portin">Portineria</label> <input type="checkbox" name="portin" id="portin" value="Portineria">
-        <label for="sauna">Sauna</label> <input type="checkbox" name="sauna" id="sauna" value="Sauna">
-        <label for="mare">Vista Mare</label> <input type="checkbox" name="mare" id="mare" value="Vista Mare">
-        <label for="ac">Aria Condizionata</label> <input type="checkbox" name="ac" id="ac" value="Aria Condizionata">
-        <label for="fuma">Fumatori</label> <input type="checkbox" name="fuma" id="fuma" value="Fumatori">
-        <label for="colazione">Prima Colazione</label> <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione">
+        <label for="wifi">WiFi</label> <input class="checkbox" type="checkbox" name="wifi" id="wifi" value="WiFi" data-id="1">
+        <label for="car">Posto Macchina</label> <input class="checkbox" type="checkbox" name="car" id="car" value="Posto Macchina" data-id="2">
+        <label for="pool">Piscina</label> <input class="checkbox" type="checkbox" name="pool" id="pool" value="Piscina" data-id="3">
+        <label for="portin">Portineria</label> <input class="checkbox" type="checkbox" name="portin" id="portin" value="Portineria" data-id="4">
+        <label for="sauna">Sauna</label> <input class="checkbox" type="checkbox" name="sauna" id="sauna" value="Sauna" data-id="5">
+        <label for="mare">Vista Mare</label> <input class="checkbox" type="checkbox" name="mare" id="mare" value="Vista Mare" data-id="6">
+        <label for="ac">Aria Condizionata</label> <input class="checkbox" type="checkbox" name="ac" id="ac" value="Aria Condizionata" data-id="7">
+        <label for="fuma">Fumatori</label> <input class="checkbox" type="checkbox" name="fuma" id="fuma" value="Fumatori" data-id="8">
+        <label for="colazione">Prima Colazione</label> <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione" data-id="9">
     </div>
 
     {{-- <button id="test">Test ajax</button> --}}
 
     <div class="row">
         @foreach ($apartments as $apartment)
-        <div class="card">
-        <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
-            <h2>{{ $apartment->title }}</h2>
-        </a>
-        <img class="img-fluid" src="{{ asset('storage/'. $apartment->img_url) }}" alt="{{ $apartment->title }}">
-        <h6><span class="weight-light price">Prezzo:</span> {{$apartment->price}}€</h6>
-        <h6><span class="weight-light">Stanze:</span> <span class="rooms">{{$apartment->room_qty}}</span></h6>
-        <h6><span class="weight-light">Posti Letto:</span> {{$apartment->bed_qty}}</h6>
-        <h6><span class="weight-light">Bagni:</span> {{$apartment->bathroom_qty}}</h6>
-        <h6><span class="weight-light">m&sup2;:</span> {{$apartment->sqr_meters}}</h6>
+        <div class="card" data-id="{{ $apartment->id }}">
+            <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
+                <h2>{{ $apartment->title }}</h2>
+            </a>
+            <img class="img-fluid" src="{{ asset('storage/'. $apartment->img_url) }}" alt="{{ $apartment->title }}">
+            <h6><span class="weight-light price">Prezzo:</span> {{$apartment->price}}€</h6>
+            <h6><span class="weight-light">Stanze:</span> <span class="rooms">{{$apartment->room_qty}}</span></h6>
+            <h6><span class="weight-light">Posti Letto:</span> {{$apartment->bed_qty}}</h6>
+            <h6><span class="weight-light">Bagni:</span> {{$apartment->bathroom_qty}}</h6>
+            <h6><span class="weight-light">m&sup2;:</span> {{$apartment->sqr_meters}}</h6>
 
-        <script>
-            idArr.push({{ $apartment->id }})
+            {{-- <script>
+                idArr.push({{ $apartment->id }})
 
-        </script>
+            </script> --}}
 
-        <h5>Servizi</h5>
+            <h5>Servizi</h5>
             @forelse($apartment->services as $service)
             <h6 class="weight-light nome-servizio">{{ $service->name }}</h6>
             @empty
@@ -95,6 +95,6 @@ rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
-<script src="{{ asset("js/search.js") }}" defer></script>
+{{-- <script src="{{ asset("js/search.js") }}" defer></script> --}}
 <script src="{{ asset("js/select.js") }}" defer></script>
 @endpush

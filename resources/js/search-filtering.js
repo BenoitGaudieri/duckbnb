@@ -1,6 +1,8 @@
 import $ from 'jquery';
 
 $(document).ready(function() {
+    var apartments = getIds();
+    console.log(apartments);
 
     var globalFilters = {
         services: []
@@ -8,6 +10,7 @@ $(document).ready(function() {
 
     $(document).on('change', 'input:checkbox', function() {
         getFilters(globalFilters);
+        callApi(apartments);
     });
 
 
@@ -16,9 +19,12 @@ $(document).ready(function() {
 }); // <--- End Ready
 
 
-function callApi() {
+function callApi(apartments) {
     $.ajax({
         url: 'http://127.0.0.1:8000/api/apartments/',
+        data: {
+            id: apartments.join(',')
+        },
         success: function(res) {
             console.log(res);
         },
@@ -29,21 +35,37 @@ function callApi() {
 }
 
 function getFilters(globalFilters) {
+    var services = globalFilters.services;
+    
     $('input:checkbox').each(function() {
-        if( $(this).prop('checked') == true ) {
+        var self = $(this);
+        var serviceId = self.attr('data-id');
+
+        if( self.prop('checked') == true ) {
             console.log('Checked');
-            if( !globalFilters.services.includes($(this).attr('data-id')) ) {
-                globalFilters.services.push($(this).attr('data-id'));
+            if( !services.includes(serviceId) ) {
+                services.push(serviceId);
             }
         } else {
             console.log('Unchecked');
-            if( globalFilters.services.includes($(this).attr('data-id')) ) {
-                var index = globalFilters.services.indexOf($(this).attr('data-id'));
+            if( services.includes(serviceId) ) {
+                var index = services.indexOf(serviceId);
                 if (index > -1) {
-                    globalFilters.services.splice(index);
+                    services.splice(index);
                 }
             }
         }
     })
+    
     console.log(globalFilters);
+}
+
+function getIds() {
+    var ids = [];
+
+    $('.card').each(function() {
+        ids.push( $(this).attr('data-id') );
+    })
+
+    return ids;
 }
