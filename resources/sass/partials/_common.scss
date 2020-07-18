@@ -15,7 +15,7 @@ body {
 
 #app {
     width: 100%;
-    padding: 68px 0;
+    padding: 69px 0;
 }
 
 h1,
@@ -47,6 +47,10 @@ button:focus {
 .row {
     margin-right: 0;
     margin-left: 0;
+}
+
+.container-fluid {
+    padding: 0;
 }
 
 .button {
