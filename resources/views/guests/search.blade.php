@@ -22,7 +22,7 @@ var idArr = []
     {{-- <button id="reset">Resetta filtri</button> --}}
     <div class="selects">
         <select name="Rooms" id="select-rooms">
-            <option value="">Numero di stanze</option>
+            <option value="">Stanze</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -30,29 +30,31 @@ var idArr = []
         </select>
     
         <select name="Beds" id="select-beds">
-            <option value="">Numero di letti</option>
+            <option value="">Letti</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4+">4+</option>
         </select>
+        
+        {{-- Checkbox con i servizi --}}
+        {{-- <div id="check-servizi">
+            <label for="wifi">WiFi</label> <input type="checkbox" name="wifi" id="wifi" value="WiFi">
+            <label for="car">Posto Macchina</label> <input type="checkbox" name="car" id="car" value="Posto Macchina">
+            <label for="pool">Piscina</label> <input type="checkbox" name="pool" id="pool" value="Piscina">
+            <label for="portin">Portineria</label> <input type="checkbox" name="portin" id="portin" value="Portineria">
+            <label for="sauna">Sauna</label> <input type="checkbox" name="sauna" id="sauna" value="Sauna">
+            <label for="mare">Vista Mare</label> <input type="checkbox" name="mare" id="mare" value="Vista Mare">
+            <label for="ac">Aria Condizionata</label> <input type="checkbox" name="ac" id="ac" value="Aria Condizionata">
+            <label for="fuma">Fumatori</label> <input type="checkbox" name="fuma" id="fuma" value="Fumatori">
+            <label for="colazione">Prima Colazione</label> <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione">
+        </div> --}}
+    
+        {{-- Avvia la chiamata alle API --}}
+        <button id="test">Raffina la ricerca</button>
+
     </div>
     
-    {{-- Checkbox con i servizi --}}
-    {{-- <div id="check-servizi">
-        <label for="wifi">WiFi</label> <input type="checkbox" name="wifi" id="wifi" value="WiFi">
-        <label for="car">Posto Macchina</label> <input type="checkbox" name="car" id="car" value="Posto Macchina">
-        <label for="pool">Piscina</label> <input type="checkbox" name="pool" id="pool" value="Piscina">
-        <label for="portin">Portineria</label> <input type="checkbox" name="portin" id="portin" value="Portineria">
-        <label for="sauna">Sauna</label> <input type="checkbox" name="sauna" id="sauna" value="Sauna">
-        <label for="mare">Vista Mare</label> <input type="checkbox" name="mare" id="mare" value="Vista Mare">
-        <label for="ac">Aria Condizionata</label> <input type="checkbox" name="ac" id="ac" value="Aria Condizionata">
-        <label for="fuma">Fumatori</label> <input type="checkbox" name="fuma" id="fuma" value="Fumatori">
-        <label for="colazione">Prima Colazione</label> <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione">
-    </div> --}}
-
-    {{-- Avvia la chiamata alle API --}}
-    <button id="test">Raffina la ricerca</button>
 
     <div class="row" id="apts">
         @foreach ($apartments as $apartment)
