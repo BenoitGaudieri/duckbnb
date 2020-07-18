@@ -19,6 +19,7 @@ class ApartmentController extends Controller
 
         $apartments = $apartments->whereIn("id", $idArr);
 
+        // known bug: 11 counts as 1.
         // TODO: services to fix.
         if ($request->input("services")) {
             $services = $request->input("services");

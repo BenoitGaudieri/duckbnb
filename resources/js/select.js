@@ -29,7 +29,7 @@ $(document).ready(function() {
     function roomHandle() {
         roomsInput = 0;
         if (selectRooms.val()) {
-            console.log(selectRooms.val());
+            // console.log(selectRooms.val());
             roomsInput = selectRooms.val();
         }
     }
@@ -38,7 +38,7 @@ $(document).ready(function() {
     function bedHandle() {
         bedsInput = 0;
         if (selectBeds.val()) {
-            console.log(selectBeds.val());
+            // console.log(selectBeds.val());
             bedsInput = selectBeds.val();
         }
     }

@@ -36,7 +36,7 @@ var idArr = []
             <option value="3">3</option>
             <option value="4+">4+</option>
         </select>
-        
+
         {{-- Checkbox con i servizi --}}
         {{-- <div id="check-servizi">
             <label for="wifi">WiFi</label> <input type="checkbox" name="wifi" id="wifi" value="WiFi">
@@ -84,6 +84,7 @@ var idArr = []
         
         @endforeach
 
+        @include('shared.handlebars')
     @endif
     </div>
 </div>
@@ -103,7 +104,6 @@ var idArr = []
 
 </style>
 
-@include('shared.handlebars')
 
 @push('scripts')
 <link
