@@ -10940,7 +10940,7 @@ body {
 
 #app {
   width: 100%;
-  padding: 60px 0;
+  padding: 68px 0;
 }
 
 h1,
@@ -11083,15 +11083,18 @@ button:focus {
   font-weight: 500;
 }
 
-.divider {
+.divider-gradient {
   height: 25px;
   background: linear-gradient(150deg, #ffdd00 0%, #fbb034 80%);
 }
 
+.divider-dark {
+  height: 25px;
+  background: #3E4452;
+}
+
 .navbar {
   width: 100%;
-  position: fixed;
-  z-index: 1;
   background: #F7F6F6;
 }
 
@@ -11130,6 +11133,119 @@ button:focus {
   background-color: transparent;
 }
 
+@media (min-width: 768px) {
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.navbar-nav .nav-auth-link {
+  background: #F4AF32;
+  padding: 10px;
+  border-radius: 9px;
+}
+
+.navbar-nav .nav-auth-link a:hover {
+  color: #F7F6F6;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav .nav-item.dropdown .nav-item--user {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.navbar-nav .nav-item.dropdown .nav-item--user--avatar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav .nav-item.dropdown .nav-item--user--avatar {
+    display: block;
+  }
+}
+
+.navbar-nav .nav-item.dropdown .nav-item--user--avatar img {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #F4AF32;
+}
+
+.navbar-nav .nav-item.dropdown .nav-item--user--name {
+  margin-right: 10px;
+}
+
+.login-icon {
+  font-size: 1.1rem;
+}
+
+.card-apt {
+  margin: 30px 0;
+  width: 340px;
+  transition: ease-in-out all 0.1s;
+}
+
+.card-apt:hover {
+  transform: scale(1.03);
+}
+
+@media (min-width: 768px) {
+  .card-apt {
+    margin: 48px 30px 48px 0;
+    width: calc(100% / 2 - 60px);
+  }
+}
+
+@media (min-width: 992px) {
+  .card-apt {
+    margin: 48px 30px 48px 0;
+    width: calc(100% / 3 - 60px);
+  }
+}
+
+.card-apt--img {
+  width: 100%;
+  height: auto;
+}
+
+.card-apt--img img {
+  width: 100%;
+  height: 180px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 13px;
+}
+
+.card-apt--location {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 5px 0;
+}
+
+.card-apt--location h5 {
+  font-size: 0.9em;
+}
+
+.card-apt--title {
+  margin: 5px 0;
+}
+
+.card-apt--title h4,
+.card-apt--price h4 {
+  font-size: 1.2em;
+}
+
 .jumbotron {
   height: calc(100vh - 60px);
   width: 100%;
@@ -11138,10 +11254,12 @@ button:focus {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  border-radius: 0;
 }
 
 .jumbotron .search {
-  width: 400px;
+  min-width: 250px;
+  max-width: 400px;
   height: 50px;
   background-color: rgba(62, 68, 82, 0.62);
   top: 50%;
@@ -11149,72 +11267,16 @@ button:focus {
   transform: translate(-50%, -50%);
 }
 
-.dashboard-nav {
-  list-style: none;
-  margin-bottom: 30px;
+.sponsor-section--title {
+  padding-top: 30px;
 }
 
-.dashboard-nav ul {
-  padding: 0;
+.sponsor-section--apts {
+  justify-content: space-between;
 }
 
-.dashboard-nav--link {
-  display: inline;
-}
-
-.dashboard-nav--link:first-child {
-  margin-right: 10px;
-}
-
-.dashboard-apts {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 0;
-}
-
-.dashboard-apts--title {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.dashboard-apts--title h2 {
-  font-size: 1.1rem;
-  margin-right: 10px;
-}
-
-@media (min-width: 768px) {
-  .dashboard-apts--title h2 {
-    font-size: 2rem;
-  }
-}
-
-.dashboard-apts--apt {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #3E4452;
-}
-
-.dashboard-apts--apt:last-child {
-  border: 0;
-}
-
-.dashboard-apts--apt-title {
-  width: 180px;
-  margin-right: 10px;
-}
-
-@media (min-width: 768px) {
-  .dashboard-apts--apt-title {
-    width: 400px;
-  }
+.show-page {
+  padding-top: 40px;
 }
 
 .map-show {
@@ -11295,11 +11357,30 @@ button:focus {
 }
 
 .dashboard-ctas {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
   padding: 15px 0;
 }
 
+.dashboard-ctas form {
+  display: inline-block;
+}
+
 .dashboard-ctas--btn {
-  line-height: 3;
+  margin: 5px 5px 5px 0;
+}
+
+.message,
+.review {
+  max-width: 500px;
+}
+
+.message textarea,
+.review textarea {
+  height: 100px;
 }
 
 .message {
@@ -11310,7 +11391,214 @@ button:focus {
   margin-bottom: 15px;
 }
 
+.reviews-wrapper {
+  background: linear-gradient(150deg, #ffdd00 0%, #fbb034 80%);
+  margin-top: 100px;
+}
+
+.reviews {
+  padding: 50px 0;
+}
+
+.reviews-single {
+  max-width: 500px;
+  padding: 10px 20px;
+  border-radius: 13px;
+  margin-bottom: 10px;
+  background: #4040400a;
+}
+
+.reviews-single--imgName {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.reviews-single--imgName--avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.reviews-single--imgName--avatar img {
+  border-radius: 50%;
+  border: 2px solid #3E4452;
+}
+
+.reviews-single--imgName--name h4 {
+  font-size: 1.2rem;
+}
+
+.reviews-single--body {
+  margin-top: 15px;
+}
+
+.reviews-single--body--review p {
+  font-size: 0.8rem;
+}
+
+.reviews-single--body--date {
+  text-align: right;
+}
+
+.reviews-single--body--date h6 {
+  font-size: 0.8rem;
+}
+
+.reviews-single--body--date .date-format {
+  font-size: 0.7rem;
+}
+
 .latlng {
   display: none;
+}
+
+.dashboard {
+  padding: 50px 0;
+}
+
+.dashboard-nav {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.dashboard-nav ul {
+  padding: 0;
+}
+
+.dashboard-nav--link {
+  display: inline;
+}
+
+.dashboard-nav--link:first-child {
+  margin-right: 10px;
+}
+
+.dashboard-apts {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.dashboard-apts--title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-apts--title h2 {
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-apts--title h2 {
+    font-size: 2rem;
+  }
+}
+
+.dashboard-apts--apt {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #3E4452;
+}
+
+.dashboard-apts--apt:last-child {
+  border: 0;
+}
+
+.dashboard-apts--apt-title {
+  width: 180px;
+  margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-apts--apt-title {
+    width: 400px;
+  }
+}
+
+.dashboard-messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+  margin-top: 50px;
+}
+
+.dashboard-messages--title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-messages--title h2 {
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-messages--title h2 {
+    font-size: 2rem;
+  }
+}
+
+.dashboard-messages--singleCtn {
+  padding: 10px 0;
+  border-bottom: 1px solid #3E4452;
+}
+
+.dashboard-messages--singleCtn:last-child {
+  border-bottom: 0;
+}
+
+.dashboard-messages--singleCtn--apt-messages {
+  padding: 10px 30px;
+  max-width: 347px;
+  border-radius: 13px;
+  background: #4040400a;
+  margin: 20px 0;
+}
+
+.dashboard-messages--singleCtn--apt-messages--body {
+  padding: 15px 0px;
+  font-size: 0.9rem;
+}
+
+.dashboard-messages--singleCtn--apt-messages--date h5 {
+  text-align: right;
+  font-size: 0.8rem;
+}
+
+.message-line {
+  padding: 10px 0;
+  border-bottom: 1px solid #3E4452;
+}
+
+.message-line:last-child {
+  border-bottom: 0;
+}
+
+.create {
+  padding: 100px 0;
+}
+
+.create--form {
+  margin: 50px 0;
+}
+
+.create--form--services {
+  margin: 15px 0;
 }
 

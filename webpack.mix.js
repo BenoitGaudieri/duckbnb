@@ -16,5 +16,6 @@ mix.js("resources/js/app.js", "public/js")
     .js("resources/js/place-create.js", "public/js")
     .js("resources/js/search.js", "public/js")
     .js("resources/js/select.js", "public/js")
+    .js("resources/js/views-chart.js", "public/js")
     .js("resources/js/sponsorship.js", "public/js")
     .sass("resources/sass/app.scss", "public/css");
