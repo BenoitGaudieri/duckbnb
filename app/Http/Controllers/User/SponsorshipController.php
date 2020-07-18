@@ -21,11 +21,17 @@ class SponsorshipController extends Controller
     $sponsorship = Sponsorship::all();
 
     $token = $gateway->ClientToken()->generate();
-    return view('users.sponsorships', [
-        'token' => $token,
-        'apartment' => $apartment,
-        'sponsorship' => $sponsorship
-    ]);
+
+    if (Auth::user()->id == $apartment->user_id) {
+        return view('users.sponsorships', [
+            'token' => $token,
+            'apartment' => $apartment,
+            'sponsorship' => $sponsorship
+        ]);
+    } else {
+        return back();
+    }
+
     }
 
     public function checkout (Request $request, Apartment $apartment) {
