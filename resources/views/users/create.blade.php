@@ -23,7 +23,7 @@
             @method("POST")
     
             <div class="form-group">
-                <input class="form-control" type="text" name="title" id="title" value="{{ old("title") }}" placeholder="Inserisci un titolo" required maxlength="150" pattern="[A-z0-9À-ž\s]+">
+                <input class="form-control" type="text" name="title" id="title" value="{{ old("title") }}" placeholder="Inserisci un titolo" required maxlength="150" pattern="[A-Z0-9À-ž\s]+">
             </div>
     
             <div class="form-group">
