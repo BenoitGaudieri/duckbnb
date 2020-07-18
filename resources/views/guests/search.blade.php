@@ -21,7 +21,15 @@ var idArr = []
     @if (!empty($apartments) && count($apartments) > 0)
     <button id="reset">Resetta filtri</button>
     <select name="Rooms" id="select-rooms">
-        <option value="">Rooms number</option>
+        <option value="">Numero di stanze</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4+">4+</option>
+    </select>
+
+    <select name="Beds" id="select-beds">
+        <option value="">Numero di letti</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -40,9 +48,9 @@ var idArr = []
         <label for="colazione">Prima Colazione</label> <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione">
     </div>
 
-    <button id="test">Test ajax</button>
+    <button id="test">Raffina la ricerca</button>
 
-    <div class="row">
+    <div class="row" id="apts">
         @foreach ($apartments as $apartment)
         <div class="card">
         <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
@@ -88,6 +96,8 @@ var idArr = []
     }
 
 </style>
+
+@include('shared.handlebars')
 
 @push('scripts')
 <link
