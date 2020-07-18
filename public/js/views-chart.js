@@ -48371,6 +48371,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // Imports
 
 
@@ -48378,15 +48390,16 @@ __webpack_require__.r(__webpack_exports__);
 jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ready(function () {
   // Dynamic endpoint
   var url = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/' + 'api' + window.location.pathname;
-  var views = getViews(url);
+  getViews(url);
 }); // <--- End Ready
 
 function getViews(url) {
   fetch(url).then(function (res) {
     return res.json();
   }).then(function (data) {
+    var totalViews = data.response.views.length;
     var views = setViews(data);
-    printGraph(views);
+    printGraph(views, totalViews);
   });
 }
 
@@ -48425,9 +48438,11 @@ function setViews(data) {
   return months;
 }
 
-function printGraph(views) {
+function printGraph(views, totalViews) {
   // Setup chart.js
-  var ctx = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#viewsPerMonth'); // Instancing new Chart
+  var ctx = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#viewsPerMonth');
+  var currentMonth = moment__WEBPACK_IMPORTED_MODULE_2___default()().format('M') - 1;
+  var yOffset = Math.max.apply(Math, _toConsumableArray(views)) * 1.1; // Instancing new Chart
 
   var viewsPerMonth = new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
     type: 'line',
@@ -48436,14 +48451,35 @@ function printGraph(views) {
       datasets: [{
         data: [views[0], views[1], views[2], views[3], views[4], views[5], views[6], views[7], views[8], views[9], views[10], views[11]],
         label: 'Visite/mese',
-        borderColor: '#ffdd01',
-        backgroundColor: 'rgba(0, 0, 0, .03'
+        borderColor: '#f4af32',
+        backgroundColor: 'rgba(0, 0, 0, .03)',
+        lineTension: 0
       }]
     },
     options: {
-      showLines: true
+      showLines: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            max: yOffset
+          }
+        }]
+      }
     }
   });
+  var pie = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#pieChart');
+  var pieChart = new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(pie, {
+    type: 'doughnut',
+    data: {
+      labels: ['Visite mese corrente', 'Visite totali'],
+      datasets: [{
+        data: [views[currentMonth], totalViews],
+        label: 'Visite',
+        backgroundColor: ["#f4af32", "#87abcb"]
+      }]
+    }
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_1___default()('#total-views span').append(totalViews);
 }
 
 /***/ }),
