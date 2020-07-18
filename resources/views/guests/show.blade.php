@@ -57,7 +57,7 @@
         <div class="dashboard">
             <h4 class="section-title weight-light">Dashboard Proprietario</h4>
             <div class="dashboard-ctas">
-                <a class="dashboard-ctas--btn button-main" href="#">Sponsorizza</a>
+                <a class="dashboard-ctas--btn button-main" href="{{ route('user.sponsorships', $apartment->id) }}">Sponsorizza</a>
                 <a class="dashboard-ctas--btn button-light" href="{{ route('user.apartments.edit', $apartment->id) }}">Modifica</a>
                 <a class=" dashboard-ctas--btn button-dark" href="{{ route('user.stats', $apartment->id) }}">Statistiche</a> 
             
