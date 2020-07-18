@@ -11,6 +11,7 @@ class ApartmentController extends Controller
     public function search(Request $request)
     {
         $apartments = Apartment::all();
+        $aptServices = Apartment::with("services");
 
         // $data = $request->all();
         $filter = $request->input("filter");
@@ -18,14 +19,17 @@ class ApartmentController extends Controller
 
         $apartments = $apartments->whereIn("id", $idArr);
 
-        // if ($request->input("services")) {
-        //     $services = $request->input("services");
-        //     $servicesArr = explode(', ', $services);
-        //     // $apartments = $apartments->whereIn($apartments->services->name, $servicesArr);
-        //     $apartments = Apartment::whereHas("services", function ($query) use ($servicesArr) {
-        //         $query->whereIn("id", [1]);
-        //     });
-        // }
+        //
+        if ($request->input("services")) {
+            $services = $request->input("services");
+            // $servicesArr = explode(', ', $services);
+            $servicesArr = collect(explode(', ', $services));
+
+            // $apartments = Apartment::with("services")->get();
+            $apartments = Apartment::with("services")->where("services.id", "=", "9")->get();
+            $apartments = $apartments->find($idArr);
+            // $apartments = $apartments->where("id", "=", "9");
+        };
 
         if ($request->input("rooms")) {
             $rooms = $request->input("rooms");

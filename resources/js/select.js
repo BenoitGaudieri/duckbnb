@@ -1,84 +1,73 @@
 require("./bootstrap");
 
-let selectRooms = $("#select-rooms");
-let results = $(".card");
+// $('input[type="checkbox"]').click(function() {
+//     if ($(this).prop("checked") == true) {
+//         var selectedService = $(this).val();
+//         console.log(selectedService);
 
-$("#reset").on("click", function(e) {
-    e.preventDefault();
-    $(".card").show();
-    $("input[type=checkbox]").prop("checked", false);
-});
+//         for (let i = 0; i < results.length - 1; i++) {
+//             var services = $(".card")
+//                 .eq(i)
+//                 .find(".nome-servizio");
+//             console.log(services.length);
 
-selectRooms.change(function() {
-    $(".card").show();
-    for (let i = 0; i < results.length; i++) {
-        text = $(".card")
-            .eq(i)
-            .find(".rooms")
-            .text();
-        console.log(text);
+//             for (let s = 0; s < services.length; s++) {
+//                 var servizio = $(".card")
+//                     .eq(i)
+//                     .find(".nome-servizio")
+//                     .eq(s)
+//                     .text();
+//                 console.log("Servizio:", servizio);
 
-        if (selectRooms.val()) {
-            if (text != selectRooms.val()) {
-                $(".card")
-                    .eq(i)
-                    .hide();
-            }
-        }
-    }
-});
+//                 if (servizio == selectedService) {
+//                     $(".card")
+//                         .eq(i)
+//                         .show();
+//                     console.log("ja");
+//                 } else {
+//                     $(".card")
+//                         .eq(i)
+//                         .hide();
+//                 }
+//             }
+//         }
+//     } else if ($(this).prop("checked") == false) {
+//         console.log("Checkbox is unchecked.");
+//     }
+// });
 
-$('input[type="checkbox"]').click(function() {
-    if ($(this).prop("checked") == true) {
-        var selectedService = $(this).val();
-        console.log(selectedService);
-
-        for (let i = 0; i < results.length - 1; i++) {
-            var services = $(".card")
-                .eq(i)
-                .find(".nome-servizio");
-            console.log(services.length);
-
-            for (let s = 0; s < services.length; s++) {
-                var servizio = $(".card")
-                    .eq(i)
-                    .find(".nome-servizio")
-                    .eq(s)
-                    .text();
-                console.log("Servizio:", servizio);
-
-                if (servizio == selectedService) {
-                    $(".card")
-                        .eq(i)
-                        .show();
-                    console.log("ja");
-                } else {
-                    $(".card")
-                        .eq(i)
-                        .hide();
-                }
-            }
-        }
-    } else if ($(this).prop("checked") == false) {
-        console.log("Checkbox is unchecked.");
-    }
-});
-
-/**
- * Ajax
- */
 const { ajax } = require("jquery");
 
 $(document).ready(function() {
     // setup
+
+    let selectRooms = $("#select-rooms");
+    let results = $(".card");
+
+    $("#reset").on("click", function(e) {
+        e.preventDefault();
+        $(".card").show();
+        $("input[type=checkbox]").prop("checked", false);
+    });
+
+    selectRooms.change(roomSelect);
+
+    function roomSelect() {
+        if (selectRooms.val()) {
+            console.log(selectRooms.val());
+            heya = selectRooms.val();
+        }
+    }
     const filter = $("#test");
+    var heya = 0;
     // const filter = $('input[type="checkbox"]');
+
     const apiUrl =
         window.location.protocol +
         "//" +
         window.location.host +
         "/api/apartments/api";
-    console.log(apiUrl);
+    // console.log(apiUrl);
     // "http://127.0.0.1:8000/api/apartments/api";
 
     // HANDLEBARS
@@ -100,23 +89,29 @@ $(document).ready(function() {
     filter.on("click", function(e) {
         e.preventDefault();
 
-        console.log("From Blade:", idArr.join(", "));
-
         var arrInString = idArr.join(", ");
-        console.log("Array in stringa: ", arrInString);
+
+        // console.log("From Blade:", idArr.join(", "));
+        // console.log("Array in stringa: ", arrInString);
         // var urlCombo = `${apiUrl}?filter=${arrInString}`;
-        var urlCombo = `${apiUrl}?filter=${arrInString}&rooms=2`;
-        console.log(urlCombo);
+        var urlCombo = `${apiUrl}?filter=${arrInString}&rooms=${heya}`;
+        // console.log(urlCombo);
 
         fetch(urlCombo)
             .then(response => response.json())
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
                 for (var res in data) {
-                    console.log(data[res]);
+                    // console.log(data[res]);
                     // object with the apartment
                     let apt = data[res];
-                    console.log(apt.id);
+                    console.log("id: ", apt.id);
+                    console.log("title: ", apt.title);
+                    console.log("img_url: ", apt.img_url);
+                    console.log("price: ", apt.price);
+                    console.log("room_qty: ", apt.room_qty);
+                    console.log("bet_qty: ", apt.bed_qty);
+                    console.log("bathroom_qty: ", apt.bathroom_qty);
                 }
             });
 
