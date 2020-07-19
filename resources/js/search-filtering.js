@@ -1,20 +1,13 @@
 import $ from 'jquery';
 
 $(document).ready(function() {
-    var apartments = getIds();
-    console.log(apartments);
 
-    var globalFilters = {
-        services: []
-    }
+    var apartments = getIds();
 
     $(document).on('change', 'input:checkbox', function() {
-        getFilters(globalFilters);
+        $('#search-results').html('');
         callApi(apartments);
     });
-
-
-
 
 }); // <--- End Ready
 
@@ -22,9 +15,7 @@ $(document).ready(function() {
 function callApi(apartments) {
     $.ajax({
         url: 'http://127.0.0.1:8000/api/apartments/',
-        data: {
-            id: apartments.join(',')
-        },
+        data: dataCompile(apartments),
         success: function(res) {
             console.log(res);
         },
@@ -34,8 +25,8 @@ function callApi(apartments) {
     })
 }
 
-function getFilters(globalFilters) {
-    var services = globalFilters.services;
+function getServices() {
+    var services = [];
     
     $('input:checkbox').each(function() {
         var self = $(this);
@@ -56,8 +47,13 @@ function getFilters(globalFilters) {
             }
         }
     })
-    
-    console.log(globalFilters);
+
+    if(services.length != 0) {
+        return services;
+    } else {
+        services.push('all');
+        return services;
+    }
 }
 
 function getIds() {
@@ -67,5 +63,17 @@ function getIds() {
         ids.push( $(this).attr('data-id') );
     })
 
-    return ids;
+    return ids.join(',');
+}
+
+function dataCompile(apartments) {
+    var data = {
+        id: apartments,
+        services: getServices().join(','),
+        rooms: $('#select-rooms').val(),
+        beds: $('#select-beds').val()
+    }
+
+    console.log(data);
+    return data;
 }

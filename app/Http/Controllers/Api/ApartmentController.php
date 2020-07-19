@@ -8,21 +8,21 @@ use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
-    public function search(Request $request)
-    {
-        $id = $request->id;
+    // public function search(Request $request)
+    // {
+    //     $id = $request->id;
         
-        $apartments = Apartment::with('services')->whereIn('id', $id)->get();
-        // $data = $request->all();
-        // $filter = $data["filter"];
-        // $filter = $request->filter;
-        // $filter = $request->input("filter");
-        // $array = explode(',', $filter);
+    //     $apartments = Apartment::with('services')->whereIn('id', $id)->get();
+    //     // $data = $request->all();
+    //     // $filter = $data["filter"];
+    //     // $filter = $request->filter;
+    //     // $filter = $request->input("filter");
+    //     // $array = explode(',', $filter);
 
-        // $apartments = Apartment::all()->whereIn("id", $array);
+    //     // $apartments = Apartment::all()->whereIn("id", $array);
 
-        return response()->json($apartments);
-    }
+    //     return response()->json($apartments);
+    // }
 
     public function stats(Apartment $apartment)
     {
@@ -41,7 +41,12 @@ class ApartmentController extends Controller
         $ids = explode(',', $request->id);
         $minRooms = $request->rooms;
         $minBeds = $request->beds;
-        $services = explode(',', $request->services);
+
+        if($request->services <> 'all') {
+            $services = explode(',', $request->services);
+        } else {
+            $services = 'all';
+        }
 
         $apartments = Apartment::with('services')
                     ->whereIn('id', $ids)
@@ -59,13 +64,15 @@ class ApartmentController extends Controller
         
         if( $apartments->isNotEmpty() ) {
             foreach ($apartments as $apartment) {
+                // Compiling array with apartment's service id's
                 $array = [];
-
                 foreach ($apartment->services as $service) {
                     $array[] = $service['id'];
                 }
 
-                if(count($services) <= count($array)) {
+                if($services == 'all') {
+                    $res['response'][] = $apartment;
+                } elseif(count($services) <= count($array)) {
                     if(array_intersect($array, $services)) {
                         $res['response'][] = $apartment;
                     }

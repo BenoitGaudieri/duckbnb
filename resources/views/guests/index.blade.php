@@ -60,4 +60,6 @@ rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+<script src="{{ asset("js/search.js") }}" defer></script>
+<script src="{{ asset("js/select.js") }}" defer></script>
 @endpush
