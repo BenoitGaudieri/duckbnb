@@ -8,37 +8,6 @@ use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
-    public function index()
-    {
-        $apartments = Apartment::with('views')->get();
-
-        $res = [
-            'error' => '',
-            'response' => []
-        ];
-
-        foreach ($apartments as $apartment) {
-            $res['response'][] = $apartment;
-        }
-
-        return response()->json($res);
-    }
-
-    public function search(Request $request)
-    {
-        $apartments = Apartment::all();
-
-        // $data = $request->all();
-        // $filter = $data["filter"];
-        // $filter = $request->filter;
-        $filter = $request->input("filter");
-        $array = explode(',', $filter);
-
-        $apartments = Apartment::all()->whereIn("id", $array);
-
-        return response()->json($apartments);
-    }
-
     public function stats(Apartment $apartment)
     {
         $data = Apartment::with('views')->find($apartment->id);
@@ -47,6 +16,56 @@ class ApartmentController extends Controller
             'error' => '',
             'response' => $data
         ];
+
+        return response()->json($res);
+    }
+
+    public function filter(Request $request)
+    {   
+        $ids = explode(',', $request->id);
+        $minRooms = $request->rooms;
+        $minBeds = $request->beds;
+
+        if($request->services <> 'all') {
+            $services = explode(',', $request->services);
+        } else {
+            $services = 'all';
+        }
+
+        $apartments = Apartment::with('services')
+                    ->whereIn('id', $ids)
+                    ->where([
+                        ['room_qty', '>=', $minRooms],
+                        ['bed_qty', '>=', $minBeds]
+                    ])
+                    ->get();
+
+        $res = [
+            'error' => '',
+            'response' => []
+        ];
+
+        
+        if( $apartments->isNotEmpty() ) {
+            foreach ($apartments as $apartment) {
+                // Compiling array with apartment's service ids
+                $array = [];
+                foreach ($apartment->services as $service) {
+                    $array[] = $service['id'];
+                }
+
+                if($services == 'all') {
+                    $res['response'][] = $apartment;
+                } elseif(count($services) <= count($array)) {
+                    if(array_intersect($array, $services)) {
+                        $res['response'][] = $apartment;
+                    }
+                }
+                
+            }
+        } else {
+            $res['response'] = 'empty';
+        }
 
         return response()->json($res);
     }

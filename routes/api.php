@@ -15,16 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace("Api")->group(function () {
-    Route::get("apartments/api", "ApartmentController@search");
-    Route::get("apartments", "ApartmentController@index");
+    Route::get("apartments", "ApartmentController@filter");
     Route::get("user/apartments/{apartment}/stats", "ApartmentController@stats");
-});
-
-Route::namespace('Api')->group(function () {
     Route::get('messages/{user}', 'MessageController@inbox');
 });
-
-
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
