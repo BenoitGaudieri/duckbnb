@@ -1,9 +1,14 @@
 .pack {
-    height: calc(100vh - 69px);
+    height: 700px;
     position: relative;
+
+    @include responsive($tablet) {
+        height: calc(100vh - 69px);
+    }
 
     &-cards {
         height: 100%;
+        padding: 20px 0;
         @include flex(row, center, center);
         flex-wrap: wrap;
         background-color: rgb(83, 86, 94);
@@ -18,9 +23,17 @@
 
 
             h2 {
-                font-size: 12rem;
+                font-size: 2rem;
                 color: rgba(62, 68, 82, 0.22);
                 cursor: default;
+
+                @include responsive($tablet) {
+                    font-size: 8rem;
+                }
+
+                @include responsive($desktop) {
+                    font-size: 12rem;
+                }
             }
         }
         
@@ -63,17 +76,15 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
-        }
-
-        &--subtitle {
-            position: absolute;
-            bottom: 18%;
-            left: 50%;
-            transform: translateX(-50%);
-
-        }
-        
+        }      
     }
+}
+
+.info {
+    background: #34363c;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
 }
 
 
@@ -111,12 +122,16 @@
     
     
     .payment {
-        @include flex(column, flex-start, center);
+        display: none; // jQuery
         &--form {
             max-width: 400px;
     
         }
     }
+}
+
+.braintree-heading {
+    display: none;
 }
 
 

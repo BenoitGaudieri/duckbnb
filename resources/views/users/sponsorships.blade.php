@@ -3,23 +3,24 @@
 @section('content')
 
 
-@if (session('success_message'))
-<div class="alert alert-success">
-    {{ session('success_message')}}
-</div>
-@endif
-
-@if (count($errors) > 0)
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 <div class="container-fluid">
+
+    @if (session('success_message'))
+    <div class="alert alert-success">
+        {{ session('success_message')}}
+    </div>
+    @endif
+
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <div class="pack container-fluid">
         <div class="pack-cards container-fluid">
             
@@ -31,15 +32,20 @@
             @foreach($sponsorship as $sponsor)
             <a class="pack-cards--single pk pk-{{$loop->iteration}} pack-basic">
                 <span class="pack-cards--single--id">{{ $sponsor->id }}</span>        
-                <span class="pack-cards--single--price price">{{ $sponsor->price }}€</span>
+                <span class="pack-cards--single--price price"> <span class="get-price">{{ $sponsor->price }}</span>€</span>
                 <span class="pack-cards--single--duration duration">{{ $sponsor->duration }} ore</span>
             </a>
             @endforeach
 
-            <div class="pack-cards--subtitle">
-                <h3>Scegli fra i nostri pacchetti</h3>
-            </div>
+        </div>
+    </div>
 
+    <div class="info container-fluid">
+        <div class="info-title container">
+            <h3 class="weight-light text-main">Scegli fra i nostri pacchetti</h3>
+        </div>
+        <div class="info-subtitle container">
+            <p>Metti in vetrina il tuo appartamento ed aumenta le tue vendite, grazie alle sponsorizzazioni.</p>
         </div>
     </div>
 
@@ -81,8 +87,8 @@
                     </section>
         
                     <input id="nonce" name="payment_method_nonce" type="hidden" />
-                    <button class="button" type="submit">
-                        <span>Test Transaction</span>
+                    <button class="button-main" type="submit">
+                        Paga
                     </button>
                 </form>
             </div>
