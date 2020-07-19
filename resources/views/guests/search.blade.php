@@ -115,12 +115,29 @@ var idArr = []
 
 </style>
 
+<script id="card-template" type="text/x-handlebars-template">
+    <div class="card">
+        <img class="card-img" src="@{{ imgUrl }}" alt="">
+        <div class="card-body">
+            <ul>
+                <li>@{{ title }}</li>
+                <li>€@{{ price }} al giorno</li>
+                <li>@{{ rooms }} stanze</li>
+                <li>@{{ beds }} posti letto</li>
+                <li>@{{ bathrooms }} bagni</li>
+                <li>@{{ sqrMeters }} m&sup2;</li>
+            </ul>
+        </div>
+    </div>
+</script>
+
+
 @push('scripts')
 <link
 rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
-{{-- <script src="{{ asset("js/search.js") }}" defer></script>
-<script src="{{ asset("js/select.js") }}" defer></script> --}}
+<script src="{{ asset("js/search.js") }}" defer></script>
+{{-- <script src="{{ asset("js/select.js") }}" defer></script> --}}
 @endpush

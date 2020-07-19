@@ -8,22 +8,6 @@ use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
-    // public function search(Request $request)
-    // {
-    //     $id = $request->id;
-        
-    //     $apartments = Apartment::with('services')->whereIn('id', $id)->get();
-    //     // $data = $request->all();
-    //     // $filter = $data["filter"];
-    //     // $filter = $request->filter;
-    //     // $filter = $request->input("filter");
-    //     // $array = explode(',', $filter);
-
-    //     // $apartments = Apartment::all()->whereIn("id", $array);
-
-    //     return response()->json($apartments);
-    // }
-
     public function stats(Apartment $apartment)
     {
         $data = Apartment::with('views')->find($apartment->id);
@@ -64,7 +48,7 @@ class ApartmentController extends Controller
         
         if( $apartments->isNotEmpty() ) {
             foreach ($apartments as $apartment) {
-                // Compiling array with apartment's service id's
+                // Compiling array with apartment's service ids
                 $array = [];
                 foreach ($apartment->services as $service) {
                     $array[] = $service['id'];

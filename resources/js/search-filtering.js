@@ -1,34 +1,38 @@
 import $ from 'jquery';
+import Handlebars from 'handlebars';
 
 $(document).ready(function() {
+    var source = $('#card-template').html();
+    const template = Handlebars.compile(source);
 
     var apartments = getIds();
 
     $(document).on('change', 'input:checkbox', function() {
         $('#search-results').html('');
-        callApi(apartments);
+        callApi(apartments, template);
     });
     
     $(document).on('change', 'select', function() {
         $('#search-results').html('');
-        callApi(apartments);
+        callApi(apartments, template);
     });
     
     $(document).on('click', '#reset', function() {
         $('#search-results').html('');
         clearFilters();
-        resetCall(apartments);
+        resetCall(apartments, template);
     });
 
 }); // <--- End Ready
 
+/* FUNCTIONS */
 
-function callApi(apartments) {
+function callApi(apartments, template) {
     $.ajax({
         url: 'http://127.0.0.1:8000/api/apartments/',
         data: dataCompile(apartments),
         success: function(res) {
-            console.log(res);
+            appendResults(res, template);
         },
         error: function() {
             console.log('Errore');
@@ -103,7 +107,7 @@ function clearFilters() {
     });
 }
 
-function resetCall(apartments) {
+function resetCall(apartments, template) {
     $.ajax({
         url: 'http://127.0.0.1:8000/api/apartments/',
         data: {
@@ -113,10 +117,31 @@ function resetCall(apartments) {
             beds: $('#select-beds').val()
         },
         success: function(res) {
-            console.log(res);
+            appendResults(res, template);
         },
         error: function() {
             console.log('Errore');
         }
     });
+}
+
+function appendResults(data, template) {
+    var results = data.response;
+
+    for (let i = 0; i < results.length; i++) {
+        var item = results[i];
+
+        var ctx = {
+            imgUrl: item.img_url,
+            title: item.title,
+            price: item.price,
+            rooms: item.room_qty,
+            beds: item.bed_qty,
+            bathrooms: item.bathroom_qty,
+            sqrMeters: item.sqr_meters
+        }
+        
+        var html = template(ctx);
+        $('#search-results').append(html);
+    }
 }
