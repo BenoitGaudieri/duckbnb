@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index() {
-        $res = Apartment::orderBy('views', 'desc')->get();
+        $res = Apartment::where('is_visible', '<>', 0)->orderBy('views', 'desc')->get();
         $now = Carbon::now();
 
         $apartments = [];
