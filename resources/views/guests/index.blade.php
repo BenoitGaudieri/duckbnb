@@ -4,14 +4,16 @@
 
     <div class="jumbotron position-relative">
         <div class="search position-absolute">
-            <form action="{{ route('search.submit') }}" method="POST">
+            <form class="search-act" action="{{ route('search.submit') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="search-group">
-                    <input id="address-input" placeholder="Cerca per meta"/>
+                <div class="search-act--input search-group">
+                    <input id="address-input" placeholder="La tua prossima meta?"/>
                 </div>
                 <input type="hidden" id="apartmentId" name="id[]" value="">
-                <input type="submit" value="Cerca">
+                <button type="submit" class="search-act--btnSubmit">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
             </form>
         </div>
     </div>
@@ -38,7 +40,7 @@
                                 Recensioni 
                                 (<span class="text-main">{{ count($apt->reviews)}}</span>)
                             </h5>
-                            <h5 class="weight-regular text-main"> Città </h5>
+                            <h5 id="address" class="weight-regular text-main"> Città </h5>
                         </div>
                         <div class="card-apt--title">
                             <h4 class="weight-regular"> {{ $apt->title }} </h4>

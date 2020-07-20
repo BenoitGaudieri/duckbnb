@@ -94,7 +94,7 @@
         @endif
         </div>
     @else
-        <div class="message">
+        <div class="show-message">
             <h4 class="section-title weight-light">Contatta il proprietario</h4>
             @if($message = Session::get('success'))
             <div class="alert alert-success alert-block">
