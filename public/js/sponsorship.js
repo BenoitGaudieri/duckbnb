@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10970,139 +10970,73 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./resources/js/select.js":
-/*!********************************!*\
-  !*** ./resources/js/select.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./resources/js/sponsorship.js":
+/*!*************************************!*\
+  !*** ./resources/js/sponsorship.js ***!
+  \*************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var selectRooms = $("#select-rooms");
-var results = $(".card");
-$("#reset").on("click", function (e) {
-  e.preventDefault();
-  $(".card").show();
-  $("input[type=checkbox]").prop("checked", false);
-});
-selectRooms.change(function () {
-  $(".card").show();
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
-  for (var i = 0; i < results.length; i++) {
-    text = $(".card").eq(i).find(".rooms").text();
-    console.log(text);
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  // var form = document.querySelector('#payment-form');
+  // var client_token = "{{ $token }}";
+  // braintree.dropin.create({
+  // authorization: client_token,
+  // selector: '#bt-dropin',
+  // paypal: {
+  //     flow: 'vault'
+  // }
+  // }, function (createErr, instance) {
+  // if (createErr) {
+  //     console.log('Create Error', createErr);
+  //     return;
+  // }
+  // form.addEventListener('submit', function (event) {
+  //     event.preventDefault();
+  //     instance.requestPaymentMethod(function (err, payload) {
+  //     if (err) {
+  //         console.log('Request Payment Method Error', err);
+  //         return;
+  //     }
+  //     // Add the nonce to the form and submit
+  //     document.querySelector('#nonce').value = payload.nonce;
+  //     form.submit();
+  //     });
+  // });
+  // });
+  var pack = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.btn-pack'); // Get packs
 
-    if (selectRooms.val()) {
-      if (text != selectRooms.val()) {
-        $(".card").eq(i).hide();
-      }
-    }
-  }
-});
-$('input[type="checkbox"]').click(function () {
-  if ($(this).prop("checked") == true) {
-    var selectedService = $(this).val();
-    console.log(selectedService);
+  var amountInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#amount'); // Get Amount input
 
-    for (var i = 0; i < results.length - 1; i++) {
-      var services = $(".card").eq(i).find(".nome-servizio");
-      console.log(services.length);
+  var packInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#pack'); // Get Pack input
 
-      for (var s = 0; s < services.length; s++) {
-        var servizio = $(".card").eq(i).find(".nome-servizio").eq(s).text();
-        console.log("Servizio:", servizio);
+  pack.click(function () {
+    // Get Price and duration
+    var id = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.pack-id').text();
+    var price = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.price').text();
+    var duration = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).siblings('.duration').text(); // Set price 
 
-        if (servizio == selectedService) {
-          $(".card").eq(i).show();
-          console.log("ja");
-        } else {
-          $(".card").eq(i).hide();
-        }
-      }
-    }
-  } else if ($(this).prop("checked") == false) {
-    console.log("Checkbox is unchecked.");
-  }
-});
-/**
- * Ajax
- */
+    amountInput.val(price); // Set pack id
 
-var _require = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"),
-    ajax = _require.ajax;
-
-$(document).ready(function () {
-  // setup
-  var filter = $("#test"); // const filter = $('input[type="checkbox"]');
-
-  var apiUrl = window.location.protocol + "//" + window.location.host + "/api/apartments/api";
-  console.log(apiUrl); // "http://127.0.0.1:8000/api/apartments/api";
-  // HANDLEBARS
-  // let source = $("#student-template").html();
-  // let template = Handlebars.compile(source);
-  // let container = $(".students");
-
-  /**
-   * Handle the selector view with handlebars
-   * using the array returned with the logic of the Api/StudentController
-   */
-
-  filter.on("click", function (e) {
-    e.preventDefault();
-    console.log("From Blade:", idArr.join());
-    var arrInString = idArr.join();
-    console.log("Array in stringa: ", arrInString);
-    var urlCombo = "".concat(apiUrl, "?filter=/").concat(arrInString);
-    console.log(urlCombo);
-    fetch(urlCombo).then(function (response) {
-      return response.json();
-    }).then(function (data) {
-      console.log(data);
-    });
-    $.ajax({
-      url: apiUrl,
-      method: "POST",
-      data: {
-        filter: 2
-      }
-    }).done(function (res) {
-      if (res.length > 0) {
-        console.log(res); // clean
-        // container.html("");
-        // for (let i = 0; i < res.response.length; i++) {
-        //     const item = res.response[i];
-        //     let context = {
-        //         slug: item.slug,
-        //         img: item.img,
-        //         nome: item.nome,
-        //         eta: item.eta,
-        //         assunzione:
-        //             item.genere == "m" ? "assunto" : "assunta",
-        //         azienda: item.azienda,
-        //         ruolo: item.ruolo,
-        //         descrizione: item.descrizione
-        //     };
-        //     let output = template(context);
-        //     container.append(output);
-        // }
-      } else {
-        console.log(res.error);
-      }
-    }).fail(function (err) {
-      console.log("Error:", err);
-    });
+    packInput.val(id);
   });
-}); //end ready
+});
 
 /***/ }),
 
-/***/ 5:
-/*!**************************************!*\
-  !*** multi ./resources/js/select.js ***!
-  \**************************************/
+/***/ 7:
+/*!*******************************************!*\
+  !*** multi ./resources/js/sponsorship.js ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\luigi\Desktop\Progetto\duckbnb\resources\js\select.js */"./resources/js/select.js");
+module.exports = __webpack_require__(/*! D:\luigi\Desktop\Progetto\duckbnb\resources\js\sponsorship.js */"./resources/js/sponsorship.js");
 
 
 /***/ })
