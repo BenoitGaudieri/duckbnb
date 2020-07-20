@@ -18,6 +18,22 @@ var idArr = []
         <input type="submit" value="Cerca">
     </form>
 
+    <div class="row justify-content-center">
+        <h6>Modifica raggio di ricerca</h6>
+    </div>
+    <div class="row justify-content-center">
+        <form class="row" id="select-radius">
+            <input type="radio" name="radius" id="20" value="20000" checked>
+            <label for="20">20 Km</label>
+
+            <input type="radio" name="radius" id="30" value="30000">
+            <label for="30">30 Km</label>
+
+            <input type="radio" name="radius" id="50" value="50000">
+            <label for="50">50 Km</label>
+        </form>
+    </div>
+
     @if (!empty($apartments) && count($apartments) > 0)
     <button id="reset">Resetta filtri</button>
 
