@@ -51005,7 +51005,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-var client = algoliasearch("NWETNAHZK6", "74f79f9cd51ac246370b92525271c814");
+var client = algoliasearch("47VSO533ZH", "eaa5d8cf24f4fb6090811993ad43f3fd");
 var index = client.initIndex("apartments"); // Algolia places
 
 var placesAutocomplete = places({
