@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="info container-fluid">
+    <div class="slogan container-fluid">
         <div class="info-title container">
             <h3 class="weight-light text-main">Scegli fra i nostri pacchetti</h3>
         </div>

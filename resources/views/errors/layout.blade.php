@@ -40,7 +40,7 @@
             }
 
             .title {
-                font-size: 36px;
+                font-size: 96px;
                 padding: 20px;
             }
         </style>
