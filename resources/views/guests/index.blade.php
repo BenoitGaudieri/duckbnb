@@ -18,7 +18,6 @@
 
     <div class="divider-gradient"></div>
 
-
     <div class="container sponsor-section">
         <div class="row sponsor-section--title">
             <h2 class="weight-light">Le migliori mete</h2>

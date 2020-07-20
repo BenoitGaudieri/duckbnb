@@ -51006,7 +51006,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 var client = algoliasearch("47VSO533ZH", "eaa5d8cf24f4fb6090811993ad43f3fd");
-var index = client.initIndex("apartments"); // Algolia places
+var index = client.initIndex("apartments"); // Change radius
+
+var radius = 20000;
+$(document).on('click', '#select-radius input[type=radio]', function () {
+  radius = $(this).val();
+  console.log(radius);
+}); // Algolia places
 
 var placesAutocomplete = places({
   appId: "plBH45044BXL",
@@ -51022,10 +51028,11 @@ function changeHandle(e) {
   var lat = e.suggestion.latlng.lat;
   var lng = e.suggestion.latlng.lng;
   var apts = [];
+  console.log(radius);
   index.search("", {
     aroundLatLng: "".concat(lat, ", ").concat(lng),
     // aroundRadius: 1000000 // 1000 km
-    aroundRadius: 20000 // 20 km
+    aroundRadius: radius // 20 km
 
   }).then(function (_ref) {
     var hits = _ref.hits;
