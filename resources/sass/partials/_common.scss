@@ -7,7 +7,7 @@
 body {
     width: 100%;
     min-height: 100vh;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     color: $dark;
 
     @include flex(column, flex-start, center);
@@ -38,14 +38,13 @@ a {
 
 input[type="submit" i] {
     background-color: transparent;
- }
+}
 
 button:focus {
     outline: none;
 }
 
 .form-control {
-
     &:focus {
         box-shadow: none;
         border: 0;
@@ -64,8 +63,11 @@ button:focus {
     padding: 0;
 }
 
-.button {
+.card {
+    border: 0;
+}
 
+.button {
     &-main {
         @include button($main-color);
     }
@@ -79,5 +81,4 @@ button:focus {
     &-shadow {
         @include button($shadow);
     }
-
 }

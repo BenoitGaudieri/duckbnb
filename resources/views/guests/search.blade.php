@@ -35,6 +35,7 @@ var idArr = []
     </div>
 
     @if (!empty($apartments) && count($apartments) > 0)
+    @include('shared.handlebar')
     <button id="reset">Resetta filtri</button>
 
     <label for="select-rooms">Numero minimo di stanze</label>
@@ -82,32 +83,28 @@ var idArr = []
         <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione" data-id="9">
     </div>
 
-    {{-- <button id="test">Test ajax</button> --}}
-
     <div class="row" id="search-results">
         @foreach ($apartments as $apartment)
-        <div class="card" data-id="{{ $apartment->id }}">
-            <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
-                <h2>{{ $apartment->title }}</h2>
-            </a>
-            <img class="img-fluid" src="{{ asset('storage/'. $apartment->img_url) }}" alt="{{ $apartment->title }}">
-            <h6><span class="weight-light price">Prezzo:</span> {{$apartment->price}}€</h6>
-            <h6><span class="weight-light">Stanze:</span> <span class="rooms">{{$apartment->room_qty}}</span></h6>
-            <h6><span class="weight-light">Posti Letto:</span> {{$apartment->bed_qty}}</h6>
-            <h6><span class="weight-light">Bagni:</span> {{$apartment->bathroom_qty}}</h6>
-            <h6><span class="weight-light">m&sup2;:</span> {{$apartment->sqr_meters}}</h6>
-
-            {{-- <script>
-                idArr.push({{ $apartment->id }})
-
-            </script> --}}
-
-            <h5>Servizi</h5>
-            @forelse($apartment->services as $service)
-            <h6 class="weight-light nome-servizio">{{ $service->name }}</h6>
-            @empty
-            <h6 class="">Nessun servizio compreso</h6>
-            @endforelse
+        <div class="card card-apt" data-id="{{ $apartment->id }}">                <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
+                @if($apartment->img_url == 'https://picsum.photos/200/300')
+                    <img class="img-fluid" src="{{ $apartment->img_url }}" alt="">
+                @else
+                    <img class="img-fluid" src="{{ asset('storage/' . $apartment->img_url) }}" alt="">
+                @endif
+                </a>
+                <div class="card-apt--location">
+                    <h5 class="weight-regular">
+                        Recensioni 
+                        (<span class="text-main">{{ count($apartment->reviews)}}</span>)
+                    </h5>
+                    <h5 id="address" class="weight-regular text-main"> Città </h5>
+                </div>
+                <div class="card-apt--title">
+                    <h4 class="weight-regular"> {{ $apartment->title }} </h4>
+                </div>
+                <div class="card-apt--price">
+                    <h4 class="weight-regular"> <span class="text-main weight-bold">{{ $apartment->price }}€</span> a notte</h4>
+                </div>
         </div>
         
         @endforeach
@@ -130,22 +127,6 @@ var idArr = []
     }
 
 </style>
-
-<script id="card-template" type="text/x-handlebars-template">
-    <div class="card">
-        <img class="card-img" src="@{{ imgUrl }}" alt="">
-        <div class="card-body">
-            <ul>
-                <li>@{{ title }}</li>
-                <li>€@{{ price }} al giorno</li>
-                <li>@{{ rooms }} stanze</li>
-                <li>@{{ beds }} posti letto</li>
-                <li>@{{ bathrooms }} bagni</li>
-                <li>@{{ sqrMeters }} m&sup2;</li>
-            </ul>
-        </div>
-    </div>
-</script>
 
 
 @push('scripts')
