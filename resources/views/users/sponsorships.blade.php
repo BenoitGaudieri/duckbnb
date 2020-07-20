@@ -33,7 +33,7 @@
             <a class="pack-cards--single pk pk-{{$loop->iteration}} pack-basic">
                 <span class="pack-cards--single--id">{{ $sponsor->id }}</span>        
                 <span class="pack-cards--single--price price"> <span class="get-price">{{ $sponsor->price }}</span>€</span>
-                <span class="pack-cards--single--duration duration">{{ $sponsor->duration }} ore</span>
+                <span class="pack-cards--single--duration duration"> <span class="get-duration">{{ $sponsor->duration }}</span> ore.</span>
             </a>
             @endforeach
 
@@ -41,10 +41,10 @@
     </div>
 
     <div class="slogan container-fluid">
-        <div class="info-title container">
+        <div class="slogan-title container">
             <h3 class="weight-light text-main">Scegli fra i nostri pacchetti</h3>
         </div>
-        <div class="info-subtitle container">
+        <div class="slogan-subtitle container">
             <p>Metti in vetrina il tuo appartamento ed aumenta le tue vendite, grazie alle sponsorizzazioni.</p>
         </div>
     </div>
@@ -53,12 +53,12 @@
         <div class="choice">
             <h4>Hai scelto il pacchetto da 
                 {{-- Insert Price with jQuery --}}
-                <span class="choice-price text-main"></span>.
+                <span class="choice-price text-main"></span>€.
             </h4>
             <h5>
                 l'appartamento <span class="text-main">{{$apartment->title }}</span> sarà in sponsorizzazione per
                 {{-- Insert Duration with jQuery --}} 
-                <span class="choice-duration"></span>.
+                <span class="choice-duration text-main"></span> ore.
             </h5>
     
             <p>Qui sotto puoi completare il pagamento.</p>
@@ -135,5 +135,5 @@
 
 @push('scripts')
 <script src="https://js.braintreegateway.com/web/dropin/1.23.0/js/dropin.min.js"></script>
-        <script src="{{ asset('js/sponsorship.js')}}"></script>
+<script src="{{ asset('js/sponsorship.js')}}"></script>
 @endpush

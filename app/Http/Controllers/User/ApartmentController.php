@@ -170,6 +170,7 @@ class ApartmentController extends Controller
 
         $apartmentId = $apartment->id;
         $apartment->services()->detach();
+        $apartment->sponsorships()->detach();
         $deleted = $apartment->delete();
 
         if ($deleted) {

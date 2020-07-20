@@ -59,7 +59,9 @@ $(document).ready(function() {
         // Get Price and duration
         let id = $(this).children('.pack-cards--single--id').text();
         let price = $(this).children('.pack-cards--single--price').children('.get-price').text();
-        let duration = $(this).children('.pack-cards--single--duration').text();
+        let duration = $(this).children('.pack-cards--single--duration').children('.get-duration').text();
+
+        console.log(duration);
         let cardNotSelected = $(this).siblings('.pk');
 
         console.log(price, id);
