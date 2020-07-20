@@ -68,7 +68,7 @@ if ($result->success) {
     $apartment->sponsorships()->attach($idPack);
 
     $transaction = $result->transaction;
-    return back()->with('success_message', 'Transazione eseguita, ID:'. $transaction->id);
+    return redirect()->route('show', $apartment->id)->with('success_message', 'Transazione eseguita, ID:'. $transaction->id);
 } else {
     $errorString = "";
 

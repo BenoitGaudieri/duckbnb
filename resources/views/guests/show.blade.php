@@ -55,6 +55,12 @@
     </div>    
     @if(Auth::id() == $apartment['user_id'])
         <div class="dashboard">
+            @if (session('success_message'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    {{ session('success_message')}}
+                </div>
+            @endif
             <h4 class="section-title weight-light">Dashboard Proprietario</h4>
             <div class="dashboard-ctas">
                 <a class="dashboard-ctas--btn button-main" href="{{ route('user.sponsorships', $apartment->id) }}">Sponsorizza</a>
