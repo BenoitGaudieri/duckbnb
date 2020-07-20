@@ -24,4 +24,9 @@
 @import 'partials/pages/users/index';
 @import 'partials/pages/users/messages';
 @import 'partials/pages/users/create';
+@import 'partials/pages/users/edit';
+@import 'partials/pages/users/statistics';
 @import 'partials/pages/users/sponsorship';
+
+// Errors Page
+@import 'partials/errors/page-404';

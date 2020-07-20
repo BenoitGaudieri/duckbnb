@@ -21,11 +21,17 @@ class SponsorshipController extends Controller
     $sponsorship = Sponsorship::all();
 
     $token = $gateway->ClientToken()->generate();
-    return view('users.sponsorships', [
-        'token' => $token,
-        'apartment' => $apartment,
-        'sponsorship' => $sponsorship
-    ]);
+
+    if (Auth::user()->id == $apartment->user_id) {
+        return view('users.sponsorships', [
+            'token' => $token,
+            'apartment' => $apartment,
+            'sponsorship' => $sponsorship
+        ]);
+    } else {
+        return back();
+    }
+
     }
 
     public function checkout (Request $request, Apartment $apartment) {
@@ -41,6 +47,8 @@ class SponsorshipController extends Controller
 
     // Pack id passato con input
     $idPack = $request["pack"];
+    
+    if($amount == "2.99" && $idPack == "1" || $amount == "5.99" && $idPack == "2" || $amount == "9.99" && $idPack == "3") {
 
     $result = $gateway->transaction()->sale([
         'amount' => $amount,
@@ -71,6 +79,10 @@ if ($result->success) {
 /*     $_SESSION["errors"] = $errorString;
     header("Location: " . $baseUrl . "index.php"); */
     return back()->withErrors('An error occurred with the message: ' . $result->message);
-}
+} 
+    } else {
+        return back()->withErrors('Si è verificato un errore');
     }
-}
+} 
+
+} 
