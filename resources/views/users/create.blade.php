@@ -23,7 +23,7 @@
             @method("POST")
     
             <div class="form-group">
-                <input class="form-control" type="text" name="title" id="title" value="{{ old("title") }}" placeholder="Inserisci un titolo" required maxlength="150" pattern="[A-z0-9À-ž\s]+">
+                <input class="form-control" type="text" name="title" id="title" value="{{ old("title") }}" placeholder="Inserisci un titolo" required maxlength="150" pattern="[A-Za-z0-9À-ž\s]+">
             </div>
     
             <div class="form-group">
@@ -93,40 +93,9 @@
     </div>
 </div>
 
-<script>
-    'use strict';
-
-;( function ( document, window, index )
-{
-	var inputs = document.querySelectorAll( '.inputfile' );
-	Array.prototype.forEach.call( inputs, function( input )
-	{
-		var label	 = input.nextElementSibling,
-			labelVal = label.innerHTML;
-
-		input.addEventListener( 'change', function( e )
-		{
-			var fileName = '';
-			if( this.files && this.files.length > 1 )
-				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-			else
-				fileName = e.target.value.split( '\\' ).pop();
-
-			if( fileName )
-				label.querySelector( 'span' ).innerHTML = fileName;
-			else
-				label.innerHTML = labelVal;
-		});
-
-		// Firefox bug fix
-		input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
-		input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
-	});
-}( document, window, 0 ));
-</script>
 @endsection
 
 @push('scripts')
 <script src="{{ asset("js/place-create.js") }}" defer></script>    
-    
+<script src="{{ asset("js/file-input.js") }}" defer></script>    
 @endpush

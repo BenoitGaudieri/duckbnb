@@ -1,102 +1,136 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+<div class="container-fluid">
+
     @if (session('success_message'))
-            <div class="alert alert-success">
-                {{ session('success_message')}}
-            </div>
+    <div class="alert alert-success">
+        {{ session('success_message')}}
+    </div>
     @endif
 
     @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 
-    <div class="content container">
-        <div class="pack">
-            <div class="pack-title">
-                <h2>Packages</h2>
+    <div class="pack container-fluid">
+        <div class="pack-cards container-fluid">
+            
+            <div class="pack-cards--title">
+                <h2 class="weight-light">Sponsorizza</h2>
             </div>
-            <div class="pack-packages">
-                @foreach($sponsorship as $sponsor)
-                <div class="pack-basic">
-                    <p class="pack-id">{{ $sponsor->id }}</p>        
-                    <p class="price">{{ $sponsor->price }}</p>
-                    <div class="duration">{{ $sponsor->duration }}</div>
-                    <a id="basic" href="#" class="button-dark btn-pack">Scegli</a>
-                </div>
-                @endforeach
-            </div>
-        </div>
-        <div class="payment">
-            <form method="post" id="payment-form" action="{{ route('user.sponsorships.checkout', $apartment->id) }}">
-                        @csrf
-                        <section>
-                            <label for="amount">
-                                <span class="input-label">Amount</span>
-                                <div class="input-wrapper amount-wrapper">
-                                    <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="0">
-                                </div>
-                            </label>
 
-                            <label for="pack">
-                                <span class="input-label">Pack</span>
-                                <div class="input-wrapper amount-wrapper">
-                                    <input id="pack" name="pack" type="tel" min="1" placeholder="pack" value="0">
-                                </div>
-                            </label>
-           
-                            <div class="bt-drop-in-wrapper">
-                                <div id="bt-dropin"></div>
-                            </div>
-                        </section>
-    
-                        <input id="nonce" name="payment_method_nonce" type="hidden" />
-                        <button class="button" type="submit">
-                            <span>Test Transaction</span>
-                        </button>
-            </form>
+
+            @foreach($sponsorship as $sponsor)
+            <a class="pack-cards--single pk pk-{{$loop->iteration}} pack-basic">
+                <span class="pack-cards--single--id">{{ $sponsor->id }}</span>        
+                <span class="pack-cards--single--price price"> <span class="get-price">{{ $sponsor->price }}</span>€</span>
+                <span class="pack-cards--single--duration duration">{{ $sponsor->duration }} ore</span>
+            </a>
+            @endforeach
+
         </div>
     </div>
+
+    <div class="info container-fluid">
+        <div class="info-title container">
+            <h3 class="weight-light text-main">Scegli fra i nostri pacchetti</h3>
         </div>
+        <div class="info-subtitle container">
+            <p>Metti in vetrina il tuo appartamento ed aumenta le tue vendite, grazie alle sponsorizzazioni.</p>
+        </div>
+    </div>
+
+    <div class="choice-payment container">
+        <div class="choice">
+            <h4>Hai scelto il pacchetto da 
+                {{-- Insert Price with jQuery --}}
+                <span class="choice-price text-main"></span>.
+            </h4>
+            <h5>
+                l'appartamento <span class="text-main">{{$apartment->title }}</span> sarà in sponsorizzazione per
+                {{-- Insert Duration with jQuery --}} 
+                <span class="choice-duration"></span>.
+            </h5>
+    
+            <p>Qui sotto puoi completare il pagamento.</p>
+        </div>
+    
+        <div class="payment">
+            <div class="payment--form">
+                <form method="post" id="payment-form" action="{{ route('user.sponsorships.checkout', $apartment->id) }}">
+                    @csrf
+                    <section>
+                        <label for="amount">
+                            <div class="input-wrapper amount-wrapper">
+                                <input type="hidden" id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="0">
+                            </div>
+                        </label>
         
-        <script>
+                        <label for="pack">
+                            <div class="input-wrapper amount-wrapper">
+                                <input type="hidden" id="pack" name="pack" type="tel" min="1" placeholder="pack" value="0">
+                            </div>
+                        </label>
+        
+                        <div class="bt-drop-in-wrapper">
+                            <div id="bt-dropin"></div>
+                        </div>
+                    </section>
+        
+                    <input id="nonce" name="payment_method_nonce" type="hidden" />
+                    <button class="button-main" type="submit">
+                        Paga
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
 
-            var form = document.querySelector('#payment-form');
-            var client_token = "{{ $token }}";
+  
+<script>
 
-            braintree.dropin.create({
-            authorization: client_token,
-            selector: '#bt-dropin',
-            paypal: {
-                flow: 'vault'
-            }
-            }, function (createErr, instance) {
-            if (createErr) {
-                console.log('Create Error', createErr);
-                return;
-            }
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
+    var form = document.querySelector('#payment-form');
+    var client_token = "{{ $token }}";
 
-                instance.requestPaymentMethod(function (err, payload) {
-                if (err) {
-                    console.log('Request Payment Method Error', err);
-                    return;
-                }
+    braintree.dropin.create({
+    authorization: client_token,
+    selector: '#bt-dropin',
+    paypal: {
+        flow: 'vault'
+    }
+    }, function (createErr, instance) {
+    if (createErr) {
+        console.log('Create Error', createErr);
+        return;
+    }
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-                // Add the nonce to the form and submit
-                document.querySelector('#nonce').value = payload.nonce;
-                form.submit();
-                });
-            });
-            });
-        </script>
+        instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+            console.log('Request Payment Method Error', err);
+            return;
+        }
+
+        // Add the nonce to the form and submit
+        document.querySelector('#nonce').value = payload.nonce;
+        form.submit();
+        });
+    });
+    });
+</script>
 @endsection
 
 @push('scripts')
