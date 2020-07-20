@@ -16,8 +16,19 @@ class HomeController extends Controller
         foreach ($res as $apartment) {
             
             if(($apartment->sponsorships)->isNotEmpty()) {
-                $duration = $apartment->sponsorships[0]->duration;
-
+                
+                $duration = 0;
+                $i = 0;
+                $len = count($apartment->sponsorships);
+                
+                foreach ($apartment->sponsorships as $e) {
+                    if($i == $len - 1) {
+                        $duration = $apartment->sponsorships[$i]->duration;
+                    } else {
+                        $i++;
+                    }
+                }
+                
                 foreach ($apartment->sponsorships as $sponsorship) {
                     $sponsorshipDate = $sponsorship->pivot->created_at;
                     $difference = $now->diffInDays($sponsorshipDate);
