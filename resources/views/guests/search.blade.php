@@ -75,12 +75,13 @@
 
             <div class="row" id="search-results">
                 @foreach ($apartments as $apartment)
-                    <div class="card card-apt">                <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
-                        @if($apartment->img_url == 'https://picsum.photos/200/300')
-                            <img class="img-fluid" src="{{ $apartment->img_url }}" alt="">
-                        @else
-                            <img class="img-fluid" src="{{ asset('storage/' . $apartment->img_url) }}" alt="">
-                        @endif
+                    <div class="card card-apt">
+                        <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
+                            @if($apartment->img_url == 'https://picsum.photos/200/300')
+                                <img class="img-fluid" src="{{ $apartment->img_url }}" alt="">
+                            @else
+                                <img class="img-fluid" src="{{ asset('storage/' . $apartment->img_url) }}" alt="">
+                            @endif
                         </a>
                         <div class="card-apt--location">
                             <h5 class="weight-regular">
