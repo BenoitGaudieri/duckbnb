@@ -2,17 +2,21 @@ import $ from "jquery";
 import Handlebars from "handlebars";
 
 $(document).ready(function() {
+    // Handlebars instance
     var source = $("#card-template").html();
     const template = Handlebars.compile(source);
 
+    // Algolia places instance
     const client = algoliasearch("47VSO533ZH", "eaa5d8cf24f4fb6090811993ad43f3fd");
     const index = client.initIndex("apartments");
     
+    // Catch origin coordinates
     var origin = {
         lat: $('#origin-lat').val(),
         lng: $('#origin-lng').val()
     };
 
+    // Filtering
     $(document).on('change', '.search-option', function() {
         var radius = $('#select-radius input:checked').val();
         var apartments = [];
@@ -20,6 +24,7 @@ $(document).ready(function() {
         var rooms = $("#select-rooms").val();
         var beds = $("#select-beds").val();
 
+        // Getting ids around origin point
         index
         .search("", {
             aroundLatLng: `${origin.lat}, ${origin.lng}`,
@@ -33,43 +38,17 @@ $(document).ready(function() {
             
             $("#search-results").html('');
 
-            $.ajax({
-                url: "http://127.0.0.1:8000/api/apartments/",
-                data: {
-                    id: joinApartments(apartments),
-                    services: services,
-                    rooms: rooms,
-                    beds: beds
-                },
-                success: function(data) {
-                    var results = data.response;
-                    console.log(data.response);
+            // Request data
+            var data = {
+                id: joinApartments(apartments),
+                services: services,
+                rooms: rooms,
+                beds: beds
+            }
 
-                    for (let i = 0; i < results.length; i++) {
-                        var item = results[i];
-
-                        var ctx = {
-                            id: item.id,
-                            imgUrl: item.img_url,
-                            title: item.title,
-                            price: item.price,
-                            rooms: item.room_qty,
-                            beds: item.bed_qty,
-                            bathrooms: item.bathroom_qty,
-                            sqrMeters: item.sqr_meters
-                        };
-
-                        var html = template(ctx);
-                        $("#search-results").append(html);
-                    }
-                },
-                error: function() {
-                    console.log("Errore");
-                }
-            });
-
+            // Calling Apartments API
+            ajax(data, template);
         });
-
     });
 
     $(document).on('click', '#reset', function() {
@@ -88,41 +67,18 @@ $(document).ready(function() {
             
             clearFilters();
             $("#search-results").html('');
+            
+            // Request data
+            var data = {
+                id: joinApartments(apartments),
+                services: 'all',
+                rooms: 1,
+                beds: 1
+            }
 
-            $.ajax({
-                url: "http://127.0.0.1:8000/api/apartments/",
-                data: {
-                    id: joinApartments(apartments),
-                    services: 'all',
-                    rooms: 1,
-                    beds: 1
-                },
-                success: function(data) {
-                    var results = data.response;
-                    console.log(data.response);
-
-                    for (let i = 0; i < results.length; i++) {
-                        var item = results[i];
-
-                        var ctx = {
-                            id: item.id,
-                            imgUrl: item.img_url,
-                            title: item.title,
-                            price: item.price,
-                            rooms: item.room_qty,
-                            beds: item.bed_qty,
-                            bathrooms: item.bathroom_qty,
-                            sqrMeters: item.sqr_meters
-                        };
-
-                        var html = template(ctx);
-                        $("#search-results").append(html);
-                    }
-                },
-                error: function() {
-                    console.log("Errore");
-                }
-            });
+            // Calling Apartments API
+            ajax(data, template);
+            
         });
     });
 
@@ -153,8 +109,6 @@ function getServices() {
         }
     });
 
-    
-
     if (serviceIds.length != 0) {
         var services = serviceIds.join(',');
         return services;
@@ -182,4 +136,36 @@ function clearFilters() {
     $('#select-rooms').val('1');
 
     $('#select-radius #20').prop('checked', true);
+}
+
+function ajax(data, template) {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/apartments/",
+        data: data,
+        success: function(data) {
+            var results = data.response;
+            console.log(data.response);
+
+            for (let i = 0; i < results.length; i++) {
+                var item = results[i];
+
+                var ctx = {
+                    id: item.id,
+                    imgUrl: item.img_url,
+                    title: item.title,
+                    price: item.price,
+                    rooms: item.room_qty,
+                    beds: item.bed_qty,
+                    bathrooms: item.bathroom_qty,
+                    sqrMeters: item.sqr_meters
+                };
+
+                var html = template(ctx);
+                $("#search-results").append(html);
+            }
+        },
+        error: function() {
+            console.log("Errore");
+        }
+    });
 }
