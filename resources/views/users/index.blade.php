@@ -98,6 +98,7 @@
         </div>
         <div class="dashboard-messages--msgs">
             @foreach($apartments as $apartment)
+            @if(!$apartment->messages->isEmpty())
             <div class="dashboard-messages--msgs--singleCtn">
                 
                 <div class="dashboard-messages--msgs--singleCtn--apt">
@@ -105,7 +106,6 @@
                         <h5 class="weight-light text-main">{{ $apartment->title }}</h5>
                     </div>
     
-                @if(!$apartment->messages->isEmpty())
                     @foreach($apartment->messages as $message)
                     <div class="dashboard-messages--msgs--singleCtn--apt-messages">
                         <div class="dashboard-messages--msgs--singleCtn--apt-messages--from">
@@ -121,13 +121,12 @@
                         </div>
                     </div>
                     @endforeach
-                @else 
                     <div class="dashboard-messages--msgs--singleCtn--apt-messages">
                         <p>Non ci sono messaggi per questo appartamento.</p>
                     </div>        
-                @endif
-                    </div> 
-                </div>
+                </div> 
+            </div>
+            @endif
             @endforeach
         </div>
    
