@@ -146,7 +146,7 @@ function ajax(data, template) {
             var results = data.response;
             console.log(data.response);
 
-            if(results != 'empty') {
+            if(results != 'empty' && results.length != 0) {
                 for (let i = 0; i < results.length; i++) {
                     var item = results[i];
     
