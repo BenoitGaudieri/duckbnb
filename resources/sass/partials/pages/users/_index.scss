@@ -1,5 +1,5 @@
 .dashboard {
-    padding: 50px 0;
+    padding: 50px 10px;
 
     &-nav {
         list-style: none;
@@ -22,7 +22,10 @@
     }
 
     &-apts {
-        @include flex(column);
+        @include flex();
+
+
+        flex-wrap: wrap;
         padding: 0;
 
         &--title {
@@ -43,20 +46,44 @@
         &--apt {
             @include flex($align: center);
             padding: 10px 0;
-            border-bottom: 1px solid $dark;
+            overflow-x: auto;
 
-            &:last-child {
-                border: 0;
+            @include responsive($tablet) {
+                flex-wrap: wrap;
             }
 
-            &-title {
-                width: 180px;
-                margin-right: 10px;
+            .card-apt {
+                margin: 20px 8px;
 
-                @include responsive($tablet) {
-                    width: 400px;
+                &--buttons {
+                    @include flex(row, flex-end, center);
+                    font-size: 1.4rem;
+
+                    &-visibility {
+                        
+                        .not-vis {
+                            color: $shadow;
+                        }
+
+                        .vis {
+                            color: $light-accent;
+                        }
+                    }
+
+                    &-delete {
+
+                        button {
+                            color: $dark-accent;
+                        }
+                    }
                 }
             }
         }
     }
+}
+
+
+
+.select {
+    color: $main-color;
 }

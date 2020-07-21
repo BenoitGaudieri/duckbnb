@@ -20,4 +20,5 @@ mix.js("resources/js/app.js", "public/js")
     .js("resources/js/sponsorship.js", "public/js")
     .js("resources/js/search-filtering.js", "public/js")
     .js("resources/js/file-input.js", "public/js")
+    .js("resources/js/dashboard-nav.js", "public/js")
     .sass("resources/sass/app.scss", "public/css");
