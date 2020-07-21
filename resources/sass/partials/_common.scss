@@ -40,8 +40,14 @@ input[type="submit" i] {
     background-color: transparent;
 }
 
-button:focus {
-    outline: none;
+button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+   
+    &:focus {
+        outline: none;
+    }
 }
 
 .form-control {
