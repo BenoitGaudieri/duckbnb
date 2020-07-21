@@ -10,6 +10,8 @@
                 <div class="search-act--input search-group">
                     <input id="address-input" placeholder="La tua prossima meta?"/>
                 </div>
+                <input type="hidden" id="lat" name="lat" value="">
+                <input type="hidden" id="lng" name="lng" value="">
                 <input type="hidden" id="apartmentId" name="id[]" value="">
                 <button type="submit" class="search-act--btnSubmit">
                     <ion-icon name="search-outline"></ion-icon>

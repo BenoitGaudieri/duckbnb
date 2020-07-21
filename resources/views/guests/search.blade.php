@@ -17,12 +17,15 @@ var idArr = []
         <input type="hidden" id="apartmentId" name="id[]" value="">
         <input type="submit" value="Cerca">
     </form>
-
+    <input type="hidden" id="apartmentId" name="id[]" value="">
+    @foreach($origin as $key => $value)
+        <input type="hidden" id="origin-{{ $key }}" name="origin-{{ $key }}" value="{{ $value }}">
+    @endforeach
     <div class="row justify-content-center">
         <h6>Modifica raggio di ricerca</h6>
     </div>
     <div class="row justify-content-center">
-        <form class="row" id="select-radius">
+        <form class="row search-option" id="select-radius">
             <input type="radio" name="radius" id="20" value="20000" checked>
             <label for="20">20 Km</label>
 
@@ -39,7 +42,7 @@ var idArr = []
     <button id="reset">Resetta filtri</button>
 
     <label for="select-rooms">Numero minimo di stanze</label>
-    <select name="Rooms" id="select-rooms">
+    <select class="search-option" name="Rooms" id="select-rooms">
         <option value="1">>1</option>
         <option value="2">>2</option>
         <option value="3">>3</option>
@@ -47,14 +50,14 @@ var idArr = []
     </select>
     
     <label for="select-beds">Numero minimo di letti</label>
-    <select name="Rooms" id="select-beds">
+    <select class="search-option" name="Rooms" id="select-beds">
         <option value="1">>1</option>
         <option value="2">>2</option>
         <option value="3">>3</option>
         <option value="4">>4</option>
     </select>
     
-    <div id="check-servizi">
+    <form class="search-option" id="check-servizi">
         <label for="wifi">WiFi</label>
         <input class="checkbox" type="checkbox" name="wifi" id="wifi" value="WiFi" data-id="1">
         
@@ -81,7 +84,7 @@ var idArr = []
         
         <label for="colazione">Prima Colazione</label>
         <input type="checkbox" name="colazione" id="colazione" value="Prima Colazione" data-id="9">
-    </div>
+    </form>
 
     <div class="row" id="search-results">
         @foreach ($apartments as $apartment)
