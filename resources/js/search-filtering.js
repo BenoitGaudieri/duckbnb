@@ -170,21 +170,16 @@ function joinApartments(apartments) {
 }
 
 function clearFilters() {
-    var self = $(this);
-
-    $("input:checkbox").each(function() {
-        self.prop("checked", false);
+    
+    
+    $('input:checkbox').each(function() {
+        var self = $(this);
+        self.prop('checked', false);
     });
 
-    $("select").each(function() {
-        self.val("1");
-    });
+    $('#select-beds').val('1');
 
-    $('#select-radius input').each(function() {
-        if(self.prop('checked', true)) {
-            self.prop('checked', false)
-        }
-    });
+    $('#select-rooms').val('1');
 
     $('#select-radius #20').prop('checked', true);
 }
