@@ -146,22 +146,26 @@ function ajax(data, template) {
             var results = data.response;
             console.log(data.response);
 
-            for (let i = 0; i < results.length; i++) {
-                var item = results[i];
-
-                var ctx = {
-                    id: item.id,
-                    imgUrl: item.img_url,
-                    title: item.title,
-                    price: item.price,
-                    rooms: item.room_qty,
-                    beds: item.bed_qty,
-                    bathrooms: item.bathroom_qty,
-                    sqrMeters: item.sqr_meters
-                };
-
-                var html = template(ctx);
-                $("#search-results").append(html);
+            if(results != 'empty') {
+                for (let i = 0; i < results.length; i++) {
+                    var item = results[i];
+    
+                    var ctx = {
+                        id: item.id,
+                        imgUrl: item.img_url,
+                        title: item.title,
+                        price: item.price,
+                        rooms: item.room_qty,
+                        beds: item.bed_qty,
+                        bathrooms: item.bathroom_qty,
+                        sqrMeters: item.sqr_meters
+                    };
+    
+                    var html = template(ctx);
+                    $("#search-results").append(html);
+                }
+            } else {
+                $("#search-results").append('Nessun risultato trovato')
             }
         },
         error: function() {
