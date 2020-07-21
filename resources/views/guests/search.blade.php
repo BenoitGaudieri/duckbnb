@@ -24,9 +24,9 @@
             <input type="hidden" id="origin-{{ $key }}" name="origin-{{ $key }}" value="{{ $value }}">
         @endforeach
 
+        @include('shared.handlebar')
 
         @if (!empty($apartments) && count($apartments) > 0)
-            @include('shared.handlebar')
 
             <button id="reset">Resetta filtri</button>
             
@@ -73,6 +73,12 @@
                 @endforeach
             </form>
 
+            @if(Session::has('empty'))
+                <div class="alert alert-danger">
+                    {{ Session::get('empty') }}
+                </div>
+            @endif
+
             <div class="row" id="search-results">
                 @foreach ($apartments as $apartment)
                     <div class="card card-apt">
@@ -99,6 +105,8 @@
                     </div>
                 @endforeach
             </div>
+        @else
+            <h3>Nessun risultato trovato</h3>
         @endif
     </div>
 @endsection
