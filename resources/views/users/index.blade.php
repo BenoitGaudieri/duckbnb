@@ -120,10 +120,7 @@
                             <h5 class="weight-light">{{ $message->created_at->format('d/m/Y - ' . 'H:i') }}</h5>       
                         </div>
                     </div>
-                    @endforeach
-                    <div class="dashboard-messages--msgs--singleCtn--apt-messages">
-                        <p>Non ci sono messaggi per questo appartamento.</p>
-                    </div>        
+                    @endforeach        
                 </div> 
             </div>
             @endif

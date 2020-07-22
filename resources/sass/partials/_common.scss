@@ -15,7 +15,8 @@ body {
 
 #app {
     width: 100%;
-    padding: 69px 0;
+    padding-top: 69px;
+    // padding: 69px 0;
 }
 
 h1,
@@ -40,6 +41,12 @@ input[type="submit" i] {
     background-color: transparent;
 }
 
+input[type=radio], input[type=checkbox] {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+}
+
 button {
     background: transparent;
     border: 0;
@@ -48,6 +55,12 @@ button {
     &:focus {
         outline: none;
     }
+}
+
+select {
+    border: 1px solid $dark;
+    border-radius: 4px;
+    padding: 2px 4px;
 }
 
 .form-control {
