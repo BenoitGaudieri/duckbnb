@@ -27,7 +27,7 @@
             </div>        
         </div>
         <div class="search--main container">
-            @if (!empty($apartments) && count($apartments) > 0)
+            
             <div class="search--main-filter">
                 <button id="reset">Resetta filtri</button>
                 
@@ -75,48 +75,70 @@
                 </form>
             </div>
 
-            <div class="search--main-result">
-                @if(Session::has('empty'))
-                    <div class="alert alert-danger">
-                        {{ Session::get('empty') }}
-                    </div>
-                @endif
-    
-                <div class="row" id="search-results">
-                    @foreach ($apartments as $apartment)
-                        <div class="card card-apt">
-                            <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
-                                @if($apartment->img_url == 'https://picsum.photos/200/300')
-                                    <img class="img-fluid" src="{{ $apartment->img_url }}" alt="">
-                                @else
-                                    <img class="img-fluid" src="{{ asset('storage/' . $apartment->img_url) }}" alt="">
-                                @endif
-                            </a>
-                            <div class="card-apt--location">
-                                <h5 class="weight-regular">
-                                    Recensioni 
-                                    (<span class="text-main">{{ count($apartment->reviews)}}</span>)
-                                </h5>
-                                <h5 id="address" class="weight-regular text-main"> Città </h5>
-                            </div>
-                            <div class="card-apt--title">
-                                <h4 class="weight-regular"> {{ $apartment->title }} </h4>
-                            </div>
-                            <div class="card-apt--price">
-                                <h4 class="weight-regular"> <span class="text-main weight-bold">{{ $apartment->price }}€</span> a notte</h4>
-                            </div>
+            <div class="search--main-sponsor">
+                @foreach($sponsoreds as $item)
+                    <div class="card card-apt">
+                        <a href="{{ route('show', $item->id) }}" class="card-apt--img">
+                            @if($item->img_url == 'https://picsum.photos/200/300')
+                                <img class="img-fluid" src="{{ $item->img_url }}" alt="">
+                            @else
+                                <img class="img-fluid" src="{{ asset('storage/' . $item->img_url) }}" alt="">
+                            @endif
+                        </a>
+                        <div class="card-apt--location">
+                            <h5 class="weight-regular">
+                                Recensioni 
+                                (<span class="text-main">{{ count($item->reviews)}}</span>)
+                            </h5>
+                            <h5 id="address" class="weight-regular text-main"> Città </h5>
                         </div>
-                    @endforeach
+                        <div class="card-apt--title">
+                            <h4 class="weight-regular"> {{ $item->title }} </h4>
+                        </div>
+                        <div class="card-apt--price">
+                            <h4 class="weight-regular"> <span class="text-main weight-bold">{{ $item->price }}€</span> a notte</h4>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            @if (!empty($apartments) && count($apartments) > 0)
+
+                <div class="search--main-result">
+                    <div class="row" id="search-results">
+                        @foreach ($apartments as $apartment)
+                            <div class="card card-apt">
+                                <a href="{{ route('show', $apartment->id) }}" class="card-apt--img">
+                                    @if($apartment->img_url == 'https://picsum.photos/200/300')
+                                        <img class="img-fluid" src="{{ $apartment->img_url }}" alt="">
+                                    @else
+                                        <img class="img-fluid" src="{{ asset('storage/' . $apartment->img_url) }}" alt="">
+                                    @endif
+                                </a>
+                                <div class="card-apt--location">
+                                    <h5 class="weight-regular">
+                                        Recensioni 
+                                        (<span class="text-main">{{ count($apartment->reviews)}}</span>)
+                                    </h5>
+                                    <h5 id="address" class="weight-regular text-main"> Città </h5>
+                                </div>
+                                <div class="card-apt--title">
+                                    <h4 class="weight-regular"> {{ $apartment->title }} </h4>
+                                </div>
+                                <div class="card-apt--price">
+                                    <h4 class="weight-regular"> <span class="text-main weight-bold">{{ $apartment->price }}€</span> a notte</h4>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             @else
-                <h3>Nessun risultato trovato</h3>
-            
-                
+                <div class="search--main-result">
+                    <h3>Nessun risultato trovato</h3>
+                </div>
             @endif
             
             @include('shared.handlebar')
-            </div>
-    
             
         </div>
         
