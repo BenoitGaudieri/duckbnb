@@ -36,7 +36,8 @@ class ApartmentController extends Controller
                     ->whereIn('id', $ids)
                     ->where([
                         ['room_qty', '>=', $minRooms],
-                        ['bed_qty', '>=', $minBeds]
+                        ['bed_qty', '>=', $minBeds],
+                        ['is_visible', '=', 1]
                     ])
                     ->get();
 
