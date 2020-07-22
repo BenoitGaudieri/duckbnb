@@ -1,0 +1,17 @@
+.search {
+    min-height: 100vh;
+
+    &--searching {
+        @include flex(row, center, center);
+        height: 350px;
+        width: 100%;
+        background: $main-gradient;
+
+        .search-bar {
+            transform: translate(0, 0);
+        }
+
+    }
+
+
+}

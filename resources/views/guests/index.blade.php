@@ -3,17 +3,18 @@
 @section('content')
 
     <div class="jumbotron position-relative">
-        <div class="search position-absolute">
-            <form class="search-act" action="{{ route('search.submit') }}" method="POST">
+        <div class="search-bar position-absolute">
+            <form class="search-bar--act" action="{{ route('search.submit') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="search-act--input search-group">
+                <div class="search-bar--act--input search-group">
                     <input id="address-input" placeholder="La tua prossima meta?"/>
                 </div>
                 <input type="hidden" id="lat" name="lat" value="">
                 <input type="hidden" id="lng" name="lng" value="">
                 <input type="hidden" id="apartmentId" name="id[]" value="">
-                <button type="submit" class="search-act--btnSubmit">
+                
+                <button type="submit" class="search-bar--act--btnSubmit">
                     <ion-icon name="search-outline"></ion-icon>
                 </button>
             </form>
