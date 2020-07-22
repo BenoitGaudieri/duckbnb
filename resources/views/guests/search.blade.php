@@ -26,85 +26,114 @@
                 @endforeach
             </div>        
         </div>
-        <div class="search--main container">
+        <div class="search--main container-fluid">
             
-            <div class="search--main-filter">
-                <button id="reset">Resetta filtri</button>
-                
-                <div class="row justify-content-center">
-                    <h6>Modifica raggio di ricerca</h6>
-                    <div class="row justify-content-center">
-                        <form class="row search-option" id="select-radius">
-                            <input type="radio" name="radius" id="20" value="20000" checked>
-                            <label for="20">20 Km</label>
-    
-                            <input type="radio" name="radius" id="30" value="30000">
-                            <label for="30">30 Km</label>
-    
-                            <input type="radio" name="radius" id="50" value="50000">
-                            <label for="50">50 Km</label>
-                        </form>
+            <div class="search--main-sponsor">
+                <div class="container">
+                    <div class="search--main-sponsor--title">
+                        <h2 class="weight-light text-main">Le migliori mete</h2>
+                    </div>
+                    <div class="search--main-sponsor--sponsored">
+                        @foreach($sponsoreds as $item)
+                        <div class="card card-apt">
+                            <a href="{{ route('show', $item->id) }}" class="card-apt--img">
+                                @if($item->img_url == 'https://picsum.photos/200/300')
+                                    <img class="img-fluid" src="{{ $item->img_url }}" alt="">
+                                @else
+                                    <img class="img-fluid" src="{{ asset('storage/' . $item->img_url) }}" alt="">
+                                @endif
+                            </a>
+                            <div class="card-apt--location">
+                                <h5 class="weight-regular">
+                                    Recensioni 
+                                    (<span class="text-main">{{ count($item->reviews)}}</span>)
+                                </h5>
+                                <h5 id="address" class="weight-regular text-main"> Città </h5>
+                            </div>
+                            <div class="card-apt--title">
+                                <h4 class="weight-regular"> {{ $item->title }} </h4>
+                            </div>
+                            <div class="card-apt--price">
+                                <h4 class="weight-regular"> <span class="text-main weight-bold">{{ $item->price }}€</span> a notte</h4>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
-    
-                <div class="row">
-                    <label for="select-rooms">Numero minimo di stanze</label>
-                    <select class="search-option" name="Rooms" id="select-rooms">
-                        <option value="1">>1</option>
-                        <option value="2">>2</option>
-                        <option value="3">>3</option>
-                        <option value="4">>4</option>
-                    </select>
-                </div>
                 
-                <div class="row">
-                    <label for="select-beds">Numero minimo di letti</label>
-                    <select class="search-option" name="Rooms" id="select-beds">
-                        <option value="1">>1</option>
-                        <option value="2">>2</option>
-                        <option value="3">>3</option>
-                        <option value="4">>4</option>
-                    </select>
-                </div>
-    
-                <form class="search-option" id="check-servizi">
-                    @foreach($services as $service)
-                        <input type="checkbox" name="{{ $service->name }}" id="{{ $service->name }}" value="{{ $service->name }}" data-id="{{ $service->id }}">
-                        <label for="{{ $service->name }}">{{ $service->name }}</label>        
-                    @endforeach
-                </form>
             </div>
 
-            <div class="search--main-sponsor">
-                @foreach($sponsoreds as $item)
-                    <div class="card card-apt">
-                        <a href="{{ route('show', $item->id) }}" class="card-apt--img">
-                            @if($item->img_url == 'https://picsum.photos/200/300')
-                                <img class="img-fluid" src="{{ $item->img_url }}" alt="">
-                            @else
-                                <img class="img-fluid" src="{{ asset('storage/' . $item->img_url) }}" alt="">
-                            @endif
-                        </a>
-                        <div class="card-apt--location">
-                            <h5 class="weight-regular">
-                                Recensioni 
-                                (<span class="text-main">{{ count($item->reviews)}}</span>)
-                            </h5>
-                            <h5 id="address" class="weight-regular text-main"> Città </h5>
-                        </div>
-                        <div class="card-apt--title">
-                            <h4 class="weight-regular"> {{ $item->title }} </h4>
-                        </div>
-                        <div class="card-apt--price">
-                            <h4 class="weight-regular"> <span class="text-main weight-bold">{{ $item->price }}€</span> a notte</h4>
+            <div class="search--main-filter">
+                <div class="search--main-filter--title">
+                    <h3 class="weight-light text-light">Filtra la tua ricerca</h3>
+                    <button class="button-shadow" id="reset">Resetta filtri</button>
+                </div>
+
+                <div class="search--main-filter--ctn">
+                    
+                    <div class="search--main-filter--ctn--rooms">
+                        <label for="select-rooms">Stanze (minimo)</label>
+                        <select class="search-option" name="Rooms" id="select-rooms">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search--main-filter--ctn--radius">
+                        <p>Raggio di ricerca</p>
+                        <div class="">
+                            <form class="row search-option form-radius" id="select-radius">
+
+                                <div class="form-radius--single">
+                                    <label for="20">20 Km</label>
+                                    <input type="radio" name="radius" id="20" value="20000" checked>
+                                </div>
+
+                                <div class="form-radius--single">
+                                    <label for="30">30 Km</label>
+                                    <input type="radio" name="radius" id="30" value="30000">
+                                </div>
+                                <div class="form-radius--single">
+                                    <label for="50">50 Km</label>
+                                    <input type="radio" name="radius" id="50" value="50000">
+                                </div>
+                                
+        
+                            </form>
                         </div>
                     </div>
-                @endforeach
+
+                    <div class="search--main-filter--ctn--beds">
+                        <label for="select-beds">Letti (minimo)</label>
+                        <select class="search-option" name="Rooms" id="select-beds">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="search--main-filter--services">
+                    <form class="search-option form-service" id="check-servizi">
+                        @foreach($services as $service)
+                            <div class="form-service--single">
+                                <label for="{{ $service->name }}">{{ $service->name }}</label>        
+                                <input type="checkbox" name="{{ $service->name }}" id="{{ $service->name }}" value="{{ $service->name }}" data-id="{{ $service->id }}">
+                            </div>
+                        @endforeach
+                    </form>
+                </div>
+
             </div>
+            
 
             @if (!empty($apartments) && count($apartments) > 0)
 
-                <div class="search--main-result">
+                <div class="search--main-result container">
+                    <h2 class="weight-light text-main">Risultati ricerca</h2>
                     <div class="row" id="search-results">
                         @foreach ($apartments as $apartment)
                             <div class="card card-apt">
@@ -133,7 +162,7 @@
                     </div>
                 </div>
             @else
-                <div class="search--main-result">
+                <div class="search--main-result no-result container">
                     <h3>Nessun risultato trovato</h3>
                 </div>
             @endif

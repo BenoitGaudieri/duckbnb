@@ -109,6 +109,7 @@
 
 .choice-payment {
     @include flex(column, flex-start, center);
+    padding-bottom: 50px;
 
     .choice {
         display: none; // jQuery

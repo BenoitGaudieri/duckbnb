@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="container-fluid">
+<div class="container-fluid sponsorship-page">
 
     @if (session('success_message'))
     <div class="alert alert-success">
