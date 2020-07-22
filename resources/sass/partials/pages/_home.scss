@@ -7,44 +7,7 @@
     background-size: cover;
     background-position: center center;
     border-radius: 0;
-
-    .search {
-        min-width: 250px;
-        max-width: 400px;
-        height: 50px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        @include responsive($tablet) {
-            min-width: 350px;
-        }
-
-        &-act {
-            position: relative;
-
-            &--btnSubmit {
-                position: absolute;
-                top: 8px;
-                left: 10px;
-                background: transparent;
-                border: none;
-                color: $shadow;
-            }
-        }
-
-        // Algolia input
-        .ap-input {
-            padding-left: 45px;
-            border: none;
-            border-radius: 30px;    
-            background: rgb(255 255 255 / 86%);
-            font-size: 0.8rem;
-        }
-    }
 }
-
-
 
 .sponsor-section {
 

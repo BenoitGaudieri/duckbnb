@@ -16,10 +16,12 @@
 @import 'partials/components/card-apt';
 @import 'partials/components/review-apt';
 @import 'partials/components/input-file';
+@import 'partials/components/search-bar';
 
 // Pages Guest
 @import 'partials/pages/home';
 @import 'partials/pages/show';
+@import 'partials/pages/search-page.scss';
 
 // Pages User
 @import 'partials/pages/users/index';
