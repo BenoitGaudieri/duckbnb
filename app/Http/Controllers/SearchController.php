@@ -97,7 +97,7 @@ class SearchController extends Controller
             $ids = $request->id[0];
             $array = explode(',', $ids);
 
-            $apartments = Apartment::all()->whereIn("id", $array);
+            $apartments = Apartment::whereIn("id", $array)->where('is_visible', '<>', 0)->get();
 
             return view('guests.search', compact('apartments', 'origin', 'services', 'sponsoreds'));
         } else {
