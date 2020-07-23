@@ -30,3 +30,11 @@ require("./bootstrap");
 // const app = new Vue({
 //     el: '#app',
 // });
+
+// Open/Close Hamburger Menu
+const hamburger = document.querySelector(".main-nav--hamburger");
+const navLinks = document.querySelector(".main-nav--links");
+
+hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+});
