@@ -1,6 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/js/dashboard-nav.js": "/js/dashboard-nav.js",
+    "/js/file-input.js": "/js/file-input.js",
     "/js/place-create.js": "/js/place-create.js",
     "/js/search.js": "/js/search.js",
     "/js/search-filtering.js": "/js/search-filtering.js",

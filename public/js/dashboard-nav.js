@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -50992,51 +50992,51 @@ try {
 
 /***/ }),
 
-/***/ "./resources/js/search.js":
-/*!********************************!*\
-  !*** ./resources/js/search.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./resources/js/dashboard-nav.js":
+/*!***************************************!*\
+  !*** ./resources/js/dashboard-nav.js ***!
+  \***************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/**
- * GEOLOC
- */
 
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  var aptNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.dashboard-nav--link'); // Get Nav Link
 
-var client = algoliasearch("47VSO533ZH", "eaa5d8cf24f4fb6090811993ad43f3fd");
-var index = client.initIndex("apartments"); // Algolia places
+  var aptsCtn = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.dashboard-apts'); // Get Apartments Container
 
-var placesAutocomplete = places({
-  appId: "pl9UU6OYE3WK",
-  apiKey: "37d301cd4aac7a421b9138b33579f801",
-  container: document.querySelector("#address-input"),
-  language: "it",
-  aroundLatLngViaIP: true,
-  useDeviceLocation: true
-});
-placesAutocomplete.on("change", changeHandle);
+  var msgsCtn = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.dashboard-messages'); // Get Messages Container
 
-function changeHandle(e) {
-  var lat = e.suggestion.latlng.lat;
-  var lng = e.suggestion.latlng.lng;
-  var apts = [];
-  index.search("", {
-    aroundLatLng: "".concat(lat, ", ").concat(lng),
-    // aroundRadius: 1000000 // 1000 km
-    aroundRadius: 20000 // 20 km
-
-  }).then(function (_ref) {
-    var hits = _ref.hits;
-    hits.forEach(function (item) {
-      apts.push(item["id"]);
-    });
-    document.getElementById("apartmentId").value = apts;
-    document.getElementById("lat").value = lat;
-    document.getElementById("lng").value = lng;
-    console.log(apts);
+  console.log(aptNav);
+  console.log(aptsCtn);
+  console.log(msgsCtn);
+  aptNav.click(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass('apt')) {
+      // Select Color Label
+      selectNav(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
+      aptsCtn.show();
+      msgsCtn.hide();
+    } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass('msg')) {
+      // Select Color Label
+      selectNav(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
+      msgsCtn.show();
+      aptsCtn.hide();
+    }
   });
+}); // Function 
+
+function selectNav(selected) {
+  if (!selected.hasClass('select')) {
+    selected.siblings().removeClass('select');
+    selected.addClass('select');
+  }
 }
 
 /***/ }),
@@ -51052,14 +51052,14 @@ function changeHandle(e) {
 
 /***/ }),
 
-/***/ 4:
-/*!**************************************!*\
-  !*** multi ./resources/js/search.js ***!
-  \**************************************/
+/***/ 10:
+/*!*********************************************!*\
+  !*** multi ./resources/js/dashboard-nav.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\search.js */"./resources/js/search.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\dashboard-nav.js */"./resources/js/dashboard-nav.js");
 
 
 /***/ })

@@ -48491,7 +48491,7 @@ function printGraph(views, totalViews) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\luigi\Desktop\Progetto\duckbnb\resources\js\views-chart.js */"./resources/js/views-chart.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\views-chart.js */"./resources/js/views-chart.js");
 
 
 /***/ })

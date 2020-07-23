@@ -63,7 +63,11 @@
             @endif
             <h4 class="section-title weight-light">Dashboard Proprietario</h4>
             <div class="dashboard-ctas">
-                <a class="dashboard-ctas--btn button-main" href="{{ route('user.sponsorships', $apartment->id) }}">Sponsorizza</a>
+                @if($check)
+                    <button class="dashboard-ctas--btn button-main" disabled >Sponsorizzazione attiva</button>
+                @else
+                    <a class="dashboard-ctas--btn button-main" href="{{ route('user.sponsorships', $apartment->id) }}">Sponsorizza</a>
+                @endif
                 <a class="dashboard-ctas--btn button-light" href="{{ route('user.apartments.edit', $apartment->id) }}">Modifica</a>
                 <a class=" dashboard-ctas--btn button-dark" href="{{ route('user.stats', $apartment->id) }}">Statistiche</a> 
             

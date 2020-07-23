@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -50992,52 +50992,38 @@ try {
 
 /***/ }),
 
-/***/ "./resources/js/search.js":
-/*!********************************!*\
-  !*** ./resources/js/search.js ***!
-  \********************************/
+/***/ "./resources/js/file-input.js":
+/*!************************************!*\
+  !*** ./resources/js/file-input.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/**
- * GEOLOC
- */
 
+'use strict';
 
-var client = algoliasearch("47VSO533ZH", "eaa5d8cf24f4fb6090811993ad43f3fd");
-var index = client.initIndex("apartments"); // Algolia places
+;
 
-var placesAutocomplete = places({
-  appId: "pl9UU6OYE3WK",
-  apiKey: "37d301cd4aac7a421b9138b33579f801",
-  container: document.querySelector("#address-input"),
-  language: "it",
-  aroundLatLngViaIP: true,
-  useDeviceLocation: true
-});
-placesAutocomplete.on("change", changeHandle);
+(function (document, window, index) {
+  var inputs = document.querySelectorAll('.inputfile');
+  Array.prototype.forEach.call(inputs, function (input) {
+    var label = input.nextElementSibling,
+        labelVal = label.innerHTML;
+    input.addEventListener('change', function (e) {
+      var fileName = '';
+      if (this.files && this.files.length > 1) fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);else fileName = e.target.value.split('\\').pop();
+      if (fileName) label.querySelector('span').innerHTML = fileName;else label.innerHTML = labelVal;
+    }); // Firefox bug fix
 
-function changeHandle(e) {
-  var lat = e.suggestion.latlng.lat;
-  var lng = e.suggestion.latlng.lng;
-  var apts = [];
-  index.search("", {
-    aroundLatLng: "".concat(lat, ", ").concat(lng),
-    // aroundRadius: 1000000 // 1000 km
-    aroundRadius: 20000 // 20 km
-
-  }).then(function (_ref) {
-    var hits = _ref.hits;
-    hits.forEach(function (item) {
-      apts.push(item["id"]);
+    input.addEventListener('focus', function () {
+      input.classList.add('has-focus');
     });
-    document.getElementById("apartmentId").value = apts;
-    document.getElementById("lat").value = lat;
-    document.getElementById("lng").value = lng;
-    console.log(apts);
+    input.addEventListener('blur', function () {
+      input.classList.remove('has-focus');
+    });
   });
-}
+})(document, window, 0);
 
 /***/ }),
 
@@ -51052,14 +51038,14 @@ function changeHandle(e) {
 
 /***/ }),
 
-/***/ 4:
-/*!**************************************!*\
-  !*** multi ./resources/js/search.js ***!
-  \**************************************/
+/***/ 9:
+/*!******************************************!*\
+  !*** multi ./resources/js/file-input.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\search.js */"./resources/js/search.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\file-input.js */"./resources/js/file-input.js");
 
 
 /***/ })
