@@ -72,7 +72,7 @@
             
             <div class="form-group">
                 <label for="address-input">Indirizzo</label>
-                <input id="address-input" placeholder="Aggiungi l'indirizzo completo"/>
+                <input id="address-input" class="form" placeholder="Aggiungi l'indirizzo completo"/>
                 <span id="coords"></span>
             </div>
             

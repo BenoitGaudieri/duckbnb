@@ -1,0 +1,22 @@
+.registration,
+.login {
+    height: calc(100vh - 69px);
+    padding-top: 40px;
+}
+
+// Login
+
+.login {
+
+    .form-check {
+        @include flex($align: center);
+    }
+
+    .form-check-input {
+        margin-top: 0;
+    }
+
+    .form-check-label {
+        margin-left: 10px;
+    }
+}

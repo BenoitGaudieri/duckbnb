@@ -14,14 +14,17 @@
 @import 'partials/components/header';
 @import 'partials/components/footer';
 @import 'partials/components/card-apt';
-@import 'partials/components/review-apt';
 @import 'partials/components/input-file';
 @import 'partials/components/search-bar';
 
 // Pages Guest
-@import 'partials/pages/home';
-@import 'partials/pages/show';
-@import 'partials/pages/search-page.scss';
+@import 'partials/pages/guests/home';
+@import 'partials/pages/guests/show';
+@import 'partials/pages/guests/search-page.scss';
+
+// Auth
+@import 'partials/pages/auth/auth.scss';
+
 
 // Pages User
 @import 'partials/pages/users/index';

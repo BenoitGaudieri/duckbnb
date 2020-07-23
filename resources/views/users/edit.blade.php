@@ -82,7 +82,7 @@
 
             <div class="form-group">
                 <label for="address-input">Indirizzo</label>
-                <input id="address-input" placeholder="Modifica indirizzo completo"/>
+                <input id="address-input" class="form" placeholder="Modifica indirizzo completo"/>
             </div>
     
             <div class="edit--form--services">

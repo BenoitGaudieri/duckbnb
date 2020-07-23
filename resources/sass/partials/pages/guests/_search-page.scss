@@ -63,14 +63,6 @@
                         }
                     }
                 }
-
-                &--rooms {
-
-                }
-
-                &--beds {
-
-                }
             }
 
             &--services {
@@ -87,7 +79,7 @@
 
                     &--single {
                         @include flex(column, center, center);
-                        min-width: 130px;
+                        min-width: 165px;
                         padding: 15px;
                     }
                 }
