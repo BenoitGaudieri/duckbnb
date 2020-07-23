@@ -80,12 +80,12 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //salvare in db
+        $check = false;
         if(Auth::id() <> $apartment['user_id']) {
             $apartment['views'] += 1;
             $saved = $apartment->save();
         }
-        return view("guests.show", compact("apartment"));
+        return view("guests.show", compact("apartment", "check"));
     }
 
     /**

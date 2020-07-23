@@ -16096,89 +16096,113 @@ __webpack_require__.r(__webpack_exports__);
 
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
-  var source = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#card-template').html();
-  var template = handlebars__WEBPACK_IMPORTED_MODULE_1___default.a.compile(source);
-  var apartments = getIds();
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'input:checkbox', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-results').html('');
-    callApi(apartments, template);
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', 'select', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-results').html('');
-    callApi(apartments, template);
+  // Handlebars instance
+  var source = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#card-template").html();
+  var template = handlebars__WEBPACK_IMPORTED_MODULE_1___default.a.compile(source); // Algolia places instance
+
+  var client = algoliasearch("47VSO533ZH", "eaa5d8cf24f4fb6090811993ad43f3fd");
+  var index = client.initIndex("apartments"); // Catch origin coordinates
+
+  var origin = {
+    lat: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#origin-lat').val(),
+    lng: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#origin-lng').val()
+  }; // Filtering
+
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '.search-option', function () {
+    var radius = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select-radius input:checked').val();
+    var apartments = [];
+    var services = getServices();
+    var rooms = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#select-rooms").val();
+    var beds = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#select-beds").val(); // Getting ids around origin point
+
+    index.search("", {
+      aroundLatLng: "".concat(origin.lat, ", ").concat(origin.lng),
+      // aroundRadius: 1000000 // 1000 km
+      aroundRadius: radius // 20 km
+
+    }).then(function (_ref) {
+      var hits = _ref.hits;
+      hits.forEach(function (item) {
+        apartments.push(item["id"]);
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-results").html(''); // Request data
+
+      var data = {
+        id: joinApartments(apartments),
+        services: services,
+        rooms: rooms,
+        beds: beds
+      }; // Calling Apartments API
+
+      ajax(data, template);
+    });
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#reset', function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-results').html('');
-    clearFilters();
-    resetCall(apartments, template);
+    var apartments = [];
+    index.search("", {
+      aroundLatLng: "".concat(origin.lat, ", ").concat(origin.lng),
+      // aroundRadius: 1000000 // 1000 km
+      aroundRadius: 20000 // 20 km
+
+    }).then(function (_ref2) {
+      var hits = _ref2.hits;
+      hits.forEach(function (item) {
+        apartments.push(item["id"]);
+      });
+      clearFilters();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-results").html(''); // Request data
+
+      var data = {
+        id: joinApartments(apartments),
+        services: 'all',
+        rooms: 1,
+        beds: 1
+      }; // Calling Apartments API
+
+      ajax(data, template);
+    });
   });
 }); // <--- End Ready
 
 /* FUNCTIONS */
 
-function callApi(apartments, template) {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
-    url: 'http://127.0.0.1:8000/api/apartments/',
-    data: dataCompile(apartments),
-    success: function success(res) {
-      appendResults(res, template);
-    },
-    error: function error() {
-      console.log('Errore');
-    }
-  });
-}
-
 function getServices() {
-  var services = [];
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input:checkbox').each(function () {
+  var serviceIds = [];
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("input:checkbox").each(function () {
     var self = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    var serviceId = self.attr('data-id');
+    var serviceId = self.attr("data-id");
 
-    if (self.prop('checked') == true) {
-      console.log('Checked');
+    if (self.prop("checked") == true) {
+      console.log("Checked");
 
-      if (!services.includes(serviceId)) {
-        services.push(serviceId);
+      if (!serviceIds.includes(serviceId)) {
+        serviceIds.push(serviceId);
       }
     } else {
-      console.log('Unchecked');
+      console.log("Unchecked");
 
-      if (services.includes(serviceId)) {
-        var index = services.indexOf(serviceId);
+      if (serviceIds.includes(serviceId)) {
+        var index = serviceIds.indexOf(serviceId);
 
         if (index > -1) {
-          services.splice(index);
+          serviceIds.splice(index);
         }
       }
     }
   });
 
-  if (services.length != 0) {
+  if (serviceIds.length != 0) {
+    var services = serviceIds.join(',');
     return services;
   } else {
-    services.push('all');
+    services = "all";
     return services;
   }
 }
 
-function getIds() {
-  var ids = [];
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.card').each(function () {
-    ids.push(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-id'));
-  });
-  return ids.join(',');
-}
-
-function dataCompile(apartments) {
-  var data = {
-    id: apartments,
-    services: getServices().join(','),
-    rooms: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select-rooms').val(),
-    beds: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select-beds').val()
-  };
-  console.log(data);
-  return data;
+function joinApartments(apartments) {
+  var result = apartments.join(',');
+  return result;
 }
 
 function clearFilters() {
@@ -16186,47 +16210,43 @@ function clearFilters() {
     var self = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     self.prop('checked', false);
   });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('select').each(function () {
-    var self = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    self.val('1');
-  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select-beds').val('1');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select-rooms').val('1');
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select-radius #20').prop('checked', true);
 }
 
-function resetCall(apartments, template) {
+function ajax(data, template) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
-    url: 'http://127.0.0.1:8000/api/apartments/',
-    data: {
-      id: apartments,
-      services: 'all',
-      rooms: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select-rooms').val(),
-      beds: jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select-beds').val()
-    },
-    success: function success(res) {
-      appendResults(res, template);
+    url: "http://127.0.0.1:8000/api/apartments/",
+    data: data,
+    success: function success(data) {
+      var results = data.response;
+      console.log(data.response);
+
+      if (results != 'empty' && results.length != 0) {
+        for (var i = 0; i < results.length; i++) {
+          var item = results[i];
+          var ctx = {
+            id: item.id,
+            imgUrl: item.img_url,
+            title: item.title,
+            price: item.price,
+            rooms: item.room_qty,
+            beds: item.bed_qty,
+            bathrooms: item.bathroom_qty,
+            sqrMeters: item.sqr_meters
+          };
+          var html = template(ctx);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-results").append(html);
+        }
+      } else {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-results").append('Nessun risultato trovato');
+      }
     },
     error: function error() {
-      console.log('Errore');
+      console.log("Errore");
     }
   });
-}
-
-function appendResults(data, template) {
-  var results = data.response;
-
-  for (var i = 0; i < results.length; i++) {
-    var item = results[i];
-    var ctx = {
-      imgUrl: item.img_url,
-      title: item.title,
-      price: item.price,
-      rooms: item.room_qty,
-      beds: item.bed_qty,
-      bathrooms: item.bathroom_qty,
-      sqrMeters: item.sqr_meters
-    };
-    var html = template(ctx);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#search-results').append(html);
-  }
 }
 
 /***/ }),
@@ -16238,7 +16258,7 @@ function appendResults(data, template) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\luigi\Desktop\Progetto\duckbnb\resources\js\search-filtering.js */"./resources/js/search-filtering.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\duckbnb\resources\js\search-filtering.js */"./resources/js/search-filtering.js");
 
 
 /***/ })
