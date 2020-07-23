@@ -22,9 +22,7 @@
     }
 
     &-apts {
-        @include flex();
-
-
+        @include flex(column);
         flex-wrap: wrap;
         padding: 0;
 

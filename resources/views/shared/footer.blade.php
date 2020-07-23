@@ -12,10 +12,15 @@
             </div>
         </div>
         <ul class="main-footer--ctn-menu">
-            <li><a href="">Menu</a></li>
-            <li><a href="">Menu</a></li>
-            <li><a href="">Menu</a></li>
-            <li><a href="">Menu</a></li>
+            @Auth 
+                <li><a href="{{ route('user.apartments.index') }}">Dashboard</a></li>     
+            @else
+                <li><a href="{{ route('login') }}">Login</a></li>
+                <li><a href="{{ route('register') }}">Iscriviti</a></li>
+            @endauth
+            <li><a href="{{ url('/') }}">Home</a></li>
+            <li><a href="{{ route("search") }}">Cerca</a></li>
+            <li><a href="">About</a></li>
         </ul>
     </div>
 </footer>

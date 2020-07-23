@@ -86,8 +86,10 @@
                     </div>    
                 </div>
                 @endforeach
-            @else 
-                <p>Non hai nessun appartamento, aggiungine uno!</p>
+            @else
+                <div class="no-apt">
+                    <p>Non hai nessun appartamento, aggiungine uno!</p>
+                </div>
             @endif
         </div>
     </div>
