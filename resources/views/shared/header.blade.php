@@ -35,12 +35,12 @@
 
         {{-- Right Menu --}}
         <div class="main-nav--hamburger">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
+            <div class="line l1"></div>
+            <div class="line l2"></div>
+            <div class="line l3"></div>
         </div>
         <ul class="main-nav--links navbar-nav ml-auto">
-            <li class="nav-item mr-2">
+            <li class="nav-item">
                 <a href="{{ route("search") }}" class="nav-link">Cerca</a>
             </li>
             <!-- Authentication Links -->
@@ -84,10 +84,6 @@
                             @endif
                         </div>
                     </span>
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                    </div>
                 </li>
             @endguest
         </ul>
