@@ -3,7 +3,10 @@ require("./bootstrap");
 /**
  * GEOLOC
  */
-const client = algoliasearch("NWETNAHZK6", "74f79f9cd51ac246370b92525271c814");
+const client = algoliasearch(
+    process.env.MIX_ALGOLIA_APP_ID,
+    process.env.MIX_ALGOLIA_SECRET
+);
 const index = client.initIndex("apartments");
 
 // Algolia places
@@ -36,6 +39,6 @@ function changeHandle(e) {
             document.getElementById("apartmentId").value = apts;
             document.getElementById("lat").value = lat;
             document.getElementById("lng").value = lng;
-            console.log(apts);
+            // console.log(apts);
         });
 }

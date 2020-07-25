@@ -1,51 +1,38 @@
-import $ from 'jquery';
+import $ from "jquery";
 require("./bootstrap");
 
-$(document).ready(function() { 
+$(document).ready(function() {
+    const aptNav = $(".dashboard-nav--link"); // Get Nav Link
+    const aptsCtn = $(".dashboard-apts"); // Get Apartments Container
+    const msgsCtn = $(".dashboard-messages"); // Get Messages Container
 
-    const aptNav = $('.dashboard-nav--link'); // Get Nav Link
-    const aptsCtn = $('.dashboard-apts'); // Get Apartments Container
-    const msgsCtn = $('.dashboard-messages'); // Get Messages Container
+    // console.log(aptNav);
+    // console.log(aptsCtn);
+    // console.log(msgsCtn);
 
-    console.log(aptNav);
-    console.log(aptsCtn);
-    console.log(msgsCtn);
-    
-    aptNav.click( function() {
-
-        if($(this).hasClass('apt')) {
-            
+    aptNav.click(function() {
+        if ($(this).hasClass("apt")) {
             // Select Color Label
-            selectNav($(this))
-        
+            selectNav($(this));
+
             aptsCtn.show();
             msgsCtn.hide();
-        } else if ($(this).hasClass('msg')) {
-            
+        } else if ($(this).hasClass("msg")) {
             // Select Color Label
-            selectNav($(this))
+            selectNav($(this));
 
             msgsCtn.show();
             aptsCtn.hide();
         }
-       
     });
-
-
 });
 
-// Function 
+// Function
 
 function selectNav(selected) {
+    if (!selected.hasClass("select")) {
+        selected.siblings().removeClass("select");
 
-    if(! selected.hasClass('select')) {
-                
-        selected.siblings().removeClass('select');
-        
-        selected.addClass('select');
+        selected.addClass("select");
     }
 }
-
-
-
-    

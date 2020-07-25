@@ -14,7 +14,7 @@ selectRooms.change(function() {
             .eq(i)
             .find(".rooms")
             .text();
-        console.log(text);
+        // console.log(text);
 
         if (selectRooms.val()) {
             if (text != selectRooms.val()) {
@@ -29,13 +29,13 @@ selectRooms.change(function() {
 $('input[type="checkbox"]').click(function() {
     if ($(this).prop("checked") == true) {
         var selectedService = $(this).val();
-        console.log(selectedService);
+        // console.log(selectedService);
 
         for (let i = 0; i < results.length - 1; i++) {
             var services = $(".card")
                 .eq(i)
                 .find(".nome-servizio");
-            console.log(services.length);
+            // console.log(services.length);
 
             for (let s = 0; s < services.length; s++) {
                 var servizio = $(".card")
@@ -43,13 +43,13 @@ $('input[type="checkbox"]').click(function() {
                     .find(".nome-servizio")
                     .eq(s)
                     .text();
-                console.log("Servizio:", servizio);
+                // console.log("Servizio:", servizio);
 
                 if (servizio == selectedService) {
                     $(".card")
                         .eq(i)
                         .show();
-                    console.log("ja");
+                    // console.log("ja");
                 } else {
                     $(".card")
                         .eq(i)
@@ -58,7 +58,7 @@ $('input[type="checkbox"]').click(function() {
             }
         }
     } else if ($(this).prop("checked") == false) {
-        console.log("Checkbox is unchecked.");
+        // console.log("Checkbox is unchecked.");
     }
 });
 
@@ -76,7 +76,7 @@ $(document).ready(function() {
         "//" +
         window.location.host +
         "/api/apartments/api";
-    console.log(apiUrl);
+    // console.log(apiUrl);
     // "http://127.0.0.1:8000/api/apartments/api";
 
     // HANDLEBARS
@@ -91,17 +91,17 @@ $(document).ready(function() {
     filter.on("click", function(e) {
         e.preventDefault();
 
-        console.log("From Blade:", idArr.join());
+        // console.log("From Blade:", idArr.join());
 
         var arrInString = idArr.join();
-        console.log("Array in stringa: ", arrInString);
+        // console.log("Array in stringa: ", arrInString);
         var urlCombo = `${apiUrl}?filter=/${arrInString}`;
-        console.log(urlCombo);
+        // console.log(urlCombo);
 
         fetch(urlCombo)
             .then(response => response.json())
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
             });
 
         $.ajax({
@@ -113,7 +113,7 @@ $(document).ready(function() {
         })
             .done(function(res) {
                 if (res.length > 0) {
-                    console.log(res);
+                    // console.log(res);
                     // clean
                     // container.html("");
                     // for (let i = 0; i < res.response.length; i++) {
@@ -133,13 +133,11 @@ $(document).ready(function() {
                     //     container.append(output);
                     // }
                 } else {
-                    console.log(res.error);
+                    // console.log(res.error);
                 }
             })
             .fail(function(err) {
-                console.log("Error:", err);
+                // console.log("Error:", err);
             });
     });
-
-    
 }); //end ready

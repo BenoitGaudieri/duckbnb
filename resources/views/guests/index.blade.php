@@ -62,6 +62,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3.31/algoliasearchLite.min.js"></script>
     <script src="{{ asset("js/search.js") }}" defer></script>
     <script src="{{ asset("js/select.js") }}" defer></script>
     <script src="{{ asset("js/reverse-geo.js") }}" defer></script>

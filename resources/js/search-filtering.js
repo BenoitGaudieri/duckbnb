@@ -1,4 +1,5 @@
 require("./bootstrap");
+import cities from "./reverse-geo.js";
 
 $(document).ready(function() {
     // Handlebars instance
@@ -7,8 +8,8 @@ $(document).ready(function() {
 
     // Algolia places instance
     const client = algoliasearch(
-        "NWETNAHZK6",
-        "74f79f9cd51ac246370b92525271c814"
+        process.env.MIX_ALGOLIA_APP_ID,
+        process.env.MIX_ALGOLIA_SECRET
     );
     const index = client.initIndex("apartments");
 
@@ -94,12 +95,12 @@ function getServices() {
         var serviceId = self.attr("data-id");
 
         if (self.prop("checked") == true) {
-            console.log("Checked");
+            // console.log("Checked");
             if (!serviceIds.includes(serviceId)) {
                 serviceIds.push(serviceId);
             }
         } else {
-            console.log("Unchecked");
+            // console.log("Unchecked");
             if (serviceIds.includes(serviceId)) {
                 var index = serviceIds.indexOf(serviceId);
                 if (index > -1) {
@@ -142,7 +143,7 @@ function ajax(data, template) {
         data: data,
         success: function(data) {
             var results = data.response;
-            console.log(data.response);
+            // console.log(data.response);
 
             if (results != "empty" && results.length != 0) {
                 for (let i = 0; i < results.length; i++) {
@@ -156,18 +157,21 @@ function ajax(data, template) {
                         rooms: item.room_qty,
                         beds: item.bed_qty,
                         bathrooms: item.bathroom_qty,
-                        sqrMeters: item.sqr_meters
+                        sqrMeters: item.sqr_meters,
+                        lat: item.lat,
+                        lng: item.lng
                     };
 
                     var html = template(ctx);
                     $("#search-results").append(html);
                 }
+                cities();
             } else {
                 $("#search-results").append("Nessun risultato trovato");
             }
         },
         error: function() {
-            console.log("Errore");
+            // console.log("Errore");
         }
     });
 }

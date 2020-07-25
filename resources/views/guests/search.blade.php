@@ -48,7 +48,7 @@
                                     Recensioni 
                                     (<span class="text-main">{{ count($item->reviews)}}</span>)
                                 </h5>
-                                <h5 id="address" class="weight-regular text-main"> Città </h5>
+                                <h5 id="address" class="weight-regular text-main" data-lat="{{ $item->lat }}" data-lng="{{ $item->lng }}"> Città </h5>
                             </div>
                             <div class="card-apt--title">
                                 <h4 class="weight-regular"> {{ $item->title }} </h4>
