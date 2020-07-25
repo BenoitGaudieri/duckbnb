@@ -3,7 +3,10 @@ require("./bootstrap");
 /**
  * GEOLOC
  */
-const client = algoliasearch("47VSO533ZH", "eaa5d8cf24f4fb6090811993ad43f3fd");
+const client = algoliasearch(
+    process.env.MIX_ALGOLIA_APP_ID,
+    process.env.MIX_ALGOLIA_SECRET
+);
 const index = client.initIndex("apartments");
 
 // Algolia places
