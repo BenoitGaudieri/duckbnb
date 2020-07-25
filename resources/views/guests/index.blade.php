@@ -43,7 +43,7 @@
                                 Recensioni 
                                 (<span class="text-main">{{ count($apt->reviews)}}</span>)
                             </h5>
-                            <h5 id="address" class="weight-regular text-main"> Città </h5>
+                            <h5 id="address" class="weight-regular text-main" data-lat="{{ $apt->lat }}" data-lng="{{ $apt->lng }}"> Città </h5>
                         </div>
                         <div class="card-apt--title">
                             <h4 class="weight-regular"> {{ $apt->title }} </h4>
@@ -62,6 +62,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3.31/algoliasearchLite.min.js"></script>
     <script src="{{ asset("js/search.js") }}" defer></script>
     <script src="{{ asset("js/select.js") }}" defer></script>
+    <script src="{{ asset("js/reverse-geo.js") }}" defer></script>
 @endpush

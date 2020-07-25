@@ -8,7 +8,7 @@
                 Recensioni 
                 
             </h5>
-            <h5 id="address" class="weight-regular text-main"> Città </h5>
+            <h5 id="address" class="weight-regular text-main" data-lat="@{{ lat }}" data-lng="@{{ lng }}"> Città </h5>
         </div>
         <div class="card-apt--title">
             <h4 class="weight-regular">@{{ title }}</h4>

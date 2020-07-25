@@ -85,5 +85,5 @@ function updateDiv(response) {
         .bindPopup(address)
         .openPopup();
 
-    console.log(suggestion);
+    // console.log(suggestion);
 }
