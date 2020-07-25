@@ -43,7 +43,7 @@
                                 Recensioni 
                                 (<span class="text-main">{{ count($apt->reviews)}}</span>)
                             </h5>
-                            <h5 id="address" class="weight-regular text-main"> Città </h5>
+                            <h5 id="address" class="weight-regular text-main" data-lat="{{ $apt->lat }}" data-lng="{{ $apt->lng }}"> Città </h5>
                         </div>
                         <div class="card-apt--title">
                             <h4 class="weight-regular"> {{ $apt->title }} </h4>
@@ -64,4 +64,5 @@
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
     <script src="{{ asset("js/search.js") }}" defer></script>
     <script src="{{ asset("js/select.js") }}" defer></script>
+    <script src="{{ asset("js/reverse-geo.js") }}" defer></script>
 @endpush
