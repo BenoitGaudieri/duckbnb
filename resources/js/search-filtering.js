@@ -7,18 +7,21 @@ $(document).ready(function() {
     const template = Handlebars.compile(source);
 
     // Algolia places instance
-    const client = algoliasearch("47VSO533ZH", "eaa5d8cf24f4fb6090811993ad43f3fd");
+    const client = algoliasearch(
+        process.env.MIX_ALGOLIA_APP_ID,
+        process.env.MIX_ALGOLIA_SECRET
+    );
     const index = client.initIndex("apartments");
-    
+
     // Catch origin coordinates
     var origin = {
-        lat: $('#origin-lat').val(),
-        lng: $('#origin-lng').val()
+        lat: $("#origin-lat").val(),
+        lng: $("#origin-lng").val()
     };
 
     // Filtering
-    $(document).on('change', '.search-option', function() {
-        var radius = $('#select-radius input:checked').val();
+    $(document).on("change", ".search-option", function() {
+        var radius = $("#select-radius input:checked").val();
         var apartments = [];
         var services = getServices();
         var rooms = $("#select-rooms").val();
@@ -26,62 +29,60 @@ $(document).ready(function() {
 
         // Getting ids around origin point
         index
-        .search("", {
-            aroundLatLng: `${origin.lat}, ${origin.lng}`,
-            // aroundRadius: 1000000 // 1000 km
-            aroundRadius: radius // 20 km
-        })
-        .then(({ hits }) => {
-            hits.forEach(item => {
-                apartments.push(item["id"]);
+            .search("", {
+                aroundLatLng: `${origin.lat}, ${origin.lng}`,
+                // aroundRadius: 1000000 // 1000 km
+                aroundRadius: radius // 20 km
+            })
+            .then(({ hits }) => {
+                hits.forEach(item => {
+                    apartments.push(item["id"]);
+                });
+
+                $("#search-results").html("");
+
+                // Request data
+                var data = {
+                    id: joinApartments(apartments),
+                    services: services,
+                    rooms: rooms,
+                    beds: beds
+                };
+
+                // Calling Apartments API
+                ajax(data, template);
             });
-            
-            $("#search-results").html('');
-
-            // Request data
-            var data = {
-                id: joinApartments(apartments),
-                services: services,
-                rooms: rooms,
-                beds: beds
-            }
-
-            // Calling Apartments API
-            ajax(data, template);
-        });
     });
 
-    $(document).on('click', '#reset', function() {
+    $(document).on("click", "#reset", function() {
         var apartments = [];
-        
+
         index
-        .search("", {
-            aroundLatLng: `${origin.lat}, ${origin.lng}`,
-            // aroundRadius: 1000000 // 1000 km
-            aroundRadius: 20000 // 20 km
-        })
-        .then(({ hits }) => {
-            hits.forEach(item => {
-                apartments.push(item["id"]);
+            .search("", {
+                aroundLatLng: `${origin.lat}, ${origin.lng}`,
+                // aroundRadius: 1000000 // 1000 km
+                aroundRadius: 20000 // 20 km
+            })
+            .then(({ hits }) => {
+                hits.forEach(item => {
+                    apartments.push(item["id"]);
+                });
+
+                clearFilters();
+                $("#search-results").html("");
+
+                // Request data
+                var data = {
+                    id: joinApartments(apartments),
+                    services: "all",
+                    rooms: 1,
+                    beds: 1
+                };
+
+                // Calling Apartments API
+                ajax(data, template);
             });
-            
-            clearFilters();
-            $("#search-results").html('');
-            
-            // Request data
-            var data = {
-                id: joinApartments(apartments),
-                services: 'all',
-                rooms: 1,
-                beds: 1
-            }
-
-            // Calling Apartments API
-            ajax(data, template);
-            
-        });
     });
-
 }); // <--- End Ready
 
 /* FUNCTIONS */
@@ -110,7 +111,7 @@ function getServices() {
     });
 
     if (serviceIds.length != 0) {
-        var services = serviceIds.join(',');
+        var services = serviceIds.join(",");
         return services;
     } else {
         services = "all";
@@ -119,23 +120,21 @@ function getServices() {
 }
 
 function joinApartments(apartments) {
-    var result = apartments.join(',');
+    var result = apartments.join(",");
     return result;
 }
 
 function clearFilters() {
-    
-    
-    $('input:checkbox').each(function() {
+    $("input:checkbox").each(function() {
         var self = $(this);
-        self.prop('checked', false);
+        self.prop("checked", false);
     });
 
-    $('#select-beds').val('1');
+    $("#select-beds").val("1");
 
-    $('#select-rooms').val('1');
+    $("#select-rooms").val("1");
 
-    $('#select-radius #20').prop('checked', true);
+    $("#select-radius #20").prop("checked", true);
 }
 
 function ajax(data, template) {
@@ -146,10 +145,10 @@ function ajax(data, template) {
             var results = data.response;
             console.log(data.response);
 
-            if(results != 'empty' && results.length != 0) {
+            if (results != "empty" && results.length != 0) {
                 for (let i = 0; i < results.length; i++) {
                     var item = results[i];
-    
+
                     var ctx = {
                         id: item.id,
                         imgUrl: item.img_url,
@@ -160,12 +159,12 @@ function ajax(data, template) {
                         bathrooms: item.bathroom_qty,
                         sqrMeters: item.sqr_meters
                     };
-    
+
                     var html = template(ctx);
                     $("#search-results").append(html);
                 }
             } else {
-                $("#search-results").append('Nessun risultato trovato')
+                $("#search-results").append("Nessun risultato trovato");
             }
         },
         error: function() {
