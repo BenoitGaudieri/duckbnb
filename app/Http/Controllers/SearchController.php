@@ -35,7 +35,7 @@ class SearchController extends Controller
                 
                 foreach ($sponsored->sponsorships as $sponsorship) {
                     $sponsorshipDate = $sponsorship->pivot->created_at;
-                    $difference = $now->diffInDays($sponsorshipDate);
+                    $difference = $now->diffInHours($sponsorshipDate);
     
                     if($difference < $duration) {
                         $sponsoreds[] = $sponsored;
@@ -77,7 +77,7 @@ class SearchController extends Controller
                 
                 foreach ($sponsored->sponsorships as $sponsorship) {
                     $sponsorshipDate = $sponsorship->pivot->created_at;
-                    $difference = $now->diffInDays($sponsorshipDate);
+                    $difference = $now->diffInHours($sponsorshipDate);
     
                     if($difference < $duration) {
                         $sponsoreds[] = $sponsored;

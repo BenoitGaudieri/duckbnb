@@ -43,12 +43,12 @@
         
         &--apt {
             @include flex($align: center);
+            flex-wrap: wrap;
             padding: 10px 0;
-            overflow-x: auto;
 
-            @include responsive($tablet) {
-                flex-wrap: wrap;
-            }
+            // @include responsive($tablet) {
+            //     flex-wrap: wrap;
+            // }
 
             .card-apt {
                 margin: 20px 8px;

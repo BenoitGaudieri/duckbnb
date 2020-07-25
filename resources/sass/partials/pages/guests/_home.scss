@@ -1,5 +1,5 @@
 .jumbotron {
-    height: calc(100vh - 60px);
+    height: 92vh;
     width: 100%;
     margin: 0;
     background-image: url('img/home/jumbo-img.jpg');
@@ -10,6 +10,7 @@
 }
 
 .sponsor-section {
+    min-height: 600px;
 
     &--title {
         padding-top: 30px;
