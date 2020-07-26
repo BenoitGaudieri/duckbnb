@@ -89,7 +89,14 @@
 
 
 .pk {
-    
+
+    &-1:hover,
+    &-2:hover,
+    &-3:hover {
+
+        transform: scale(1.03);
+    }
+
     &-1 {
         color: $light;
         background-color: $dark-accent;
