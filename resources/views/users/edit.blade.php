@@ -40,7 +40,7 @@
                     <h6>Immagine corrente</h6>
                     <img style="display:block;" width="200" src="{{ asset('storage/'. $apartment->img_url) }}" alt="{{ $apartment->title }}">
                 @endisset
-                <label for="img_url">Inserisci una nuovo immagine</label>
+                <label for="img_url">Inserisci una nuova immagine</label>
                 <div class="box">
 
                     <input type="file" name="img_url" id="img_url" class="inputfile inputfile-2" data-multiple-caption="{count} files selected" multiple />

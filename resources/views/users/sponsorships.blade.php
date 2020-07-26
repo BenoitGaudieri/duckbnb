@@ -56,7 +56,7 @@
                 <span class="choice-price text-main"></span>€.
             </h4>
             <h5>
-                l'appartamento <span class="text-main">{{$apartment->title }}</span> sarà in sponsorizzazione per
+                L'appartamento <span class="text-main">{{$apartment->title }}</span> sarà in sponsorizzazione per
                 {{-- Insert Duration with jQuery --}} 
                 <span class="choice-duration text-main"></span> ore.
             </h5>
