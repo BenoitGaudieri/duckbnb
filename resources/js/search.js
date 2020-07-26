@@ -39,6 +39,6 @@ function changeHandle(e) {
             document.getElementById("apartmentId").value = apts;
             document.getElementById("lat").value = lat;
             document.getElementById("lng").value = lng;
-            console.log(apts);
+            // console.log(apts);
         });
 }

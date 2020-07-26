@@ -46,7 +46,7 @@
                             Recensioni 
                             (<span class="text-main">{{ count($apartment->reviews)}}</span>)
                         </h5>
-                        <h5 id="address" class="weight-regular text-main"> Città </h5>
+                        <h5 id="address" class="weight-regular text-main" data-lat="{{ $apartment->lat }}" data-lng="{{ $apartment->lng }}"> Città </h5>
                     </div>
                     <div class="card-apt--title">
                         <h4 class="weight-regular"> {{ $apartment->title }} </h4>
@@ -137,5 +137,7 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/algoliasearch/3.31/algoliasearchLite.min.js"></script>
 <script src="{{ asset('js/dashboard-nav.js')}}"></script>
+<script src="{{ asset("js/reverse-geo.js") }}" defer></script>
 @endpush

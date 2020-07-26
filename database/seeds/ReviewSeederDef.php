@@ -31,7 +31,7 @@ class ReviewSeederDef extends Seeder
             $newReview = new Review();
 
             $newReview->apartment_id = $apts->random()->id;
-            $newReview->user_id = $faker->numberBetween(6, 8);
+            $newReview->user_id = $faker->numberBetween(16, 18);
             $newReview->body = $reviewBody[array_rand($reviewBody)];
 
             $newReview->save();

@@ -1,5 +1,6 @@
-import $ from 'jquery';
+import $ from "jquery";
 require("./bootstrap");
+
 
 $(document).ready(function() { 
     
@@ -10,12 +11,11 @@ $(document).ready(function() {
     const ctnPay = $('.payment'); // Get container Payment
 
     // Choice Section
-    let choiceCtn = $('.choice'); // Get Container Choice
-    let choicePrice = $('.choice-price'); // Get Price Chosen
-    let choiceDur = $('.choice-duration'); // Get Duration Chosen
+    let choiceCtn = $(".choice"); // Get Container Choice
+    let choicePrice = $(".choice-price"); // Get Price Chosen
+    let choiceDur = $(".choice-duration"); // Get Duration Chosen
 
-    pack.click( function() {
-        
+    pack.click(function() {
         // Show/Hide Choice Container
         choiceCtn.fadeToggle();
 
@@ -23,6 +23,7 @@ $(document).ready(function() {
         ctnPay.fadeToggle();
 
         // Get color and container
+
         let bgColor = $(this).css('background-color');
 
         // Get Price and duration
@@ -35,18 +36,19 @@ $(document).ready(function() {
         // Print in dom (Choice) price and duration
         choicePrice.text(price);
         choiceDur.text(duration);
-        
+
         // Hide package not chosen
         cardNotSelected.fadeToggle();
 
         // Set Color
-        ctnCard.css('background-color', bgColor);
+        ctnCard.css("background-color", bgColor);
 
-        // Set price 
+        // Set price
         amountInput.val(price);
 
         // Set pack id
         packInput.val(id);
+
 
         })
 
