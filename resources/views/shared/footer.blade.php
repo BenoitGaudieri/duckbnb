@@ -20,7 +20,6 @@
             @endauth
             <li><a href="{{ url('/') }}">Home</a></li>
             <li><a href="{{ route("search") }}">Cerca</a></li>
-            <li><a href="">About</a></li>
         </ul>
     </div>
 </footer>

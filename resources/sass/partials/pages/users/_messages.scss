@@ -16,12 +16,7 @@
     }
 
     &--msgs {
-        @include flex();
-        overflow-x: auto;
-
-        @include responsive($tablet) {
-            flex-direction: column;
-        }
+        @include flex(column, flex-start, flex-start);
 
         &--singleCtn {
             min-width: 220px;
