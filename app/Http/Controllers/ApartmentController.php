@@ -11,6 +11,7 @@ class ApartmentController extends Controller
 {
     public function show(Apartment $apartment)
     {
+        $difference = 0;
         $check = false;
         if(Auth::id() <> $apartment['user_id']) {
             $newView = new View();
@@ -36,6 +37,6 @@ class ApartmentController extends Controller
                 }
             }
         }
-        return view("guests.show", compact("apartment", "check"));
+        return view("guests.show", compact("apartment", "check", 'difference'));
     }
 }
