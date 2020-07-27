@@ -64,7 +64,7 @@
             <h4 class="section-title weight-light">Dashboard Proprietario</h4>
             <div class="dashboard-ctas">
                 @if($check)
-                    <button class="dashboard-ctas--btn button-main" disabled >{{ 24 - $difference }} ore rimanenti</button>
+                    <button class="dashboard-ctas--btn button-main" disabled >{{ $duration - $difference }} ore rimanenti</button>
                 @else
                     <a class="dashboard-ctas--btn button-main" href="{{ route('user.sponsorships', $apartment->id) }}">Sponsorizza</a>
                 @endif

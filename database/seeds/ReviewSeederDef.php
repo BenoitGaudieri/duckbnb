@@ -38,4 +38,3 @@ class ReviewSeederDef extends Seeder
         }
     }
 }
-
