@@ -1,7 +1,11 @@
 .registration,
 .login {
-    height: calc(100vh - 69px);
-    padding-top: 40px;
+    min-height: calc(100vh - 8vh);
+    
+    @include responsive($tablet) {
+        height: calc(100vh - 8vh);
+        padding-top: 40px;
+    }
 }
 
 // Login
