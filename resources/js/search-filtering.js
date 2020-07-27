@@ -143,7 +143,6 @@ function ajax(data, template) {
         data: data,
         success: function(data) {
             var results = data.response;
-            // console.log(data.response);
 
             if (results != "empty" && results.length != 0) {
                 for (let i = 0; i < results.length; i++) {
@@ -159,7 +158,8 @@ function ajax(data, template) {
                         bathrooms: item.bathroom_qty,
                         sqrMeters: item.sqr_meters,
                         lat: item.lat,
-                        lng: item.lng
+                        lng: item.lng,
+                        reviews: item.reviews.length
                     };
 
                     var html = template(ctx);

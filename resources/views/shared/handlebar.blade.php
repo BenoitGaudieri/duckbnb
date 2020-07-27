@@ -5,7 +5,7 @@
         </a>
         <div class="card-apt--location">
             <h5 class="weight-regular">
-                Recensioni 
+                Recensioni (<span class="text-main">@{{ reviews }}</span>)
                 
             </h5>
             <h5 id="address" class="weight-regular text-main" data-lat="@{{ lat }}" data-lng="@{{ lng }}"> Città </h5>

@@ -28,45 +28,75 @@ class ApartmentController extends Controller
 
         if($request->services <> 'all') {
             $services = explode(',', $request->services);
-        } else {
-            $services = 'all';
-        }
-
-        $apartments = Apartment::with('services')
-                    ->whereIn('id', $ids)
-                    ->where([
-                        ['room_qty', '>=', $minRooms],
-                        ['bed_qty', '>=', $minBeds],
-                        ['is_visible', '=', 1]
-                    ])
-                    ->get();
-
-        $res = [
-            'error' => '',
-            'response' => []
-        ];
-
-        
-        if( $apartments->isNotEmpty() ) {
-            foreach ($apartments as $apartment) {
-                // Compiling array with apartment's service ids
-                $array = [];
-                foreach ($apartment->services as $service) {
-                    $array[] = $service['id'];
-                }
-
-                if($services == 'all') {
+            
+            $apartments = Apartment::with('services', 'reviews')
+            ->whereIn('id', $ids)
+            ->where([
+                ['room_qty', '>=', $minRooms],
+                ['bed_qty', '>=', $minBeds],
+                ['is_visible', '=', 1]
+                ])
+            ->whereHas('services', function ($query) use ($services) {
+                        return $query->whereIn('services.id', $services);
+                    })->get();
+    
+            $res = [
+                'error' => '',
+                'response' => []
+            ];
+    
+            if( $apartments->isNotEmpty() ) {
+                foreach($apartments as $apartment) {
                     $res['response'][] = $apartment;
-                } elseif(count($services) <= count($array)) {
-                    if(array_intersect($array, $services)) {
-                        $res['response'][] = $apartment;
-                    }
                 }
-                
             }
         } else {
-            $res['response'] = 'empty';
+            $services = 'all';
+
+            $apartments = Apartment::with('services', 'reviews')->whereIn('id', $ids)
+            ->where([
+                ['room_qty', '>=', $minRooms],
+                ['bed_qty', '>=', $minBeds],
+                ['is_visible', '=', 1]
+                ])
+            ->get();
+    
+            $res = [
+                'error' => '',
+                'response' => []
+            ];
+    
+            if( $apartments->isNotEmpty() ) {
+                foreach($apartments as $apartment) {
+                    $res['response'][] = $apartment;
+                }
+            } else {
+                $res['response'] = 'empty';
+            }
         }
+        
+
+        
+        // if( $apartments->isNotEmpty() ) {
+        //     foreach ($apartments as $apartment) {
+        //         // Compiling array with apartment's service ids
+        //         $array = [];
+        //         foreach ($apartment->services as $service) {
+        //             $array[] = $service['id'];
+        //         }
+
+        //         if($services == 'all') {
+        //             $res['response'][] = $apartment;
+        //         } elseif(count($services) <= count($array)) {
+        //             if(array_intersect($array, $services)) {
+        //                 $res['response'][] = $apartment;
+        //             }
+        //         }
+                
+        //     }
+        // } else {
+        //     $res['response'] = 'empty';
+        // }
 
         return response()->json($res);
     }
