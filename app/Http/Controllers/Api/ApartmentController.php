@@ -30,15 +30,14 @@ class ApartmentController extends Controller
         $ids = explode(',', $request->id);
         $minRooms = $request->rooms;
         $minBeds = $request->beds;
+        $collection = $this->collectApts($ids, $minRooms, $minBeds);
         
         if($request->services <> 'all') {
 
             $services = explode(',', $request->services);
-            $apartments = $this->queryWithServices($ids, $minRooms, $minBeds, $services);
-            
-            
-            if( $apartments->isNotEmpty() ) {
-                foreach ($apartments as $apartment) {
+
+            if( $collection->isNotEmpty() ) {
+                foreach ($collection as $apartment) {
                     
                     $array = [];
 
@@ -57,10 +56,8 @@ class ApartmentController extends Controller
             }
           
         } else {
-            $apartments = $this->queryNoServices($ids, $minRooms, $minBeds);
-
-            if($apartments->isNotEmpty()) {
-                foreach($apartments as $apartment) {
+            if($collection->isNotEmpty()) {
+                foreach($collection as $apartment) {
                     $res['response'][] = $apartment;
                 }
             }
@@ -69,29 +66,15 @@ class ApartmentController extends Controller
         return response()->json($res);
     }
 
-    private function queryWithServices($ids, $minRooms, $minBeds, $services)
+    private function collectApts($ids, $minRooms, $minBeds) 
     {
         return Apartment::with('services', 'reviews')
-            ->whereIn('id', $ids)
-            ->where([
-                ['room_qty', '>=', $minRooms],
-                ['bed_qty', '>=', $minBeds],
-                ['is_visible', '=', 1]
-                ])
-            ->whereHas('services', function ($query) use ($services) {
-                        return $query->whereIn('services.id', $services);
-                    })->get();
-    }
-
-    private function queryNoServices($ids, $minRooms, $minBeds)
-    {
-        return Apartment::with('services', 'reviews')
-            ->whereIn('id', $ids)
-            ->where([
-                ['room_qty', '>=', $minRooms],
-                ['bed_qty', '>=', $minBeds],
-                ['is_visible', '=', 1]
-                ])
-            ->get();
+        ->whereIn('id', $ids)
+        ->where([
+            ['room_qty', '>=', $minRooms],
+            ['bed_qty', '>=', $minBeds],
+            ['is_visible', '=', 1]
+            ])
+        ->get();
     }
 }
